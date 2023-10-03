@@ -11,7 +11,24 @@ class StoreStudentRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
+    }
+
+    public function attributes()
+    {
+        return [
+            'student-number' => 'NIM',
+            'name' => 'nama',
+            'batch' => 'angkatan'
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'required' => 'Field :attribute wajib diisi.',
+            'unique' => ':attribute :input sudah ada di dalam database.'
+        ];
     }
 
     /**
@@ -22,7 +39,9 @@ class StoreStudentRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'student-number' => 'required|unique:students,student-number',
+            'name' => 'required',
+            'batch' => 'required'
         ];
     }
 }

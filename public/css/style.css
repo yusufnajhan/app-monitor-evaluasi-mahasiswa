@@ -1,0 +1,8 @@
+footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background-color: #f8f9fa; /* Ubah sesuai dengan warna latar belakang yang Anda inginkan */
+    padding: 20px 0;
+    text-align: center;
+}
