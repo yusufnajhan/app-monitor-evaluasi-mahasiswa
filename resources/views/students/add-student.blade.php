@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @push('scripts')
-    <script src="{{ asset('js/add-student') }}"></script>
+    <script src="{{ asset('js/add-student.js') }}"></script>
 @endpush
 
 @section('container')
