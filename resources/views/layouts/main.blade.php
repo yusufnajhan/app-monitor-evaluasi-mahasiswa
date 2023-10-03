@@ -14,11 +14,15 @@
 </head>
 
 <body>
-    @include('partials.navbar')
+    <header>
+        @include('partials.navbar')
+    </header>
 
-    <div class="container mt-4">
+    <main class="container mt-4">
         @yield('container')
-    </div>
+    </main>
+
+    @include('partials.footer')
 </body>
 
 </html>
