@@ -13,7 +13,7 @@ class StudentController extends Controller
      */
     public function index()
     {
-        //
+        return view('students.students');
     }
 
     /**
@@ -23,7 +23,7 @@ class StudentController extends Controller
     {
         return view(
             'students.add-student'
-        );
+        )->with('route', route('students.store'));
     }
 
     /**
@@ -31,7 +31,27 @@ class StudentController extends Controller
      */
     public function store(StoreStudentRequest $request)
     {
-        //
+        $custom_messages = [
+            'required' => ':attribute harus diisi!',
+            'unique' => ':attribute dengan NIM :value sudah ada'
+        ];
+
+        $custom_attributes = [
+            'student_number' => 'NIM',
+            'name' => 'Nama',
+            'batch' => 'Angkatan'
+        ];
+
+        $validated_data = $request->validate([
+            'student_number' => 'required|unique:students',
+            'name' => 'required',
+            'batch' => 'required'
+        ], $custom_attributes, $custom_messages);
+
+        $validated_data['status'] = 'Aktif';
+        Student::create($validated_data);
+
+        return redirect()->route('students.index')->with('success', 'Mahasiswa berhasil ditambahkan');
     }
 
     /**

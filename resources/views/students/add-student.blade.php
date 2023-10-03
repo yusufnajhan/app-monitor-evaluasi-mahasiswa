@@ -1,19 +1,28 @@
 @extends('layouts.main')
 
+@push('scripts')
+    <script src="{{ asset('js/add-student') }}"></script>
+@endpush
+
 @section('container')
     <div class="card">
         <div class="card-body">
             <h5 class="card-title">Test</h5>
-            <form>
+            <form action="{{ $route }}" method="POST">
+                @csrf
                 <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">Email address</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                    <label for="student-number" class="form-label">NIM</label>
+                    <input type="text" class="form-control" name="student-number" id="student-number" maxlength="14">
                 </div>
                 <div class="mb-3">
-                    <label for="exampleInputPassword1" class="form-label">Password</label>
-                    <input type="password" class="form-control" id="exampleInputPassword1">
+                    <label for="name" class="form-label">Nama</label>
+                    <input type="text" class="form-control" name="name" id="name">
                 </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <div class="mb-3">
+                    <label for="batch" class="form-label">Angkatan</label>
+                    <input type="text" class="form-control" name="batch" id="batch">
+                </div>
+                <button type="submit" class="btn btn-primary">Tambah</button>
             </form>
         </div>
     </div>
