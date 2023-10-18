@@ -15,22 +15,22 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        $operatorData = Operator::all();
-        foreach ($operatorData as $operator) {
-            User::create([
-                'email' => $operator->email,
-                'password' => $operator->password,
-                'role' => 'operator'
-            ]);
-        }
+        // $operatorData = Operator::all();
+        // foreach ($operatorData as $operator) {
+        //     User::create([
+        //         'email' => $operator->email,
+        //         'password' => $operator->password,
+        //         'role' => 'operator'
+        //     ]);
+        // }
 
-        $mahasiswaData = Mahasiswa::all();
-        foreach ($mahasiswaData as $mahasiswa) {
-            User::create([
-                'email' => $mahasiswa->email,
-                'password' => $mahasiswa->password,
-                'role' => 'mahasiswa'
-            ]);
-        }
+        // $mahasiswaData = Mahasiswa::all();
+        // foreach ($mahasiswaData as $mahasiswa) {
+        //     User::create([
+        //         'email' => $mahasiswa->email,
+        //         'password' => $mahasiswa->password,
+        //         'role' => 'mahasiswa'
+        //     ]);
+        // }
     }
 }

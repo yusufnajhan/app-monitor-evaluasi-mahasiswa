@@ -15,8 +15,10 @@ return new class extends Migration
             $table->id();
             $table->string('nip')->unique();
             $table->string('nama');
-            $table->string('email')->unique();
-            $table->string('password');
+            $table->unsignedBigInteger('user_id');
+
+            $table->index('user_id');
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

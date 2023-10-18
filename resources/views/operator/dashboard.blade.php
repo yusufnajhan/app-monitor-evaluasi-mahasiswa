@@ -1,6 +1,6 @@
 <h1>Hai</h1>
 <h2>Ini dasbor operator</h2>
-<h2>Operator {{ auth()->user()->email }}</h2>
+<h2>Operator {{ auth()->user()->operator->nama }}</h2>
 <form action="/logout" method="POST">
     @csrf
     <button type="submit"

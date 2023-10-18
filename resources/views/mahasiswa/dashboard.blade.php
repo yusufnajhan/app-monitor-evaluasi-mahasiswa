@@ -1,6 +1,6 @@
 <h1>Hai</h1>
 <h2>Ini dasbor mahasiswa</h2>
-<h2>Mahasiswa {{ auth()->user()->email }}</h2>
+<h2>Mahasiswa {{ auth()->user()->mahasiswa->nama }}</h2>
 <form action="/logout" method="POST">
     @csrf
     <button type="submit"

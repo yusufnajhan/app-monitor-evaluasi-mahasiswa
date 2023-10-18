@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -21,9 +22,13 @@ class MahasiswaFactory extends Factory
             $nim .= $this->faker->randomDigit;
         }
 
-        return [
+        $user = User::factory()->create([
             'email' => $this->faker->freeEmail(),
             'password' => bcrypt('12345'),
+            'role' => 'mahasiswa'
+        ]);
+
+        return [
             'nim' => $nim,
             'nama' => $this->faker->name(),
             'angkatan' => '2023',
@@ -33,7 +38,8 @@ class MahasiswaFactory extends Factory
             'alamat' => $this->faker->address(),
             'kota' => $this->faker->city(),
             'provinsi' => $this->faker->state(),
-            'id_dosen_wali' => $this->faker->randomElement([1, 2, 3])
+            'user_id' => $user->id,
+            'dosen_wali_id' => $this->faker->randomElement([1, 2, 3])
         ];
     }
 }

@@ -12,4 +12,9 @@ class Operator extends Model
     protected $table = 'operator';
     protected $guarded = ['id'];
     public $timestamps = FALSE;
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

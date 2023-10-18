@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -16,11 +17,16 @@ class OperatorFactory extends Factory
      */
     public function definition(): array
     {
+        $user = User::factory()->create([
+            'email' => 'sepuh@gmail.com',
+            'password' => bcrypt('12345'),
+            'role' => 'operator'
+        ]);
+
         return [
             'nip' => '1195671929239',
             'nama' => 'Sepuh',
-            'email' => 'sepuh@gmail.com',
-            'password' => bcrypt('12345')
+            'user_id' => $user->id
         ];
     }
 }

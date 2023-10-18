@@ -44,13 +44,13 @@ class User extends Authenticatable
     ];
 
 
-    // public function operator()
-    // {
-    //     return $this->hasOne(Operator::class);
-    // }
+    public function operator()
+    {
+        return $this->hasOne(Operator::class);
+    }
 
-    // public function mahasiswa()
-    // {
-    //     return $this->hasOne(Mahasiswa::class);
-    // }
+    public function mahasiswa()
+    {
+        return $this->hasOne(Mahasiswa::class);
+    }
 }
