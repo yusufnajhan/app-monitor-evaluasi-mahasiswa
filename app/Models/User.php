@@ -42,4 +42,15 @@ class User extends Authenticatable
     protected $casts = [
         'password' => 'hashed',
     ];
+
+
+    // public function operator()
+    // {
+    //     return $this->hasOne(Operator::class);
+    // }
+
+    // public function mahasiswa()
+    // {
+    //     return $this->hasOne(Mahasiswa::class);
+    // }
 }

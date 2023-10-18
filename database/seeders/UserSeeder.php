@@ -15,21 +15,21 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        $mahasiswaData = Mahasiswa::all();
-        foreach ($mahasiswaData as $mahasiswa) {
-            User::create([
-                'email' => $mahasiswa->email,
-                'password' => $mahasiswa->password,
-                'role' => 'mahasiswa'
-            ]);
-        }
-
         $operatorData = Operator::all();
         foreach ($operatorData as $operator) {
             User::create([
                 'email' => $operator->email,
                 'password' => $operator->password,
                 'role' => 'operator'
+            ]);
+        }
+
+        $mahasiswaData = Mahasiswa::all();
+        foreach ($mahasiswaData as $mahasiswa) {
+            User::create([
+                'email' => $mahasiswa->email,
+                'password' => $mahasiswa->password,
+                'role' => 'mahasiswa'
             ]);
         }
     }
