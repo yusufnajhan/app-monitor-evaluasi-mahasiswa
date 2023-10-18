@@ -2,10 +2,11 @@
 
 namespace Database\Seeders;
 
-use App\Models\Mahasiswa;
 use App\Models\User;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Operator;
+use App\Models\Mahasiswa;
 use Illuminate\Database\Seeder;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class UserSeeder extends Seeder
 {
@@ -20,6 +21,15 @@ class UserSeeder extends Seeder
                 'email' => $mahasiswa->email,
                 'password' => $mahasiswa->password,
                 'role' => 'mahasiswa'
+            ]);
+        }
+
+        $operatorData = Operator::all();
+        foreach ($operatorData as $operator) {
+            User::create([
+                'email' => $operator->email,
+                'password' => $operator->password,
+                'role' => 'operator'
             ]);
         }
     }
