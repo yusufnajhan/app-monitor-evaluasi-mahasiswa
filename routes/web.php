@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DataMahasiswaController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -30,5 +31,6 @@ Route::post('/logout', [LoginController::class, 'logout']);
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard')->middleware('auth');
 
-Route::middleware(['guest'])->group(function () {
+Route::middleware(['auth', 'checkrole:operator'])->group(function () {
+    Route::get('/add-mahasiswa', [DataMahasiswaController::class, 'create']);
 });
