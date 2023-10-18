@@ -11,7 +11,15 @@
 </head>
 
 <body>
-    @yield('body')
+    <header>
+        @include('partials.navbar')
+    </header>
+
+    <main class="container">
+        @yield('container')
+    </main>
+
+    @include('partials.footer')
 </body>
 
 </html>
