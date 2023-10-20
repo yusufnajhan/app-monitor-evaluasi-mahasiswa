@@ -1,6 +1,14 @@
 <h1>Hai</h1>
 <h2>Ini dasbor operator</h2>
 <h2>Operator {{ auth()->user()->operator->nama }}</h2>
+
+<br>
+<a href="/tambah-mahasiswa"
+    class="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900">
+    Tambah data mahasiswa
+</a>
+
+<br><br>
 <form action="/logout" method="POST">
     @csrf
     <button type="submit"

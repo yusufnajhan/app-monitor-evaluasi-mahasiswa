@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Mahasiswa;
-use App\Http\Requests\StoreMahasiswaRequest;
+use App\Models\User;
+use App\Http\Requests\StoreDataMahasiswaOlehOperatorRequest;
 use App\Http\Requests\UpdateMahasiswaRequest;
 
-class DataMahasiswaController extends Controller
+class DataMahasiswaOlehOperatorController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -27,9 +28,25 @@ class DataMahasiswaController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreMahasiswaRequest $request)
+    public function store(StoreDataMahasiswaOlehOperatorRequest $request)
     {
-        //
+        $data = $request->validated();
+
+        $user = User::factory()->create([
+            'email' => strtolower(str_replace(' ', '.', $data['nama'])) . '@students.undip.ac.id',
+            'password' => bcrypt('12345'),
+            'role' => 'mahasiswa'
+        ]);
+
+        Mahasiswa::create([
+            'nama' => $data['nama'],
+            'nim' => $data['nim'],
+            'angkatan' => $data['angkatan'],
+            'status' => $data['status'],
+            'user_id' => $user->id // Hubungkan user dengan mahasiswa
+        ]);
+
+        return redirect()->route('dashboard');
     }
 
     /**

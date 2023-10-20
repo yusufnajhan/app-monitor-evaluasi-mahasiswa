@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\DataMahasiswaController;
+use App\Http\Controllers\DataMahasiswaOlehOperatorController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,7 +22,6 @@ Route::get('/', function () {
 
 // Route::get('/students', [StudentController::class, 'index'])->name('students.index');
 
-// Route::get('/add-student', [StudentController::class, 'create'])->name('students.create');
 // Route::post('/students', [StudentController::class, 'store'])->name('students.store');
 
 Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
@@ -32,5 +31,6 @@ Route::post('/logout', [LoginController::class, 'logout']);
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard')->middleware('auth');
 
 Route::middleware(['auth', 'checkrole:operator'])->group(function () {
-    Route::get('/add-mahasiswa', [DataMahasiswaController::class, 'create']);
+    Route::get('/tambah-mahasiswa', [DataMahasiswaOlehOperatorController::class, 'create'])->name('tambah-mahasiswa');
+    Route::post('/tambah-mahasiswa', [DataMahasiswaOlehOperatorController::class, 'store'])->name('simpan-mahasiswa');
 });
