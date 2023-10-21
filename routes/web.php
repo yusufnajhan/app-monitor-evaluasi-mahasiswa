@@ -27,8 +27,9 @@ Route::get('/', function () {
 
 Route::middleware(['guest'])->group(function () {
     Route::get('/register', [RegisterMahasiswaController::class, 'index']);
-    Route::post('/cek-nim', [RegisterMahasiswaController::class, 'cekNIM']);
-    Route::get('/isi-data', [RegisterMahasiswaController::class, 'edit'])->name('isi-data');
+    Route::get('/cek-nim', [RegisterMahasiswaController::class, 'cekNIM']);
+    Route::get('/isi-data/{nim}', [RegisterMahasiswaController::class, 'edit'])->name('isi-data');
+    Route::put('/ubah-data/{nim}', [RegisterMahasiswaController::class, 'update']);
 
     Route::get('/login', [LoginController::class, 'index'])->name('login');
     Route::post('/login', [LoginController::class, 'authenticate']);

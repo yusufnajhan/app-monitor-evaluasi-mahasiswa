@@ -51,7 +51,13 @@
                         </div>
                     @endif
 
-                    <form class="space-y-4 md:space-y-6" action="/cek-nim" method="POST">
+                    @if (session('error'))
+                        <div class="red-alert">
+                            {{ session('error') }}
+                        </div>
+                    @endif
+
+                    <form class="space-y-4 md:space-y-6" action="/cek-nim" method="GET">
                         @csrf
                         <div>
                             <label for="email" class="form-label">
