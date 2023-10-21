@@ -3,6 +3,7 @@
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DataMahasiswaOlehOperatorController;
+use App\Http\Controllers\RegisterMahasiswaController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,10 +25,16 @@ Route::get('/', function () {
 
 // Route::post('/students', [StudentController::class, 'store'])->name('students.store');
 
-Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
-Route::post('/login', [LoginController::class, 'authenticate']);
-Route::post('/logout', [LoginController::class, 'logout']);
+Route::middleware(['guest'])->group(function () {
+    Route::get('/register', [RegisterMahasiswaController::class, 'index']);
+    Route::get('/cek-nim', [RegisterMahasiswaController::class, 'cekNIM']);
+    Route::get('/isi-data/{nim}', [RegisterMahasiswaController::class, 'edit'])->name('isi-data');
+    Route::put('/ubah-data/{nim}', [RegisterMahasiswaController::class, 'update']);
 
+    Route::get('/login', [LoginController::class, 'index'])->name('login');
+    Route::post('/login', [LoginController::class, 'authenticate']);
+});
+Route::post('/logout', [LoginController::class, 'logout']);
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard')->middleware('auth');
 
 Route::middleware(['auth', 'checkrole:operator'])->group(function () {
