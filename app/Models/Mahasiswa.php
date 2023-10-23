@@ -22,4 +22,19 @@ class Mahasiswa extends Model
     {
         return $this->belongsTo(DosenWali::class);
     }
+
+    public function hitungSemester()
+    {
+        $tahunSaatIni = date('Y');
+        $angkatan = $this->angkatan;
+
+        $tahunTempuh = $tahunSaatIni - $angkatan;
+        $semester = $tahunTempuh * 2;
+
+        $bulanSaatIni = date('m');
+        if ($bulanSaatIni >= 8 || $bulanSaatIni == 1)
+            $semester += 1;
+
+        return $semester;
+    }
 }

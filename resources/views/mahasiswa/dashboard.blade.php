@@ -4,7 +4,7 @@
     <h1>Hai</h1>
     <h2>Ini dasbor mahasiswa</h2>
     <h2>Mahasiswa {{ auth()->user()->mahasiswa->nama }}</h2>
-    <h2>Semester {{ $semester }}, semangka</h2>
+    <h2>Semester {{ auth()->user()->mahasiswa->hitungSemester() }}, semangka</h2>
     <form action="/logout" method="POST">
         @csrf
         <button type="submit"

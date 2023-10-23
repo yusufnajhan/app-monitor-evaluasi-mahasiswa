@@ -19,13 +19,7 @@ class DashboardController extends Controller
         } else if ($user->role === 'dosenWali') {
             return view('dosen-wali.dashboard');
         } else if ($user->role === 'mahasiswa') {
-            $mahasiswa = $user->mahasiswa;
-
-            $tahunTempuh = date('Y') - $mahasiswa->angkatan;
-            $semester = $tahunTempuh * 2;
-            $semester += date('m') >= 8 || date('m') == 1 ? '1' : 0;
-
-            return view('mahasiswa.dashboard', compact('semester'));
+            return view('mahasiswa.dashboard');
         }
     }
 }
