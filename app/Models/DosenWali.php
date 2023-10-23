@@ -17,4 +17,14 @@ class DosenWali extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function mahasiswa()
+    {
+        return $this->hasMany(Mahasiswa::class);
+    }
+
+    public function jumlahMahasiswaWali()
+    {
+        return $this->mahasiswa()->count();
+    }
 }

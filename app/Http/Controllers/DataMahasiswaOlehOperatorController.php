@@ -6,6 +6,7 @@ use App\Models\Mahasiswa;
 use App\Models\User;
 use App\Http\Requests\StoreDataMahasiswaOlehOperatorRequest;
 use App\Http\Requests\UpdateMahasiswaRequest;
+use App\Models\DosenWali;
 
 class DataMahasiswaOlehOperatorController extends Controller
 {
@@ -31,6 +32,10 @@ class DataMahasiswaOlehOperatorController extends Controller
     public function store(StoreDataMahasiswaOlehOperatorRequest $request)
     {
         $data = $request->validated();
+        $daftarDosen = DosenWali::with('mahasiswa')->get();
+        $dosenTerkecil = $daftarDosen->sortBy(function ($dosen) {
+            return $dosen->jumlahMahasiswaWali();
+        })->first();
 
         $user = User::factory()->create([
             'email' => strtolower(str_replace(' ', '.', $data['nama'])) . '@students.undip.ac.id',
@@ -43,7 +48,8 @@ class DataMahasiswaOlehOperatorController extends Controller
             'nim' => $data['nim'],
             'angkatan' => $data['angkatan'],
             'status' => $data['status'],
-            'user_id' => $user->id // Hubungkan user dengan mahasiswa
+            'user_id' => $user->id, // Hubungkan user dengan mahasiswa
+            'dosen_wali_id' => $dosenTerkecil->id
         ]);
 
         return redirect()->route('dashboard');
