@@ -20,8 +20,10 @@ class RegisterMahasiswaController extends Controller
         $nim = $request->input('nim');
         $mahasiswa = Mahasiswa::where('nim', $nim)->first();
 
-        if ($mahasiswa) {
+        if ($mahasiswa && !$mahasiswa->jalur_masuk) {
             return redirect()->route('isi-data', ['nim' => $mahasiswa->nim]);
+        } else if ($mahasiswa && $mahasiswa->jalur_masuk) {
+            return redirect()->route('login')->with('loginError', 'Anda sudah daftar, silakan login!');
         } else {
             return redirect()->back()->with('error', 'NIM tidak ditemukan');
         }
@@ -40,7 +42,7 @@ class RegisterMahasiswaController extends Controller
 
     public function update(UpdateDataMahasiswaOlehMahasiswaRequest $request, $nim)
     {
-        // Ambil model Mahasiswa berdasarkan ID
+        // Ambil model Mahasiswa berdasarkan NIM
         $mahasiswa = Mahasiswa::where('nim', $nim)->first();
         $userMahasiswa = $mahasiswa->user;
 
@@ -64,11 +66,5 @@ class RegisterMahasiswaController extends Controller
             Auth::login($userMahasiswa);
             return redirect()->route('dashboard');
         }
-        // Ubah atribut-atribut model sesuai dengan input
-
-        // Simpan perubahan ke dalam database
-        // $mahasiswa->save();
-
-        // return redirect()->route('nama_route_yang_dituju')->with('success', 'Data mahasiswa berhasil diperbarui.');
     }
 }

@@ -20,7 +20,18 @@ class LoginController extends Controller
     {
         $credentials = $request->only('email', 'password');
 
-        // $user = User::with('operator', 'mahasiswa')->where('email', $credentials['email'])->first();
+        // Cek user mahasiswa dengan jalur_masuk kosong
+        $forbiddenMahasiswa = User::where('email', $credentials['email'])
+            ->where('role', 'mahasiswa')
+            ->whereHas('mahasiswa', function ($query) {
+                $query->whereNull('jalur_masuk');
+            })
+            ->first();
+
+        if ($forbiddenMahasiswa) {
+            return redirect('/register')
+                ->with('error', 'Anda belum mendaftar, daftar terlebih dahulu!');
+        }
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
