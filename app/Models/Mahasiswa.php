@@ -22,7 +22,7 @@ class Mahasiswa extends Model
     {
         return $this->belongsTo(DosenWali::class);
     }
-
+  
     public function hitungSemester()
     {
         $tahunSaatIni = date('Y');
