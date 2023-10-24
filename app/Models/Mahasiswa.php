@@ -33,6 +33,11 @@ class Mahasiswa extends Model
         return $this->hasMany(KartuHasilStudi::class);
     }
 
+    public function progresPraktikKerjaLapangan()
+    {
+        return $this->hasOne(ProgresPraktikKerjaLapangan::class);
+    }
+
     public function hitungSemester()
     {
         $tahunSaatIni = date('Y');
