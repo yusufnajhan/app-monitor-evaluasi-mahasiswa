@@ -29,17 +29,23 @@ class ProgresSkripsiSeeder extends Seeder
 
             $nilai = NULL;
             $namaFile = NULL;
+            $tanggalSidang = NULL;
+            $semesterTempuh = NULL;
             if ($status == 'Lulus') {
                 $arrayNilai = ['A', 'B'];
                 $nilaiTerpilih = array_rand($arrayNilai);
                 $nilai = $arrayNilai[$nilaiTerpilih];
                 $namaFile = "skripsi_" . strtolower(str_replace(' ', '_', $mahasiswa->nama)) . ".pdf";
+                $tanggalSidang = now();
+                $semesterTempuh = $mahasiswa->hitungSemester();
             }
 
             ProgresSkripsi::create([
                 'status' => $status,
                 'nilai' => $nilai,
                 'nama_file' => $namaFile,
+                'tanggal_sidang' => $tanggalSidang,
+                'semester_tempuh' => $semesterTempuh,
                 'mahasiswa_id' => $mahasiswa->id
             ]);
         });
