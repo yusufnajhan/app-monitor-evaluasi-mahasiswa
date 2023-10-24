@@ -18,7 +18,7 @@ class IsianRencanaSemesterSeeder extends Seeder
             $semester = $mahasiswa->hitungSemester();
 
             for ($i = 1; $i <= $semester; $i++) {
-                $namaFile = "file_" . strtolower(str_replace(' ', '_', $mahasiswa->nama)) . "_{$i}.pdf";
+                $namaFile = "irs_" . strtolower(str_replace(' ', '_', $mahasiswa->nama)) . "_{$i}.pdf";
 
                 IsianRencanaSemester::create([
                     'semester' => $i,

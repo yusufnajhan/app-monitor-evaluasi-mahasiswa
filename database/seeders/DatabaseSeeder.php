@@ -26,7 +26,8 @@ class DatabaseSeeder extends Seeder
             DepartemenSeeder::class,
             DosenWaliSeeder::class,
             MahasiswaSeeder::class,
-            IsianRencanaSemesterSeeder::class
+            IsianRencanaSemesterSeeder::class,
+            KartuHasilStudiSeeder::class
         ]);
     }
 }

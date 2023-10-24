@@ -28,6 +28,11 @@ class Mahasiswa extends Model
         return $this->hasMany(IsianRencanaSemester::class);
     }
 
+    public function kartuHasilStudi()
+    {
+        return $this->hasMany(KartuHasilStudi::class);
+    }
+
     public function hitungSemester()
     {
         $tahunSaatIni = date('Y');
