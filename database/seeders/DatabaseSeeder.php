@@ -20,7 +20,8 @@ class DatabaseSeeder extends Seeder
             MahasiswaSeeder::class,
             IsianRencanaSemesterSeeder::class,
             KartuHasilStudiSeeder::class,
-            ProgresPraktikKerjaLapanganSeeder::class
+            ProgresPraktikKerjaLapanganSeeder::class,
+            ProgresSkripsiSeeder::class
         ]);
     }
 }
