@@ -32,7 +32,7 @@ Route::middleware(['guest'])->group(function () {
     Route::put('/ubah-data/{nim}', [RegisterMahasiswaController::class, 'update']);
 
     Route::get('/login', [LoginController::class, 'index'])->name('login');
-    Route::post('/login', [LoginController::class, 'authenticate']);
+    Route::post('/login-proses', [LoginController::class, 'authenticate'])->name('login-proses');
 });
 Route::post('/logout', [LoginController::class, 'logout']);
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard')->middleware('auth');
