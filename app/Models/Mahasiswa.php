@@ -22,7 +22,27 @@ class Mahasiswa extends Model
     {
         return $this->belongsTo(DosenWali::class);
     }
-  
+
+    public function isianRencanaSemester()
+    {
+        return $this->hasMany(IsianRencanaSemester::class);
+    }
+
+    public function kartuHasilStudi()
+    {
+        return $this->hasMany(KartuHasilStudi::class);
+    }
+
+    public function progresPraktikKerjaLapangan()
+    {
+        return $this->hasOne(ProgresPraktikKerjaLapangan::class);
+    }
+
+    public function progresSkripsi()
+    {
+        return $this->hasOne(ProgresSkripsi::class);
+    }
+
     public function hitungSemester()
     {
         $tahunSaatIni = date('Y');
