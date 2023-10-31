@@ -40,8 +40,7 @@ class LoginController extends Controller
 
         return back()
             ->withInput($request->only('email'))
-            ->with('loginError', 'Login gagal!');
-    }
+            ->with('loginError', 'Login gagal!');    }
 
     public function logout(Request $request)
     {
