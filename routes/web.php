@@ -18,8 +18,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('home');
-});
+    return view('landing-page');
+})->name('landing-page');
 
 Route::middleware(['guest'])->group(function () {
     Route::get('/register', [RegisterMahasiswaController::class, 'index']);
