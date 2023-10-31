@@ -10,9 +10,9 @@ use Illuminate\Http\Request;
 
 class RegisterMahasiswaController extends Controller
 {
-    public function index()
+    public function showRegisterForm()
     {
-        return view('mahasiswa.register.index');
+        return view('mahasiswa.register.form-register');
     }
 
     public function cekNIM(CekNIMRequest $request)

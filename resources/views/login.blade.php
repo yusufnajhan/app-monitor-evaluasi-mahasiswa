@@ -3,8 +3,10 @@
 @section('body')
     <section class="bg-gray-50 dark:bg-gray-900">
         <div class="login-outer-container">
-            <a href="#" class="app-logo">
-                <img class="w-8 h-8 mr-2" src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/logo.svg" alt="logo">
+            <a href="{{ route('landing-page') }}" class="text-center mb-4 text-3xl font-bold">
+                <img class="w-24 h-28 mx-auto mb-3"
+                    src="https://seeklogo.com/images/U/universitas-diponegoro-logo-6B2C58478B-seeklogo.com.png"
+                    alt="logo">
                 MonEl
             </a>
             <div class="login-container">
@@ -85,6 +87,13 @@
                         <button type="submit" class="full-horizontal-button">
                             Login
                         </button>
+                        <p class="text-sm font-light text-gray-500 dark:text-gray-400">
+                            Belum punya akun?
+                            <a href="{{ route('register') }}"
+                                class="font-medium text-blue-600 hover:underline dark:text-blue-500">
+                                Registrasi
+                            </a>
+                        </p>
                     </form>
                 </div>
             </div>

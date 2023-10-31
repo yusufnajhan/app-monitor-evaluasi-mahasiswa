@@ -22,7 +22,7 @@ Route::get('/', function () {
 })->name('landing-page');
 
 Route::middleware(['guest'])->group(function () {
-    Route::get('/register', [RegisterMahasiswaController::class, 'index']);
+    Route::get('/register', [RegisterMahasiswaController::class, 'showRegisterForm'])->name('register');
     Route::get('/cek-nim', [RegisterMahasiswaController::class, 'cekNIM']);
     Route::get('/lengkapi-data/{nim}', [RegisterMahasiswaController::class, 'edit'])->name('lengkapi-data');
     Route::put('/lengkapi-data/{nim}', [RegisterMahasiswaController::class, 'update']);
