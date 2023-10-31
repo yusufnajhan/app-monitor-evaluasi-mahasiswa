@@ -24,9 +24,12 @@ return new class extends Migration
             $table->string('provinsi')->nullable();
             $table->unsignedBigInteger('user_id')->nullable();
             $table->unsignedBigInteger('dosen_wali_id')->nullable();
+            // $table->unsignedBigInteger('isian_rencana_semester_id')->nullable();
 
             $table->index('user_id');
+            // $table->index('isian_rencana_semester_id');
             $table->foreign('user_id')->references('id')->on('users');
+            // $table->foreign('isian_rencana_semester_id')->references('id')->on('isian_rencana_semester');
         });
     }
 
