@@ -31,7 +31,7 @@ class MahasiswaFactory extends Factory
         return [
             'nim' => $nim,
             'nama' => $this->faker->name(),
-            'angkatan' => '2023',
+            'angkatan' => $this->faker->numberBetween(2017, 2023),
             'status' => 'Aktif',
             'jalur_masuk' => $this->faker->randomElement(['SNMPTN', 'SBMPTN', 'Mandiri']),
             'no_telepon' => $this->faker->phoneNumber(),
