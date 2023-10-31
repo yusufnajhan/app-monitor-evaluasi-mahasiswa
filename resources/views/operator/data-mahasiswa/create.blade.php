@@ -56,6 +56,19 @@
             </select>
 
         </div>
+        <div class="relative z-0 w-full mb-6 group">
+
+            <label for="jalur_masuk" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                Status
+            </label>
+            <select name="jalur_masuk" id="jalur_masuk"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                <option value="SNMPTN" {{ old('status') === 'SNMPTN' ? 'selected' : '' }}>SNMPTN</option>
+                <option value="SBMPTN" {{ old('status') === 'SBMPTN' ? 'selected' : '' }}>SBMPTN</option>
+                <option value="Mandiri" {{ old('status') === 'Mandiri' ? 'selected' : '' }}>Mandiri</option>
+            </select>
+
+        </div>
         {{-- <div class="relative z-0 w-full mb-6 group">
             <input type="password" name="floating_password" id="floating_password"
                 class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"

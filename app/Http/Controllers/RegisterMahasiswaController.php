@@ -20,8 +20,8 @@ class RegisterMahasiswaController extends Controller
         $nim = $request->input('nim');
         $mahasiswa = Mahasiswa::where('nim', $nim)->first();
 
-        if ($mahasiswa && !$mahasiswa->jalur_masuk) {
-            return redirect()->route('isi-data', ['nim' => $mahasiswa->nim]);
+        if ($mahasiswa && !$mahasiswa->alamat) {
+            return redirect()->route('lengkapi-data', ['nim' => $mahasiswa->nim]);
         } else if ($mahasiswa && $mahasiswa->jalur_masuk) {
             return redirect()->route('login')->with('loginError', 'Anda sudah daftar, silakan login!');
         } else {

@@ -1,6 +1,8 @@
 @extends('layouts.main')
 
 @section('body')
+    <img class="w-10 h-10 mr-2" src="https://seeklogo.com/images/U/universitas-diponegoro-logo-6B2C58478B-seeklogo.com.png"
+        alt="logo">
     <section class="bg-white dark:bg-gray-900">
         <div class="py-8 px-4 mx-auto max-w-screen-xl text-center lg:py-16">
             <h1

@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Mahasiswa;
 use App\Models\User;
-use App\Http\Requests\StoreDataMahasiswaOlehOperatorRequest;
-use App\Http\Requests\UpdateMahasiswaRequest;
 use App\Models\DosenWali;
+use App\Models\Mahasiswa;
+use Illuminate\Support\Facades\Hash;
+use App\Http\Requests\UpdateMahasiswaRequest;
+use App\Http\Requests\StoreDataMahasiswaOlehOperatorRequest;
 
 class DataMahasiswaOlehOperatorController extends Controller
 {
@@ -39,7 +40,6 @@ class DataMahasiswaOlehOperatorController extends Controller
 
         $user = User::factory()->create([
             'email' => strtolower(str_replace(' ', '.', $data['nama'])) . '@students.undip.ac.id',
-            'password' => bcrypt('12345'),
             'role' => 'mahasiswa'
         ]);
 

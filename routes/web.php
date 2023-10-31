@@ -21,15 +21,11 @@ Route::get('/', function () {
     return view('home');
 });
 
-// Route::get('/students', [StudentController::class, 'index'])->name('students.index');
-
-// Route::post('/students', [StudentController::class, 'store'])->name('students.store');
-
 Route::middleware(['guest'])->group(function () {
     Route::get('/register', [RegisterMahasiswaController::class, 'index']);
     Route::get('/cek-nim', [RegisterMahasiswaController::class, 'cekNIM']);
-    Route::get('/isi-data/{nim}', [RegisterMahasiswaController::class, 'edit'])->name('isi-data');
-    Route::put('/ubah-data/{nim}', [RegisterMahasiswaController::class, 'update']);
+    Route::get('/lengkapi-data/{nim}', [RegisterMahasiswaController::class, 'edit'])->name('lengkapi-data');
+    Route::put('/lengkapi-data/{nim}', [RegisterMahasiswaController::class, 'update']);
 
     Route::get('/login', [LoginController::class, 'index'])->name('login');
     Route::post('/login', [LoginController::class, 'authenticate']);
