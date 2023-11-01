@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Mahasiswa;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Requests\UpdateDataMahasiswaOlehMahasiswaRequest;
+use Illuminate\Support\Facades\Auth;
 
 class LengkapiDataMahasiswaOlehMahasiswa extends Controller
 {
@@ -43,17 +45,37 @@ class LengkapiDataMahasiswaOlehMahasiswa extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Mahasiswa $mahasiswa)
+    public function edit($nim)
     {
-        return view('mahasiswa.lengkapi-data.edit');
+        $mahasiswa = Mahasiswa::where('nim', $nim)->first();
+
+        return view('mahasiswa.lengkapi-data.edit', compact('mahasiswa'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Mahasiswa $mahasiswa)
+    public function update(UpdateDataMahasiswaOlehMahasiswaRequest $request, $nim)
     {
-        //
+        $mahasiswa = Mahasiswa::where('nim', $nim)->first();
+        $userMahasiswa = $mahasiswa->user;
+
+        if ($mahasiswa && $userMahasiswa) {
+            $mahasiswa->jalur_masuk = $request->input('jalur_masuk');
+            $mahasiswa->no_telepon = $request->input('no_telepon');
+            $mahasiswa->alamat = $request->input('alamat');
+            $mahasiswa->kota = $request->input('kota');
+            $mahasiswa->provinsi = $request->input('provinsi');
+            
+            // $userMahasiswa->email = $request->input('email');
+            $userMahasiswa->password = bcrypt($request->input('password'));
+
+            $mahasiswa->save();
+            $userMahasiswa->save();
+
+            Auth::login($userMahasiswa);
+            return redirect()->route('dashboard');
+        }
     }
 
     /**
