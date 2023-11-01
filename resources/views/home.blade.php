@@ -54,7 +54,7 @@
                 <div class="divider-custom-line"></div>
             </div>
             <!-- Masthead Subheading-->
-            <p class="pre-wrap masthead-subheading font-weight-light mb-0">Mahasiswa Universitas Diponegoro</p>
+            <p class="pre-wrap masthead-subheading font-weight-light mb-0">Sistem Monitoring dan Evaluasi Mahasiswa Universitas Diponegoro</p>
         </div>
     </header>
     <section class="page-section portfolio" id="portfolio">

@@ -39,7 +39,6 @@ class DataMahasiswaOlehOperatorController extends Controller
 
         $user = User::factory()->create([
             'email' => strtolower(str_replace(' ', '.', $data['nama'])) . '@students.undip.ac.id',
-            'password' => bcrypt('12345'),
             'role' => 'mahasiswa'
         ]);
 
@@ -48,7 +47,7 @@ class DataMahasiswaOlehOperatorController extends Controller
             'nim' => $data['nim'],
             'angkatan' => $data['angkatan'],
             'status' => $data['status'],
-            'user_id' => $user->id, // Hubungkan user dengan mahasiswa
+            'user_id' => $user->id,
             'dosen_wali_id' => $dosenTerkecil->id
         ]);
 

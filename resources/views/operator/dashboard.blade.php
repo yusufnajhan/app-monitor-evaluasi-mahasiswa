@@ -59,30 +59,30 @@
                                     <div class="row">
                                         <div class="col-6">
                                             <div class="form-group">
-                                                <label>Result Type:</label>
+                                                <label>Lorem Ipsum:</label>
                                                 <select class="select2" multiple="multiple" data-placeholder="Any"
                                                     style="width: 100%;">
-                                                    <option>Text only</option>
-                                                    <option>Images</option>
-                                                    <option>Video</option>
+                                                    <option>Lorem Ipsum</option>
+                                                    <option>Lorem Ipsum</option>
+                                                    <option>Lorem Ipsum</option>
                                                 </select>
                                             </div>
                                         </div>
                                         <div class="col-3">
                                             <div class="form-group">
-                                                <label>Sort Order:</label>
+                                                <label>Lorem Ipsum</label>
                                                 <select class="select2" style="width: 100%;">
-                                                    <option selected>ASC</option>
-                                                    <option>DESC</option>
+                                                    <option selected>Lorem Ipsum</option>
+                                                    <option>Lorem Ipsum</option>
                                                 </select>
                                             </div>
                                         </div>
                                         <div class="col-3">
                                             <div class="form-group">
-                                                <label>Order By:</label>
+                                                <label>Lorem Ipsum</label>
                                                 <select class="select2" style="width: 100%;">
-                                                    <option selected>Title</option>
-                                                    <option>Date</option>
+                                                    <option selected>Lorem Ipsum</option>
+                                                    <option>Lorem Ipsum</option>
                                                 </select>
                                             </div>
                                         </div>

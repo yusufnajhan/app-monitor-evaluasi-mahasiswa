@@ -17,11 +17,6 @@ return new class extends Migration
             $table->string('nama');
             $table->year('angkatan')->default(date('Y'));
             $table->string('status')->default('Aktif');
-            $table->string('jalur_masuk')->nullable();
-            $table->string('no_telepon')->nullable();
-            $table->string('alamat')->nullable();
-            $table->string('kota')->nullable();
-            $table->string('provinsi')->nullable();
             $table->unsignedBigInteger('user_id')->nullable();
             $table->unsignedBigInteger('dosen_wali_id')->nullable();
             // $table->unsignedBigInteger('isian_rencana_semester_id')->nullable();

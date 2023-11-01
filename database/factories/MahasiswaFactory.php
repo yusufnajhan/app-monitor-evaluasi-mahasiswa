@@ -32,14 +32,7 @@ class MahasiswaFactory extends Factory
             'nim' => $nim,
             'nama' => $this->faker->name(),
             'angkatan' => $this->faker->numberBetween(2017, 2023),
-            'status' => 'Aktif',
-            'jalur_masuk' => $this->faker->randomElement(['SNMPTN', 'SBMPTN', 'Mandiri']),
-            'no_telepon' => $this->faker->phoneNumber(),
-            'alamat' => $this->faker->address(),
-            'kota' => $this->faker->city(),
-            'provinsi' => $this->faker->state(),
-            'user_id' => $user->id,
-            'dosen_wali_id' => $this->faker->randomElement([1, 2, 3])
+            'status' => 'Aktif'
         ];
     }
 }
