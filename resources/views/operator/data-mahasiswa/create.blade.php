@@ -51,14 +51,29 @@
                     <input type="text" name="nama" class="form-control" id="nama" placeholder="Masukkan Nama Lengkap" value="{{ old('nama') }}">
                   </div>
                   <div class="form-group">
-                    <label for="nama">Angkatan</label>
-                    <input type="text" name="angkatan" class="form-control" id="angkatan" placeholder="Masukkan Angkatan" value="{{ old('angkatan') }}">
+                    <label for="angkatan">Angkatan</label>
+                    <select name="angkatan" class="form-control" id="angkatan">
+                        <option value="" selected disabled>-- Pilih Angkatan --</option>
+                        @for ($year = now()->year - 6; $year <= now()->year; $year++) 
+                          <option value="{{ $year }}" {{ old('angkatan') == $year ? 'selected' : '' }}>{{ $year }}</option>
+                        @endfor
+                    </select>
                   </div>
                   <div class="form-group">
                     <label for="status">Status</label>
                     <select name="status" class="form-control" id="status">
+                    <option value="" selected disabled>-- Pilih Status --</option>
                         <option value="Aktif" {{ old('status') === 'Aktif' ? 'selected' : '' }}>Aktif</option>
                         <option value="Cuti" {{ old('status') === 'Cuti' ? 'selected' : '' }}>Cuti</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label for="dosen_wali">Dosen Wali</label>
+                    <select name="dosen_wali" id="dosen_wali" class="form-control">
+                      <option value="" selected disabled>-- Pilih Dosen Wali --</option>
+                      @foreach ($allDosenWali as $dosenWali)
+                          <option value="{{ $dosenWali->id }}">{{ $dosenWali->nama }}</option>
+                      @endforeach
                     </select>
                   </div>
                 </div>

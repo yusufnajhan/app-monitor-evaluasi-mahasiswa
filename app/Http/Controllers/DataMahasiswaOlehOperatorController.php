@@ -23,7 +23,9 @@ class DataMahasiswaOlehOperatorController extends Controller
      */
     public function create()
     {
-        return view('operator.data-mahasiswa.create');
+        $allDosenWali = DosenWali::all();
+
+        return view('operator.data-mahasiswa.create', compact('allDosenWali'));
     }
 
     /**
@@ -32,13 +34,10 @@ class DataMahasiswaOlehOperatorController extends Controller
     public function store(StoreDataMahasiswaOlehOperatorRequest $request)
     {
         $data = $request->validated();
-        $daftarDosen = DosenWali::with('mahasiswa')->get();
-        $dosenTerkecil = $daftarDosen->sortBy(function ($dosen) {
-            return $dosen->jumlahMahasiswaWali();
-        })->first();
 
         $user = User::factory()->create([
             'email' => strtolower(str_replace(' ', '.', $data['nama'])) . '@students.undip.ac.id',
+            'password' => bcrypt(12345),
             'role' => 'mahasiswa'
         ]);
 
@@ -48,7 +47,7 @@ class DataMahasiswaOlehOperatorController extends Controller
             'angkatan' => $data['angkatan'],
             'status' => $data['status'],
             'user_id' => $user->id,
-            'dosen_wali_id' => $dosenTerkecil->id
+            'dosen_wali_id' => $data['dosen_wali']
         ]);
 
         return redirect()->route('dashboard');
