@@ -38,7 +38,8 @@
                     </div>
                     <!-- /.card-header -->
                     <!-- form start -->
-                    <form action="/irs/{{ $nim }}/{{ $irs->semester }}" method="POST">
+                    <form action="/irs/{{ $nim }}/{{ $irs->semester }}" method="POST"
+                        enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
                         <div class="card-body">
@@ -52,10 +53,10 @@
                                 <input type="text" name="sks" class="form-control" id="sks"
                                     value="{{ old('sks', $irs->sks) }}">
                             </div>
-                            {{-- <div class="form-group">
+                            <div class="form-group">
                                 <label for="nama_file">Scan IRS </label>
                                 <input type="file" name="nama_file" class="form-control" id="nama_file">
-                            </div> --}}
+                            </div>
                         </div>
                         <!-- /.card-body -->
                         <div class="card-footer">

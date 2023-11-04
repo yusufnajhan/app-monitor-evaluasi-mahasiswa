@@ -74,6 +74,9 @@ class DataIRSOlehMahasiswaController extends Controller
      */
     public function update(UpdateIRSOlehMahasiswaRequest $request, $nim, $semester)
     {
+
+        // return $request->file('nama_file')->store('irs');
+
         $data = $request->validated();
 
         $mahasiswa = Mahasiswa::where('nim', $nim)->first();
@@ -87,6 +90,9 @@ class DataIRSOlehMahasiswaController extends Controller
         if (!$irs) {
             abort(404);
         }
+
+        $namaFileBaru = 'irs_' . $semester . '_' . str_replace(' ', '_', strtolower($mahasiswa->nama)) . '.pdf';
+        $irs->nama_file = $request->file('nama_file')->storeAs('irs', $namaFileBaru);
 
         $irs->sks = $data['sks'];
         $irs->save();

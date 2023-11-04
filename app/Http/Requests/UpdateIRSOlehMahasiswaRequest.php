@@ -22,14 +22,16 @@ class UpdateIRSOlehMahasiswaRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'sks' => 'required|gte:18|lte:24'
+            'sks' => 'required|gte:18|lte:24',
+            'nama_file' => 'required|file|mimes:pdf'
         ];
     }
 
     public function attributes()
     {
         return [
-            'sks' => 'Satuan kredit semester/SKS'
+            'sks' => 'Satuan kredit semester/SKS',
+            'nama_file' => 'File'
         ];
     }
 
