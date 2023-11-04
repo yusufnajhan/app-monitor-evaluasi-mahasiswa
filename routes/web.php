@@ -65,3 +65,5 @@ Route::get('/khs/{nim}/{semester}', [DataKHSOlehMahasiswaController::class, 'sho
 
 // Progres PKL
 Route::get('/progres-pkl/{nim}', [DataPKLOlehMahasiswaController::class, 'show']);
+Route::get('/progres-pkl/{nim}/edit', [DataPKLOlehMahasiswaController::class, 'edit']);
+Route::put('/progres-pkl/{nim}', [DataPKLOlehMahasiswaController::class, 'update']);

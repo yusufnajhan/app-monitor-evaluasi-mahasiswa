@@ -18,13 +18,13 @@
                     </div><!-- /.col -->
                 </div><!-- /.row -->
 
-                <h1 class="m-0">Detail KHS</h1>
+                <h1 class="m-0">Detail PKL</h1>
                 <br>
 
                 <!-- general form elements -->
                 <div class="card card-primary">
                     <div class="card-header">
-                        <h3 class="card-title">KHS</h3>
+                        <h3 class="card-title">PKL</h3>
                     </div>
                     <!-- /.card-header -->
                     <!-- form start -->
@@ -36,13 +36,13 @@
                                     value="{{ $pkl->statusPersetujuan() }}" disabled>
                             </div>
                             <div class="form-group">
-                                <label for="status">Status Persetujuan</label>
+                                <label for="status">Status</label>
                                 <input type="text" name="status" class="form-control" id="status"
                                     value="{{ $pkl->status }}" disabled>
                             </div>
                             @if ($pkl->status == 'Lulus')
                                 <div class="form-group">
-                                    <label for="nilai">Status Persetujuan</label>
+                                    <label for="nilai">Nilai</label>
                                     <input type="text" name="nilai" class="form-control" id="nilai"
                                         value="{{ $pkl->nilai }}" disabled>
                                 </div>
@@ -55,7 +55,8 @@
                         </div>
                         <!-- /.card-body -->
                         <div class="card-footer">
-                            <a href="/khs/{{ $nim }}">Back</a>
+                            <a href="/progres-pkl/{{ $nim }}">Back</a>
+                            <a href="/progres-pkl/{{ $nim }}/edit">Edit</a>
                         </div>
                     </form>
                 </div>
@@ -65,8 +66,7 @@
 
         </div><!-- /.container-fluid -->
         <br>
-        <a href="/dashboard"
-            class="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900">
+        <a href="/dashboard" class="">
             Back
         </a>
     </div>
