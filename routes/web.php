@@ -52,3 +52,4 @@ Route::get('/irs/{nim}/{semester}/edit', [DataIRSOlehMahasiswaController::class,
 Route::put('/irs/{nim}/{semester}', [DataIRSOlehMahasiswaController::class, 'update']);
 
 Route::get('/irs/{nim}/{semester}', [DataIRSOlehMahasiswaController::class, 'show']);
+
