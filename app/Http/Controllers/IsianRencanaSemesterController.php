@@ -5,15 +5,23 @@ namespace App\Http\Controllers;
 use App\Models\IsianRencanaSemester;
 use App\Http\Requests\StoreIsianRencanaSemesterRequest;
 use App\Http\Requests\UpdateIsianRencanaSemesterRequest;
+use App\Models\Mahasiswa;
 
 class IsianRencanaSemesterController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index($nim)
     {
-        //
+        $mahasiswa = Mahasiswa::where('nim', $nim)->first();
+        if (!$mahasiswa) {
+            abort(404);
+        }
+
+        $irs = IsianRencanaSemester::where('mahasiswa_id', $mahasiswa->id)->get();
+
+        return view('mahasiswa.irs.index', compact('irs', 'nim'));
     }
 
     /**
@@ -43,9 +51,21 @@ class IsianRencanaSemesterController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(IsianRencanaSemester $isianRencanaSemester)
+    public function edit($nim, $semester)
     {
-        //
+        $mahasiswa = Mahasiswa::where('nim', $nim)->first();
+        if (!$mahasiswa) {
+            abort(404);
+        }
+
+        $irs = IsianRencanaSemester::where('mahasiswa_id', $mahasiswa->id)
+            ->where('semester', $semester)
+            ->first();
+        if (!$irs) {
+            abort(404);
+        }
+
+        return view('mahasiswa.irs.edit', compact('irs', 'nim'));
     }
 
     /**
