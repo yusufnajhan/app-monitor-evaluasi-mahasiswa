@@ -6,6 +6,8 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\RegisterMahasiswaController;
 use App\Http\Controllers\LengkapiDataMahasiswaOlehMahasiswa;
 use App\Http\Controllers\DataMahasiswaOlehOperatorController;
+use App\Http\Controllers\DataIRSOlehMahasiswaController;
+use App\Models\IsianRencanaSemester;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,5 +40,16 @@ Route::middleware(['auth', 'checkrole:operator'])->group(function () {
     Route::post('/tambah-mahasiswa', [DataMahasiswaOlehOperatorController::class, 'store'])->name('simpan-mahasiswa');
 });
 
+
+// Mahasiswa
 Route::get('/isi-data/{nim}', [LengkapiDataMahasiswaOlehMahasiswa::class, 'edit'])->name('isi-data');
 Route::put('/isi-data/{nim}', [LengkapiDataMahasiswaOlehMahasiswa::class, 'update']);
+
+// IRS Mahasiswa
+Route::get('/irs/{nim}', [DataIRSOlehMahasiswaController::class, 'index']);
+
+Route::get('/irs/{nim}/{semester}/edit', [DataIRSOlehMahasiswaController::class, 'edit']);
+Route::put('/irs/{nim}/{semester}', [DataIRSOlehMahasiswaController::class, 'update']);
+
+Route::get('/irs/{nim}/{semester}', [DataIRSOlehMahasiswaController::class, 'show']);
+
