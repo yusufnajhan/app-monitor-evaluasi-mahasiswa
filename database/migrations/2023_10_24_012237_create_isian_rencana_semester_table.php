@@ -16,6 +16,7 @@ return new class extends Migration
             $table->integer('semester');
             $table->integer('sks')->nullable();
             $table->string('nama_file')->unique()->nullable();
+            $table->boolean('sudah_disetujui')->nullable();
             $table->unsignedBigInteger('mahasiswa_id');
             $table->timestamps();
 

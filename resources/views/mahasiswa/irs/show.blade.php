@@ -31,6 +31,11 @@
                     <form action="" method="" enctype="multipart/form-data">
                         <div class="card-body">
                             <div class="form-group">
+                                <label for="status">Status Persetujuan</label>
+                                <input type="text" name="status" class="form-control" id="status"
+                                    value="{{ $irs->statusPersetujuan() }}" disabled>
+                            </div>
+                            <div class="form-group">
                                 <label for="semester">Semester</label>
                                 <input type="text" name="semester" class="form-control" id="semester"
                                     value="{{ $irs->semester }}" disabled>

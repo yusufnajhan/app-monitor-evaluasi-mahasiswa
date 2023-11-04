@@ -107,6 +107,7 @@ class DataIRSOlehMahasiswaController extends Controller
         $irs->nama_file = $request->file('nama_file')->storeAs('irs', $namaFileBaru);
 
         $irs->sks = $data['sks'];
+        $irs->sudah_disetujui = 0;
         $irs->save();
 
         return redirect('/irs/' . $nim);

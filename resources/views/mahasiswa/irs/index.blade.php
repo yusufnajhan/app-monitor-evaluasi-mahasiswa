@@ -44,6 +44,7 @@
                             <tr>
                                 <th>Semester</th>
                                 <th>SKS</th>
+                                <th>Status Persetujuan</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
@@ -52,6 +53,9 @@
                                 <tr>
                                     <td>{{ $itemIrs->semester }}</td>
                                     <td>{{ $itemIrs->sks ? $itemIrs->sks : 'Kosong' }}</td>
+                                    <td>
+                                        {{ $itemIrs->statusPersetujuan() }}
+                                    </td>
                                     <td>
                                         <a href="/irs/{{ $nim }}/{{ $itemIrs->semester }}">Detail</a>
                                         <a href="/irs/{{ $nim }}/{{ $itemIrs->semester }}/edit">Edit</a>
