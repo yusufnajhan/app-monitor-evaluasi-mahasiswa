@@ -4,10 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\IsianRencanaSemester;
 use App\Http\Requests\StoreIsianRencanaSemesterRequest;
+use App\Http\Requests\UpdateIRSOlehMahasiswaRequest;
 use App\Http\Requests\UpdateIsianRencanaSemesterRequest;
 use App\Models\Mahasiswa;
 
-class IsianRencanaSemesterController extends Controller
+class DataIRSOlehMahasiswaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -71,9 +72,26 @@ class IsianRencanaSemesterController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateIsianRencanaSemesterRequest $request, IsianRencanaSemester $isianRencanaSemester)
+    public function update(UpdateIRSOlehMahasiswaRequest $request, $nim, $semester)
     {
-        //
+        $data = $request->validated();
+
+        $mahasiswa = Mahasiswa::where('nim', $nim)->first();
+        if (!$mahasiswa) {
+            abort(404);
+        }
+
+        $irs = IsianRencanaSemester::where('mahasiswa_id', $mahasiswa->id)
+            ->where('semester', $semester)
+            ->first();
+        if (!$irs) {
+            abort(404);
+        }
+
+        $irs->sks = $data['sks'];
+        $irs->save();
+
+        return redirect('/irs/' . $nim);
     }
 
     /**
