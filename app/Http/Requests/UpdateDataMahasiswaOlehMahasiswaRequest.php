@@ -27,9 +27,8 @@ class UpdateDataMahasiswaOlehMahasiswaRequest extends FormRequest
             'alamat' => 'required|min:5',
             'kota' => 'required',
             'provinsi' => 'required',
-            'email' => 'required',
+            // 'email' => 'required',
             'password' => 'required|min:6',
-            // 'confirm_password' => 'required|confirmed'
             'confirm_password' => 'required|same:password'
         ];
     }
@@ -42,7 +41,7 @@ class UpdateDataMahasiswaOlehMahasiswaRequest extends FormRequest
             'alamat' => 'Alamat',
             'kota' => 'Kota',
             'provinsi' => 'Provinsi',
-            'email' => 'Email',
+            // 'email' => 'Email',
             'password' => 'Password',
             'confirm_password' => 'Konfirmasi password'
         ];
@@ -55,7 +54,6 @@ class UpdateDataMahasiswaOlehMahasiswaRequest extends FormRequest
             'unique' => ':ATTRIBUTE sudah terdaftar!',
             'min' => ':Attribute minimal terdiri dari :min karakter!',
             'max' => ':Attribute maksimal terdiri dari :max karakter!',
-            // 'confirmed' => ':Attribute harus sama!'
             'same' => ':Attribute harus sama!'
         ];
     }

@@ -13,7 +13,8 @@ return new class extends Migration
     {
         Schema::create('progres_skripsi', function (Blueprint $table) {
             $table->id();
-            $table->string('status');
+            // Belum ambil, sedang ambil, lulus
+            $table->string('status')->nullable();
             $table->char('nilai')->nullable();
             $table->string('nama_file')->nullable();
             $table->timestamp('tanggal_sidang')->nullable();

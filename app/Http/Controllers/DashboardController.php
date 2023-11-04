@@ -19,7 +19,11 @@ class DashboardController extends Controller
         } else if ($user->role === 'dosenWali') {
             return view('dosen-wali.dashboard');
         } else if ($user->role === 'mahasiswa') {
-            return view('mahasiswa.dashboard');
+            if ($user->mahasiswa->jalur_masuk === NULL) {
+                return redirect('/isi-data/' . $user->mahasiswa->nim);
+            } else {
+                return view('mahasiswa.dashboard');
+            }
         }
     }
 }

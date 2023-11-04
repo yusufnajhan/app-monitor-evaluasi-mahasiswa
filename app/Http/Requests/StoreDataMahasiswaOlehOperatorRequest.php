@@ -25,14 +25,16 @@ class StoreDataMahasiswaOlehOperatorRequest extends FormRequest
             'nama' => 'required',
             'nim' => 'required|unique:mahasiswa',
             'angkatan' => 'required',
-            'status' => 'required'
+            'status' => 'required',
+            'dosen_wali' => 'required'
         ];
     }
 
     public function attributes()
     {
         return [
-            'nim' => 'NIM'
+            'nim' => 'NIM',
+            'dosen_wali' => 'Dosen Wali'
         ];
     }
 

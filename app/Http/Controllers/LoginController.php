@@ -6,6 +6,7 @@ use App\Http\Requests\LoginRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Reflector;
 
 class LoginController extends Controller
 {
@@ -20,21 +21,22 @@ class LoginController extends Controller
     {
         $credentials = $request->only('email', 'password');
 
-        // Cek user mahasiswa dengan jalur_masuk kosong
-        $forbiddenMahasiswa = User::where('email', $credentials['email'])
-            ->where('role', 'mahasiswa')
-            ->whereHas('mahasiswa', function ($query) {
-                $query->whereNull('jalur_masuk');
-            })
-            ->first();
+        # Cek user mahasiswa dengan jalur_masuk kosong
+        // $forbiddenMahasiswa = User::where('email', $credentials['email'])
+        //     ->where('role', 'mahasiswa')
+        //     ->whereHas('mahasiswa', function ($query) {
+        //         $query->whereNull('jalur_masuk');
+        //     })
+        //     ->first();
 
-        if ($forbiddenMahasiswa) {
-            return redirect('/register')
-                ->with('error', 'Anda belum mendaftar, daftar terlebih dahulu!');
-        }
+        // if ($forbiddenMahasiswa) {
+        //     return redirect('/isi-data/' . $forbiddenMahasiswa->mahasiswa->nim)
+        //         ->with('error', 'Anda belum mengisi data, lengkapi terlebih dahulu!');
+        // }
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
+
             return redirect()->intended('/dashboard');
         }
 

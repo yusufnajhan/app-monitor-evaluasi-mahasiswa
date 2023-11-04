@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('isian_rencana_semester', function (Blueprint $table) {
             $table->id();
-            $table->integer('semester')->nullable();
+            $table->integer('semester');
             $table->integer('sks')->nullable();
             $table->string('nama_file')->unique()->nullable();
             $table->unsignedBigInteger('mahasiswa_id');

@@ -7,6 +7,10 @@ use App\Models\User;
 use App\Http\Requests\StoreDataMahasiswaOlehOperatorRequest;
 use App\Http\Requests\UpdateMahasiswaRequest;
 use App\Models\DosenWali;
+use App\Models\IsianRencanaSemester;
+use App\Models\KartuHasilStudi;
+use App\Models\ProgresPraktikKerjaLapangan;
+use App\Models\ProgresSkripsi;
 
 class DataMahasiswaOlehOperatorController extends Controller
 {
@@ -23,7 +27,9 @@ class DataMahasiswaOlehOperatorController extends Controller
      */
     public function create()
     {
-        return view('operator.data-mahasiswa.create');
+        $allDosenWali = DosenWali::all();
+
+        return view('operator.data-mahasiswa.create', compact('allDosenWali'));
     }
 
     /**
@@ -32,25 +38,46 @@ class DataMahasiswaOlehOperatorController extends Controller
     public function store(StoreDataMahasiswaOlehOperatorRequest $request)
     {
         $data = $request->validated();
-        $daftarDosen = DosenWali::with('mahasiswa')->get();
-        $dosenTerkecil = $daftarDosen->sortBy(function ($dosen) {
-            return $dosen->jumlahMahasiswaWali();
-        })->first();
 
         $user = User::factory()->create([
             'email' => strtolower(str_replace(' ', '.', $data['nama'])) . '@students.undip.ac.id',
-            'password' => bcrypt('12345'),
+            'password' => bcrypt(12345),
             'role' => 'mahasiswa'
         ]);
 
-        Mahasiswa::create([
+        $mahasiswa = Mahasiswa::create([
             'nama' => $data['nama'],
             'nim' => $data['nim'],
             'angkatan' => $data['angkatan'],
             'status' => $data['status'],
-            'user_id' => $user->id, // Hubungkan user dengan mahasiswa
-            'dosen_wali_id' => $dosenTerkecil->id
+            'user_id' => $user->id,
+            'dosen_wali_id' => $data['dosen_wali']
         ]);
+
+        $semester = $mahasiswa->hitungSemester();
+
+        if ($semester >= 6) {
+            ProgresPraktikKerjaLapangan::create([
+                'mahasiswa_id' => $mahasiswa->id
+            ]);
+        }
+
+        if ($semester >= 7) {
+            ProgresSkripsi::create([
+                'mahasiswa_id' => $mahasiswa->id
+            ]);
+        }
+
+        for ($i = 1; $i <= $semester; $i++) {
+            IsianRencanaSemester::create([
+                'semester' => $i,
+                'mahasiswa_id' => $mahasiswa->id
+            ]);
+            KartuHasilStudi::create([
+                'semester' => $i,
+                'mahasiswa_id' => $mahasiswa->id
+            ]);
+        }
 
         return redirect()->route('dashboard');
     }
