@@ -10,7 +10,7 @@
                         <h1 class="m-0">Dashboard Mahasiswa</h1>
                     </div><!-- /.row -->
                 </div><!-- /.container-fluid -->
-            </div>https://github.com/anurhaliza/app-monitor-evaluasi-mahasiswa/pull/9/conflict?name=resources%252Fviews%252Fmahasiswa%252Fdashboard.blade.php&ancestor_oid=5934b9130aac4a7de4dd0c74dc89108e02745193&base_oid=3184cf888e2d1f651783adadfe0f169f1e469afc&head_oid=5ea41ad1dd024c1325e6663b5bf20ed641ae6bb1
+            </div>
             <!-- /.content-header -->
             <!-- Main content -->
             <section class="content">
@@ -42,6 +42,10 @@
                     <a href="/irs/{{ $mahasiswa->nim }}">IRS Mahasiswa</a>
                     <br>
                     <a href="/khs/{{ $mahasiswa->nim }}">KHS Mahasiswa</a>
+                    @if ($mahasiswa->hitungSemester() >= 6)
+                        <br>
+                        <a href="/progres-pkl/{{ $mahasiswa->nim }}">Progres PKL Mahasiswa</a>
+                    @endif
                 </div>
             </section>
         </div>
