@@ -23,7 +23,6 @@
     </div>
     <div class="card-body">
       <p class="login-box-msg">Masuk ke akun Anda</p>
-
       <form action="{{  route('login-proses') }}" method="post">
         @csrf
         <div class="input-group mb-3">
