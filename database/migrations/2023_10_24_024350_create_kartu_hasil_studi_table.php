@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('kartu_hasil_studi', function (Blueprint $table) {
             $table->id();
-            $table->integer('semester')->nullable();
+            $table->integer('semester');
             $table->integer('sks_semester')->nullable();
             $table->integer('sks_kumulatif')->nullable();
             $table->float('ip_semester')->nullable();

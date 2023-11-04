@@ -1,10 +1,11 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\LengkapiDataMahasiswaOlehMahasiswa;
 use App\Http\Controllers\RegisterMahasiswaController;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\LengkapiDataMahasiswaOlehMahasiswa;
+use App\Http\Controllers\DataMahasiswaOlehOperatorController;
 
 /*
 |--------------------------------------------------------------------------
