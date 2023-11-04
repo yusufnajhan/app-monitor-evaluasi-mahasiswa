@@ -18,19 +18,8 @@
                     </div><!-- /.col -->
                 </div><!-- /.row -->
 
-
-                <h1 class="m-0">IRS Mahasiswa</h1>
+                <h1 class="m-0">Detail IRS</h1>
                 <br>
-
-                @if ($errors->any())
-                    <div class="red-alert">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
 
                 <!-- general form elements -->
                 <div class="card card-primary">
@@ -39,27 +28,29 @@
                     </div>
                     <!-- /.card-header -->
                     <!-- form start -->
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Semester</th>
-                                <th>SKS</th>
-                                <th>Aksi</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($irs as $itemIrs)
-                                <tr>
-                                    <td>{{ $itemIrs->semester }}</td>
-                                    <td>{{ $itemIrs->sks ? $itemIrs->sks : 'Kosong' }}</td>
-                                    <td>
-                                        <a href="/irs/{{ $nim }}/{{ $itemIrs->semester }}">Detail</a>
-                                        <a href="/irs/{{ $nim }}/{{ $itemIrs->semester }}/edit">Edit</a>
-                                    </td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+                    <form action="" method="" enctype="multipart/form-data">
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="semester">Semester</label>
+                                <input type="text" name="semester" class="form-control" id="semester"
+                                    value="{{ $irs->semester }}" disabled>
+                            </div>
+                            <div class="form-group">
+                                <label for="sks">Jumlah SKS yang diambil</label>
+                                <input type="text" name="sks" class="form-control" id="sks"
+                                    value="{{ $irs->sks }}" disabled>
+                            </div>
+                            <div class="form-group">
+                                <label for="nama_file">Scan IRS </label>
+                                <embed src="/storage/{{ $irs->nama_file }}" width="100%" height="600"
+                                    type="application/pdf">
+                            </div>
+                        </div>
+                        <!-- /.card-body -->
+                        <div class="card-footer">
+                            <a href="/irs/{{ $nim }}">Back</a>
+                        </div>
+                    </form>
                 </div>
                 <!-- /.card -->
             </div><!-- /.row -->

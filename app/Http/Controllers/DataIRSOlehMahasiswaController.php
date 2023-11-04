@@ -44,9 +44,21 @@ class DataIRSOlehMahasiswaController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(IsianRencanaSemester $isianRencanaSemester)
+    public function show($nim, $semester)
     {
-        //
+        $mahasiswa = Mahasiswa::where('nim', $nim)->first();
+        if (!$mahasiswa) {
+            abort(404);
+        }
+
+        $irs = IsianRencanaSemester::where('mahasiswa_id', $mahasiswa->id)
+            ->where('semester', $semester)
+            ->first();
+        if (!$irs) {
+            abort(404);
+        }
+
+        return view('mahasiswa.irs.show', compact('irs', 'nim'));
     }
 
     /**
