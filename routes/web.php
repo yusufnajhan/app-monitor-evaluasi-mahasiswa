@@ -27,9 +27,6 @@ Route::get('/', function () {
 // Route::post('/students', [StudentController::class, 'store'])->name('students.store');
 
 Route::middleware(['guest'])->group(function () {
-    Route::get('/isi-data/{nim}', [LengkapiDataMahasiswaOlehMahasiswa::class, 'edit'])->name('isi-data');
-    Route::put('/isi-data/{nim}', [LengkapiDataMahasiswaOlehMahasiswa::class, 'update']);
-
     Route::get('/login', [LoginController::class, 'index'])->name('login');
     Route::post('/login-proses', [LoginController::class, 'authenticate'])->name('login-proses');
 });
@@ -40,3 +37,6 @@ Route::middleware(['auth', 'checkrole:operator'])->group(function () {
     Route::get('/tambah-mahasiswa', [DataMahasiswaOlehOperatorController::class, 'create'])->name('tambah-mahasiswa');
     Route::post('/tambah-mahasiswa', [DataMahasiswaOlehOperatorController::class, 'store'])->name('simpan-mahasiswa');
 });
+
+Route::get('/isi-data/{nim}', [LengkapiDataMahasiswaOlehMahasiswa::class, 'edit'])->name('isi-data');
+Route::put('/isi-data/{nim}', [LengkapiDataMahasiswaOlehMahasiswa::class, 'update']);
