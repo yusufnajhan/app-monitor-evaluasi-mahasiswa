@@ -39,6 +39,7 @@ class KartuHasilStudiSeeder extends Seeder
                     'ip_semester' => $ipSemester,
                     'ip_kumulatif' => $ipKumulatif,
                     'nama_file' => $namaFile,
+                    'sudah_disetujui' => rand(0, 1),
                     'mahasiswa_id' => $mahasiswa->id
                 ]);
             }

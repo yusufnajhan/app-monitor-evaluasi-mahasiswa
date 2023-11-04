@@ -19,6 +19,7 @@ return new class extends Migration
             $table->float('ip_semester')->nullable();
             $table->float('ip_kumulatif')->nullable();
             $table->string('nama_file')->unique()->nullable();
+            $table->boolean('sudah_disetujui')->nullable();
             $table->unsignedBigInteger('mahasiswa_id');
             $table->timestamps();
 

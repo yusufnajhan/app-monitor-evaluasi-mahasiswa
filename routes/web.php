@@ -1,13 +1,14 @@
 <?php
 
+use App\Models\IsianRencanaSemester;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\RegisterMahasiswaController;
+use App\Http\Controllers\DataIRSOlehMahasiswaController;
+use App\Http\Controllers\DataKHSOlehMahasiswaController;
 use App\Http\Controllers\LengkapiDataMahasiswaOlehMahasiswa;
 use App\Http\Controllers\DataMahasiswaOlehOperatorController;
-use App\Http\Controllers\DataIRSOlehMahasiswaController;
-use App\Models\IsianRencanaSemester;
 
 /*
 |--------------------------------------------------------------------------
@@ -52,3 +53,12 @@ Route::get('/irs/{nim}/{semester}/edit', [DataIRSOlehMahasiswaController::class,
 Route::put('/irs/{nim}/{semester}', [DataIRSOlehMahasiswaController::class, 'update']);
 
 Route::get('/irs/{nim}/{semester}', [DataIRSOlehMahasiswaController::class, 'show']);
+
+
+// KHS Mahasiswa
+Route::get('/khs/{nim}', [DataKHSOlehMahasiswaController::class, 'index']);
+
+Route::get('/khs/{nim}/{semester}/edit', [DataKHSOlehMahasiswaController::class, 'edit']);
+Route::put('/khs/{nim}/{semester}', [DataKHSOlehMahasiswaController::class, 'update']);
+
+Route::get('/khs/{nim}/{semester}', [DataKHSOlehMahasiswaController::class, 'show']);

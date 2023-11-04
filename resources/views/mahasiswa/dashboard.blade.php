@@ -40,6 +40,8 @@
             <section class="content">
                 <div class="container-fluid">
                     <a href="/irs/{{ $mahasiswa->nim }}">IRS Mahasiswa</a>
+                    <br>
+                    <a href="/khs/{{ $mahasiswa->nim }}">KHS Mahasiswa</a>
                 </div>
             </section>
         </div>
