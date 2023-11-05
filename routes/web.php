@@ -9,8 +9,6 @@ use App\Http\Controllers\DataIRSOlehMahasiswaController;
 use App\Http\Controllers\DataKHSOlehMahasiswaController;
 use App\Http\Controllers\LengkapiDataMahasiswaOlehMahasiswa;
 use App\Http\Controllers\DataMahasiswaOlehOperatorController;
-use App\Http\Controllers\DataIRSOlehMahasiswaController;
-use App\Models\IsianRencanaSemester;
 
 /*
 |--------------------------------------------------------------------------
