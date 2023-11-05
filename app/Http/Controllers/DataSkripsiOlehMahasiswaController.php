@@ -4,10 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Mahasiswa;
 use Illuminate\Http\Request;
-use App\Models\ProgresPraktikKerjaLapangan;
-use App\Http\Requests\StoreProgresPraktikKerjaLapanganRequest;
-use App\Http\Requests\UpdateProgresPKLOlehMahasiswaRequest;
-use App\Http\Requests\UpdateProgresPraktikKerjaLapanganRequest;
+use App\Models\ProgresSkripsi;
+// use App\Http\Requests\StoreProgresSkripsiRequest;
+// use App\Http\Requests\UpdateProgresPraktikKerjaLapanganRequest;
 
 class DataPKLOlehMahasiswaController extends Controller
 {
@@ -30,7 +29,7 @@ class DataPKLOlehMahasiswaController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreProgresPraktikKerjaLapanganRequest $request)
+    public function store(Request $request)
     {
         //
     }
@@ -45,13 +44,13 @@ class DataPKLOlehMahasiswaController extends Controller
             abort(404);
         }
 
-        $pkl = ProgresPraktikKerjaLapangan::where('mahasiswa_id', $mahasiswa->id)
+        $skripsi = ProgresSkripsi::where('mahasiswa_id', $mahasiswa->id)
             ->first();
-        if (!$pkl) {
+        if (!$skripsi) {
             abort(404);
         }
 
-        return view('mahasiswa.pkl.show', compact('pkl', 'nim'));
+        return view('mahasiswa.skripsi.show', compact('skripsi', 'nim'));
     }
 
     /**
@@ -64,47 +63,52 @@ class DataPKLOlehMahasiswaController extends Controller
             abort(404);
         }
 
-        $pkl = ProgresPraktikKerjaLapangan::where('mahasiswa_id', $mahasiswa->id)
+        $skripsi = ProgresSkripsi::where('mahasiswa_id', $mahasiswa->id)
             ->first();
-        if (!$pkl) {
+        if (!$skripsi) {
             abort(404);
         }
 
-        return view('mahasiswa.pkl.edit', compact('pkl', 'nim'));
+        return view('mahasiswa.skripsi.edit', compact('skripsi', 'nim'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateProgresPKLOlehMahasiswaRequest $request, $nim)
+    public function update(Request $request, $nim)
     {
         $mahasiswa = Mahasiswa::where('nim', $nim)->first();
         if (!$mahasiswa) {
             abort(404);
         }
 
-        $pkl = ProgresPraktikKerjaLapangan::where('mahasiswa_id', $mahasiswa->id)
+        $skripsi = ProgresSkripsi::where('mahasiswa_id', $mahasiswa->id)
             ->first();
-        if (!$pkl) {
+        if (!$skripsi) {
             abort(404);
         }
 
-        $data = $request->validated();
+        $request->validate([
+            'status' => 'required'
+        ]);
+        $skripsi->status = $request->input('status');
 
-        $pkl->status = $data['status'];
-        $pkl->sudah_disetujui = 0;
+        if ($request->status == 'Lulus') {
+            $request->validate([
+                'nilai' => 'required',
+                'nama_file' => 'required|file|mimes:pdf'
+            ]);
 
-        if ($data['status'] == 'Lulus') {
-            $pkl->nilai = $data['nilai'];
+            $skripsi->nilai = $request->input('nilai');
 
-            $namaFileBaru = 'pkl_' . str_replace(' ', '_', strtolower($mahasiswa->nama)) . '.pdf';
-            $pkl->nama_file = $request->file('nama_file')->storeAs('progres-pkl', $namaFileBaru);
+            $namaFileBaru = 'skripsi_' . str_replace(' ', '_', strtolower($mahasiswa->nama)) . '.pdf';
+            $skripsi->nama_file = $request->file('nama_file')->storeAs('progres-pkl', $namaFileBaru);
         } else {
-            $pkl->nilai = NULL;
-            $pkl->nama_file = NULL;
+            $skripsi->nilai = NULL;
+            $skripsi->nama_file = NULL;
         }
 
-        $pkl->save();
+        $skripsi->save();
 
         return redirect('/progres-pkl/' . $nim);
     }
@@ -112,7 +116,7 @@ class DataPKLOlehMahasiswaController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(ProgresPraktikKerjaLapangan $progresPraktikKerjaLapangan)
+    public function destroy($progresPraktikKerjaLapangan)
     {
         //
     }

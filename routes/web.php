@@ -1,7 +1,6 @@
 <?php
 
 use App\Models\IsianRencanaSemester;
-use App\Models\IsianRencanaSemester;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\DashboardController;
@@ -69,4 +68,7 @@ Route::get('/progres-pkl/{nim}', [DataPKLOlehMahasiswaController::class, 'show']
 Route::get('/progres-pkl/{nim}/edit', [DataPKLOlehMahasiswaController::class, 'edit']);
 Route::put('/progres-pkl/{nim}', [DataPKLOlehMahasiswaController::class, 'update']);
 
-Route::get('/khs/{nim}/{semester}', [DataKHSOlehMahasiswaController::class, 'show']);
+// Progres Skripsi
+Route::get('/progres-skripsi/{nim}', [DataSkripsiOlehMahasiswaController::class, 'show']);
+Route::get('/progres-skripsi/{nim}/edit', [DataSkripsiOlehMahasiswaController::class, 'edit']);
+Route::put('/progres-skripsi/{nim}', [DataSkripsiOlehMahasiswaController::class, 'update']);

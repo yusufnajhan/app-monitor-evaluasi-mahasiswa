@@ -55,7 +55,7 @@
                         </div>
                         <!-- /.card-body -->
                         <div class="card-footer">
-                            <a href="/progres-pkl/{{ $nim }}">Back</a>
+                            <a href="/dashboard">Back</a>
                             <a href="/progres-pkl/{{ $nim }}/edit">Edit</a>
                         </div>
                     </form>

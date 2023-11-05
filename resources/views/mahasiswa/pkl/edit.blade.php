@@ -21,6 +21,16 @@
                 <h1 class="m-0">Detail PKL</h1>
                 <br>
 
+                @if ($errors->any())
+                    <div class="red-alert">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+
                 <!-- general form elements -->
                 <div class="card card-primary">
                     <div class="card-header">
@@ -49,16 +59,18 @@
                             <div class="form-group">
                                 <label for="nilai">Nilai</label>
                                 <input type="text" name="nilai" class="form-control" id="nilai"
-                                    value="{{ $pkl->nilai }}" disabled>
+                                    value="{{ $pkl->nilai }}" {{ $pkl->status == 'Lulus' ? '' : 'disabled' }}>
                             </div>
                             <div class="form-group">
                                 <label for="nama_file">Scan KHS </label>
-                                <input type="file" name="nama_file" class="form-control" id="nama_file" disabled>
+                                <input type="file" name="nama_file" class="form-control" id="nama_file"
+                                    {{ $pkl->status == 'Lulus' ? '' : 'disabled' }}>
                             </div>
                         </div>
                         <!-- /.card-body -->
                         <div class="card-footer">
                             <button type="submit" class="btn btn-primary">Submit</button>
+                            <a href="/dashboard">Back to Dashboard</a>
                         </div>
                     </form>
                 </div>
@@ -84,7 +96,7 @@
             const namaFileInput = document.getElementById('nama_file');
 
             statusSelect.addEventListener('change', function() {
-                if (statusSelect.value == 'Lulus') {
+                if (statusSelect.value === 'Lulus') {
                     nilaiInput.disabled = false;
                     namaFileInput.disabled = false;
                 } else {
