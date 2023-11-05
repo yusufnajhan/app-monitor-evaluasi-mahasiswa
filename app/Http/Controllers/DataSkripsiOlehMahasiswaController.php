@@ -3,12 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Mahasiswa;
-use Illuminate\Http\Request;
 use App\Models\ProgresSkripsi;
-// use App\Http\Requests\StoreProgresSkripsiRequest;
-// use App\Http\Requests\UpdateProgresPraktikKerjaLapanganRequest;
+use App\Http\Requests\StoreProgresSkripsiRequest;
+use App\Http\Requests\UpdateProgresSkripsiOlehMahasiswaRequest;
+use App\Http\Requests\UpdateProgresSkripsiRequest;
 
-class DataPKLOlehMahasiswaController extends Controller
+class DataSkripsiOlehMahasiswaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -29,7 +29,7 @@ class DataPKLOlehMahasiswaController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreProgresSkripsiRequest $request)
     {
         //
     }
@@ -75,7 +75,7 @@ class DataPKLOlehMahasiswaController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $nim)
+    public function update(UpdateProgresSkripsiOlehMahasiswaRequest $request, $nim)
     {
         $mahasiswa = Mahasiswa::where('nim', $nim)->first();
         if (!$mahasiswa) {
@@ -88,21 +88,16 @@ class DataPKLOlehMahasiswaController extends Controller
             abort(404);
         }
 
-        $request->validate([
-            'status' => 'required'
-        ]);
-        $skripsi->status = $request->input('status');
+        $data = $request->validated();
 
-        if ($request->status == 'Lulus') {
-            $request->validate([
-                'nilai' => 'required',
-                'nama_file' => 'required|file|mimes:pdf'
-            ]);
+        $skripsi->status = $data['status'];
+        $skripsi->sudah_disetujui = 0;
 
-            $skripsi->nilai = $request->input('nilai');
+        if ($data['status'] == 'Lulus') {
+            $skripsi->nilai = $data['nilai'];
 
-            $namaFileBaru = 'skripsi_' . str_replace(' ', '_', strtolower($mahasiswa->nama)) . '.pdf';
-            $skripsi->nama_file = $request->file('nama_file')->storeAs('progres-pkl', $namaFileBaru);
+            $namaFileBaru = 'pkl_' . str_replace(' ', '_', strtolower($mahasiswa->nama)) . '.pdf';
+            $skripsi->nama_file = $request->file('nama_file')->storeAs('progres-skripsi', $namaFileBaru);
         } else {
             $skripsi->nilai = NULL;
             $skripsi->nama_file = NULL;
@@ -110,13 +105,13 @@ class DataPKLOlehMahasiswaController extends Controller
 
         $skripsi->save();
 
-        return redirect('/progres-pkl/' . $nim);
+        return redirect('/progres-skripsi/' . $nim);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($progresPraktikKerjaLapangan)
+    public function destroy(ProgresSkripsi $progresSkripsi)
     {
         //
     }

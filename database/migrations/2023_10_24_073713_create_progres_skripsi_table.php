@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('nama_file')->nullable();
             $table->timestamp('tanggal_sidang')->nullable();
             $table->integer('semester_tempuh')->nullable();
+            $table->boolean('sudah_disetujui')->nullable();
             $table->unsignedBigInteger('mahasiswa_id');
             $table->timestamps();
 

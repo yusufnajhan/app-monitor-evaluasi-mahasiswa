@@ -16,4 +16,14 @@ class ProgresSkripsi extends Model
     {
         return $this->belongsTo(Mahasiswa::class);
     }
+
+    public function statusPersetujuan()
+    {
+        $statusBiner = $this->sudah_disetujui;
+        if ($statusBiner == 0) {
+            return 'Belum disetujui';
+        } else {
+            return 'Sudah disetujui';
+        }
+    }
 }
