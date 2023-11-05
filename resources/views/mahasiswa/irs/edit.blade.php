@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('content')
-    <div class="content-wrapper">
+<div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <div class="content-header">
             <div class="container">
@@ -13,13 +13,16 @@
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
                             <li class="breadcrumb-item"><a href="/dashboard">Dashboard</a></li>
-                            <li class="breadcrumb-item active">Form</li>
+                            <li class="breadcrumb-item active">IRS</li>
                         </ol>
                     </div><!-- /.col -->
                 </div><!-- /.row -->
+            </div>
+        </div>
 
-                <h1 class="m-0">Edit IRS</h1>
-                <br>
+        <!-- Main content -->
+        <div class="content">
+            <div class="container">
 
                 @if ($errors->any())
                     <div class="red-alert">
@@ -34,7 +37,7 @@
                 <!-- general form elements -->
                 <div class="card card-primary">
                     <div class="card-header">
-                        <h3 class="card-title">IRS</h3>
+                        <h3 class="card-title">Edit IRS</h3>
                     </div>
                     <!-- /.card-header -->
                     <!-- form start -->
@@ -57,23 +60,18 @@
                                 <label for="nama_file">Scan IRS </label>
                                 <input type="file" name="nama_file" class="form-control" id="nama_file">
                             </div>
-                        </div>
-                        <!-- /.card-body -->
+                        </div><!-- /.card-body -->
                         <div class="card-footer">
                             <button type="submit" class="btn btn-primary">Submit</button>
                         </div>
                     </form>
-                </div>
-                <!-- /.card -->
-            </div><!-- /.row -->
-
-
-        </div><!-- /.container-fluid -->
-        <br>
-        <a href="/dashboard"
-            class="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900">
-            Back
-        </a>
-    </div>
+                </div><!-- /.card -->
+                <br>
+                <a href="/dashboard"
+                    class="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900">
+                    Back
+                </a>
+            </div><!-- /.container -->
+        </div>
     </div>
 @endsection

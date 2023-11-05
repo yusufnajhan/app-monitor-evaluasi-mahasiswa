@@ -52,51 +52,55 @@
                                 <label for="email">Email</label>
                                 <input type="email" name="email" class="form-control" id="email"
                                     value="{{ $mahasiswa->user->email }}" disabled>
-                                <div class="form-group">
-                                    <label for="angkatan">Angkatan</label>
-                                    <input type="text" name="angkatan" class="form-control" id="angkatan"
-                                        value="{{ $mahasiswa->angkatan }}" disabled>
-                                </div>
-                                <div class="form-group">
-                                    <label for="status">Status</label>
-                                    <input type="text" name="status" class="form-control" id="status"
-                                        value="{{ $mahasiswa->status }}" disabled>
-                                </div>
-                                <div class="form-group">
-                                    <label for="dosen_wali">Dosen Wali</label>
-                                    <input type="text" name="dosen_wali" class="form-control" id="dosen_wali"
-                                        value="{{ $mahasiswa->dosenWali->nama }}" disabled>
-                                </div>
-                                <div class="form-group">
-                                    <label for="nama">Nama</label>
-                                    <input type="text" name="nama" class="form-control" id="nama"
-                                        placeholder="Masukkan Nama Lengkap" value="{{ old('nama', $mahasiswa->nama) }}">
-                                </div>
-                                <div class="form-group">
-                                    <label for="jalur_masuk">Jalur Masuk</label>
-                                    <input type="text" name="jalur_masuk" class="form-control" id="jalur_masuk"
-                                        value="{{ old('jalur_masuk') }}">
-                                </div>
-                                <div class="form-group">
-                                    <label for="no_telepon">Nomor Telepon</label>
-                                    <input type="text" name="no_telepon" class="form-control" id="no_telepon"
-                                        value="{{ old('no_telepon') }}">
-                                </div>
-                                <div class="form-group">
-                                    <label for="alamat">Alamat</label>
-                                    <input type="text" name="alamat" class="form-control" id="alamat"
-                                        value="{{ old('alamat') }}">
-                                </div>
-                                <div class="form-group">
-                                    <label for="kota">Kota</label>
-                                    <input type="text" name="kota" class="form-control" id="kota"
-                                        value="{{ old('kota') }}">
-                                </div>
-                                <div class="form-group">
-                                    <label for="provinsi">Provinsi</label>
-                                    <input type="text" name="provinsi" class="form-control" id="provinsi"
-                                        value="{{ old('provinsi') }}">
-                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="angkatan">Angkatan</label>
+                                <input type="text" name="angkatan" class="form-control" id="angkatan"
+                                    value="{{ $mahasiswa->angkatan }}" disabled>
+                            </div>
+                            <div class="form-group">
+                                <label for="status">Status</label>
+                                <input type="text" name="status" class="form-control" id="status"
+                                    value="{{ $mahasiswa->status }}" disabled>
+                            </div>
+                            <div class="form-group">
+                                <label for="dosen_wali">Dosen Wali</label>
+                                <input type="text" name="dosen_wali" class="form-control" id="dosen_wali"
+                                    value="{{ $mahasiswa->dosenWali->nama }}" disabled>
+                            </div>
+                            <div class="form-group">
+                                <label for="nama">Nama</label>
+                                <input type="text" name="nama" class="form-control" id="nama"
+                                    placeholder="Masukkan Nama Lengkap" value="{{ old('nama', $mahasiswa->nama) }}">
+                            </div>
+                            <div class="form-group">
+                                <label for="jalur_masuk">Jalur Masuk</label>
+                                <select type="text" name="jalur_masuk" class="form-control" id="jalur_masuk">
+                                    <option value="" selected disabled>-- Pilih Jalur Masuk --</option>
+                                    <option value="SNMPTN" {{ old('jalur_masuk') === 'SNMPTN' ? 'selected' : '' }}">SNMPTN</option>
+                                    <option value="SBMPTN" {{ old('jalur_masuk') === 'SBMPTN' ? 'selected' : '' }}">SBMPTN</option>
+                                    <option value="UM" {{ old('jalur_masuk') === 'UM' ? 'selected' : '' }}">UM</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="no_telepon">Nomor Telepon</label>
+                                <input type="text" name="no_telepon" class="form-control" id="no_telepon"
+                                    value="{{ old('no_telepon') }}">
+                            </div>
+                            <div class="form-group">
+                                <label for="alamat">Alamat</label>
+                                <input type="text" name="alamat" class="form-control" id="alamat"
+                                    value="{{ old('alamat') }}">
+                            </div>
+                            <div class="form-group">
+                                <label for="kota">Kota</label>
+                                <input type="text" name="kota" class="form-control" id="kota"
+                                    value="{{ old('kota') }}">
+                            </div>
+                            <div class="form-group">
+                                <label for="provinsi">Provinsi</label>
+                                <input type="text" name="provinsi" class="form-control" id="provinsi"
+                                    value="{{ old('provinsi') }}">
                             </div>
                             <div class="form-group">
                                 <label for="password">Password</label>
@@ -108,9 +112,6 @@
                                 <input type="password" name="confirm_password" class="form-control"
                                     id="confirm_password">
                             </div>
-
-
-
                         </div>
                         <!-- /.card-body -->
 

@@ -13,12 +13,16 @@
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
                             <li class="breadcrumb-item"><a href="/dashboard">Dashboard</a></li>
-                            <li class="breadcrumb-item active">Form</li>
+                            <li class="breadcrumb-item active">IRS</li>
                         </ol>
                     </div><!-- /.col -->
                 </div><!-- /.row -->
+            </div>
+        </div>
 
-
+        <!-- Main content -->
+        <div class="content">
+            <div class="container">
                 <h1 class="m-0">IRS Mahasiswa</h1>
                 <br>
 
@@ -34,47 +38,42 @@
 
                 <!-- general form elements -->
                 <div class="card card-primary">
-                    <div class="card-header">
-                        <h3 class="card-title">IRS</h3>
-                    </div>
-                    <!-- /.card-header -->
-                    <!-- form start -->
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Semester</th>
-                                <th>SKS</th>
-                                <th>Status Persetujuan</th>
-                                <th>Aksi</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($irs as $itemIrs)
+                    <div class="card-body p-0">
+                        <!-- form start -->
+                        <table class="table">
+                            <thead>
                                 <tr>
-                                    <td>{{ $itemIrs->semester }}</td>
-                                    <td>{{ $itemIrs->sks ? $itemIrs->sks : 'Kosong' }}</td>
-                                    <td>
-                                        {{ $itemIrs->statusPersetujuan() }}
-                                    </td>
-                                    <td>
-                                        <a href="/irs/{{ $nim }}/{{ $itemIrs->semester }}">Detail</a>
-                                        <a href="/irs/{{ $nim }}/{{ $itemIrs->semester }}/edit">Edit</a>
-                                    </td>
+                                    <th>Semester</th>
+                                    <th>SKS</th>
+                                    <th>Status Persetujuan</th>
+                                    <th>Aksi</th>
                                 </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                @foreach ($irs as $itemIrs)
+                                    <tr>
+                                        <td>{{ $itemIrs->semester }}</td>
+                                        <td>{{ $itemIrs->sks ? $itemIrs->sks : 'Kosong' }}</td>
+                                        <td>
+                                            {{ $itemIrs->statusPersetujuan() }}
+                                        </td>
+                                        <td>
+                                            <a href="/irs/{{ $nim }}/{{ $itemIrs->semester }}">Detail</a> |
+                                            <a href="/irs/{{ $nim }}/{{ $itemIrs->semester }}/edit">Edit</a>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
                 <!-- /.card -->
-            </div><!-- /.row -->
-
-
-        </div><!-- /.container-fluid -->
-        <br>
-        <a href="/dashboard"
-            class="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900">
-            Back
-        </a>
-    </div>
+                <br>
+                <a href="/dashboard"
+                    class="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-primary rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900">
+                    Back
+                </a>
+            </div><!-- /.container -->
+        </div>
     </div>
 @endsection
