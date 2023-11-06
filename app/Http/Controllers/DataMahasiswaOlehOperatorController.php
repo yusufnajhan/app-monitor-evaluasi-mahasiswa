@@ -38,6 +38,8 @@ class DataMahasiswaOlehOperatorController extends Controller
      */
     public function store(StoreDataMahasiswaOlehOperatorRequest $request)
     {
+        $this->authorize('create', Mahasiswa::class);
+
         $data = $request->validated();
 
         $user = User::create([
