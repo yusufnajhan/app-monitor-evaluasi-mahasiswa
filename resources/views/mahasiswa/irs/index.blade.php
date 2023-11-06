@@ -58,8 +58,10 @@
                                             {{ $itemIrs->statusPersetujuan() }}
                                         </td>
                                         <td>
-                                            <a href="/irs/{{ $nim }}/{{ $itemIrs->semester }}">Detail</a> |
-                                            <a href="/irs/{{ $nim }}/{{ $itemIrs->semester }}/edit">Edit</a>
+                                            <a href="/mahasiswa/irs/{{ $nim }}/{{ $itemIrs->semester }}">Detail</a>
+                                            |
+                                            <a
+                                                href="/mahasiswa/irs/{{ $nim }}/{{ $itemIrs->semester }}/edit">Edit</a>
                                         </td>
                                     </tr>
                                 @endforeach

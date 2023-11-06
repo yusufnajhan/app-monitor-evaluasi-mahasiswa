@@ -46,32 +46,39 @@ Route::middleware(['auth'])->group(function () {
         Route::put('/isi-data/{nim}', [LengkapiDataMahasiswaOlehMahasiswa::class, 'update']);
 
         // IRS Mahasiswa
-        Route::get('/irs/{nim}', [DataIRSOlehMahasiswaController::class, 'index']);
-        Route::get('/irs/{nim}/{semester}', [DataIRSOlehMahasiswaController::class, 'show']);
-        Route::get('/irs/{nim}/{semester}/edit', [DataIRSOlehMahasiswaController::class, 'edit']);
-        Route::put('/irs/{nim}/{semester}', [DataIRSOlehMahasiswaController::class, 'update']);
+        Route::prefix('mahasiswa')->group(function () {
+            // IRS
+            Route::get('/irs/{nim}', [DataIRSOlehMahasiswaController::class, 'index']);
+            Route::get('/irs/{nim}/{semester}', [DataIRSOlehMahasiswaController::class, 'show']);
+            Route::get('/irs/{nim}/{semester}/edit', [DataIRSOlehMahasiswaController::class, 'edit']);
+            Route::put('/irs/{nim}/{semester}', [DataIRSOlehMahasiswaController::class, 'update']);
 
-        // KHS Mahasiswa
-        Route::get('/khs/{nim}', [DataKHSOlehMahasiswaController::class, 'index']);
-        Route::get('/khs/{nim}/{semester}', [DataKHSOlehMahasiswaController::class, 'show']);
-        Route::get('/khs/{nim}/{semester}/edit', [DataKHSOlehMahasiswaController::class, 'edit']);
-        Route::put('/khs/{nim}/{semester}', [DataKHSOlehMahasiswaController::class, 'update']);
+            // KHS Mahasiswa
+            Route::get('/khs/{nim}', [DataKHSOlehMahasiswaController::class, 'index']);
+            Route::get('/khs/{nim}/{semester}', [DataKHSOlehMahasiswaController::class, 'show']);
+            Route::get('/khs/{nim}/{semester}/edit', [DataKHSOlehMahasiswaController::class, 'edit']);
+            Route::put('/khs/{nim}/{semester}', [DataKHSOlehMahasiswaController::class, 'update']);
 
 
-        // Progres PKL
-        Route::get('/progres-pkl/{nim}', [DataPKLOlehMahasiswaController::class, 'show']);
-        Route::get('/progres-pkl/{nim}/edit', [DataPKLOlehMahasiswaController::class, 'edit']);
-        Route::put('/progres-pkl/{nim}', [DataPKLOlehMahasiswaController::class, 'update']);
+            // Progres PKL
+            Route::get('/progres-pkl/{nim}', [DataPKLOlehMahasiswaController::class, 'show']);
+            Route::get('/progres-pkl/{nim}/edit', [DataPKLOlehMahasiswaController::class, 'edit']);
+            Route::put('/progres-pkl/{nim}', [DataPKLOlehMahasiswaController::class, 'update']);
 
-        // Progres Skripsi
-        Route::get('/progres-skripsi/{nim}', [DataSkripsiOlehMahasiswaController::class, 'show']);
-        Route::get('/progres-skripsi/{nim}/edit', [DataSkripsiOlehMahasiswaController::class, 'edit']);
-        Route::put('/progres-skripsi/{nim}', [DataSkripsiOlehMahasiswaController::class, 'update']);
+            // Progres Skripsi
+            Route::get('/progres-skripsi/{nim}', [DataSkripsiOlehMahasiswaController::class, 'show']);
+            Route::get('/progres-skripsi/{nim}/edit', [DataSkripsiOlehMahasiswaController::class, 'edit']);
+            Route::put('/progres-skripsi/{nim}', [DataSkripsiOlehMahasiswaController::class, 'update']);
+        });
+    });
+
+    Route::middleware(['checkrole:dosenWali'])->group(function () {
+        Route::prefix('dosen-wali')->group(function () {
+            Route::get('/irs-belum-disetujui', [SetujuiIRSOlehDosenWaliController::class, 'indexMahasiswa']);
+
+            Route::get('/irs/{nim}', [SetujuiIRSOlehDosenWaliController::class, 'indexIRS']);
+            Route::get('/irs/{nim}/{semester}/setujui', [SetujuiIRSOlehDosenWaliController::class, 'edit']);
+            Route::put('/irs/{nim}/{semester}', [SetujuiIRSOlehDosenWaliController::class, 'setujui']);
+        });
     });
 });
-
-Route::get('/irs-belum-disetujui', [SetujuiIRSOlehDosenWaliController::class, 'indexMahasiswa']);
-
-Route::get('/irs/{nim}', [SetujuiIRSOlehDosenWaliController::class, 'indexIRS']);
-Route::get('/irs/{nim}/{semester}/setujui', [SetujuiIRSOlehDosenWaliController::class, 'edit']);
-Route::put('/irs/{nim}/{semester}', [SetujuiIRSOlehDosenWaliController::class, 'setujui']);

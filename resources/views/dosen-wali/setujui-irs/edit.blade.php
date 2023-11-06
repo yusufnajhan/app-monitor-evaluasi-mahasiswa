@@ -34,10 +34,10 @@
                             </h1>
                         </div>
                         <div class="card-footer">
-                            <a href="/irs/{{ $mahasiswa->nim }}">Back</a>
+                            <a href="/dosen-wali/irs/{{ $mahasiswa->nim }}">Back</a>
                         </div>
                     @else
-                        <form action="/irs/{{ $mahasiswa->nim }}/{{ $irs->semester }}" method="POST"
+                        <form action="/dosen-wali/irs/{{ $mahasiswa->nim }}/{{ $irs->semester }}" method="POST"
                             enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
@@ -62,7 +62,7 @@
                             <div class="card-footer">
                                 <button type="submit" name="sudah_disetujui" value="1">Setujui</button>|
                                 <button type="submit" name="sudah_disetujui" value="0">Tolak</button>|
-                                <a href="/irs/{{ $mahasiswa->nim }}">Back</a>
+                                <a href="/dosen-wali/irs/{{ $mahasiswa->nim }}">Back</a>
                             </div>
                         </form>
                     @endif

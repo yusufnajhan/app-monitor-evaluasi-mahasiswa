@@ -30,7 +30,8 @@
                     <div class="col-lg-6">
                         <div class="card card-primary card-outline">
                             <div class="card-body">
-                                <h5 class="text-center"><a href="/irs/{{ $mahasiswa->nim }}"> IRS Mahasiswa </a></h5>
+                                <h5 class="text-center"><a href="/mahasiswa/irs/{{ $mahasiswa->nim }}"> IRS Mahasiswa </a>
+                                </h5>
                             </div>
                         </div><!-- /.card -->
                     </div>
@@ -43,27 +44,29 @@
                     </div>
                 </div>
                 @if ($mahasiswa->hitungSemester() >= 6)
-                <br>
-                <div class="row">
+                    <br>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="card card-primary card-outline">
+                                <div class="card-body">
+                                    <h5 class="text-center"><a href="/progres-pkl/{{ $mahasiswa->nim }}">Progres PKL
+                                            Mahasiswa</a></h5>
+                                </div>
+                            </div><!-- /.card -->
+                        </div>
+                @endif
+                @if ($mahasiswa->hitungSemester() >= 7)
                     <div class="col-lg-6">
                         <div class="card card-primary card-outline">
                             <div class="card-body">
-                                <h5 class="text-center"><a href="/progres-pkl/{{ $mahasiswa->nim }}">Progres PKL Mahasiswa</a></h5>
+                                <h5 class="text-center"><a href="/progres-skripsi/{{ $mahasiswa->nim }}">Progres Skripsi
+                                        Mahasiswa</a></h5>
                             </div>
                         </div><!-- /.card -->
                     </div>
-                    @endif
-                    @if ($mahasiswa->hitungSemester() >= 7)
-                    <div class="col-lg-6">
-                        <div class="card card-primary card-outline">
-                            <div class="card-body">
-                                <h5 class="text-center"><a href="/progres-skripsi/{{ $mahasiswa->nim }}">Progres Skripsi Mahasiswa</a></h5>
-                            </div>
-                        </div><!-- /.card -->
-                    </div>
-                    @endif
-                </div>
+                @endif
             </div>
         </div>
+    </div>
     </div>
 @endsection

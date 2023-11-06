@@ -61,7 +61,7 @@
                                         </td>
                                         <td>
                                             <a
-                                                href="/irs/{{ $mahasiswa->nim }}/{{ $itemIrs->semester }}/setujui">Setujui</a>
+                                                href="/dosen-wali/irs/{{ $mahasiswa->nim }}/{{ $itemIrs->semester }}/setujui">Setujui</a>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -71,7 +71,7 @@
                 </div>
                 <!-- /.card -->
                 <br>
-                <a href="/irs-belum-disetujui"
+                <a href="/dosen-wali/irs-belum-disetujui"
                     class="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-primary rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900">
                     Back
                 </a>

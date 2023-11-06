@@ -110,7 +110,7 @@ class DataIRSOlehMahasiswaController extends Controller
         $irs->sudah_disetujui = 0;
         $irs->save();
 
-        return redirect('/irs/' . $nim);
+        return redirect('/mahasiswa/irs/' . $nim);
     }
 
     /**

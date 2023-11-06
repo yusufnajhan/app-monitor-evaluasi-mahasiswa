@@ -118,7 +118,7 @@ class SetujuiIRSOlehDosenWaliController extends Controller
         }
 
         $irs->save();
-        return redirect('/irs/' . $nim);
+        return redirect('dosen-wali/irs/' . $nim);
     }
 
     /**

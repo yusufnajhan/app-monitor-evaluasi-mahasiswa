@@ -60,7 +60,7 @@
                                             {{ $mhs->isianRencanaSemester->where('sudah_disetujui', 0)->count() }}
                                         </td>
                                         <td>
-                                            <a href="/irs/{{ $mhs->nim }}">Detail</a>
+                                            <a href="/dosen-wali/irs/{{ $mhs->nim }}">Detail</a>
                                         </td>
                                     </tr>
                                 @endforeach

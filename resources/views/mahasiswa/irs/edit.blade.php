@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('content')
-<div class="content-wrapper">
+    <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <div class="content-header">
             <div class="container">
@@ -41,7 +41,7 @@
                     </div>
                     <!-- /.card-header -->
                     <!-- form start -->
-                    <form action="/irs/{{ $nim }}/{{ $irs->semester }}" method="POST"
+                    <form action="/mahasiswa/irs/{{ $nim }}/{{ $irs->semester }}" method="POST"
                         enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
