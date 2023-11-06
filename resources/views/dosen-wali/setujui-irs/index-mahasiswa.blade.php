@@ -57,17 +57,11 @@
                                         <td>{{ $mhs->nim }}</td>
                                         <td>{{ $mhs->nama }}</td>
                                         <td>
-                                            {{-- {{ $mhs->isianRencanaSemester->where(function ($query) {
-                                                    $query->whereNull('sudah_disetujui')->orWhere('sudah_disetujui', 0);
-                                                })->count() }} --}}
-                                            {{-- {{ $mhs->isianRencanaSemester->where('sudah_disetujui', 0)->count() +
-                                                $mhs->isianRencanaSemester->whereNull('sudah_disetujui')->count() }} --}}
                                             {{ $mhs->isianRencanaSemester->where('sudah_disetujui', 0)->count() }}
                                         </td>
-                                        {{-- <td>
-                                            <a href="/irs/{{ $nim }}/{{ $itemIrs->semester }}">Detail</a> |
-                                            <a href="/irs/{{ $nim }}/{{ $itemIrs->semester }}/edit">Edit</a>
-                                        </td> --}}
+                                        <td>
+                                            <a href="/irs/{{ $mhs->nim }}">Detail</a>
+                                        </td>
                                     </tr>
                                 @endforeach
                             </tbody>
