@@ -40,10 +40,11 @@ class DataPKLOlehMahasiswaController extends Controller
      */
     public function show($nim)
     {
-        $mahasiswa = Mahasiswa::where('nim', $nim)->first();
+        $mahasiswa = Mahasiswa::where('nim', $nim)->select()->first();
         if (!$mahasiswa) {
             abort(404);
         }
+        $semester = $mahasiswa->hitungSemester();
 
         $pkl = ProgresPraktikKerjaLapangan::where('mahasiswa_id', $mahasiswa->id)
             ->first();
@@ -51,7 +52,7 @@ class DataPKLOlehMahasiswaController extends Controller
             abort(404);
         }
 
-        return view('mahasiswa.pkl.show', compact('pkl', 'nim'));
+        return view('mahasiswa.pkl.show', compact('pkl', 'nim', 'semester'));
     }
 
     /**

@@ -20,10 +20,10 @@ class ProgresPraktikKerjaLapangan extends Model
     public function statusPersetujuan()
     {
         $statusBiner = $this->sudah_disetujui;
-        if ($statusBiner == 0) {
-            return 'Belum disetujui';
+        if (!isset($statusBiner)) {
+            return 'Belum diisi';
         } else {
-            return 'Sudah disetujui';
+            return $statusBiner == 0 ? 'Belum disetujui' : 'Sudah disetujui';
         }
     }
 }
