@@ -1,13 +1,12 @@
 <?php
 
-use App\Models\IsianRencanaSemester;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\RegisterMahasiswaController;
 use App\Http\Controllers\DataIRSOlehMahasiswaController;
 use App\Http\Controllers\DataKHSOlehMahasiswaController;
 use App\Http\Controllers\DataPKLOlehMahasiswaController;
+use App\Http\Controllers\SetujuiIRSOlehDosenWaliController;
 use App\Http\Controllers\DataSkripsiOlehMahasiswaController;
 use App\Http\Controllers\LengkapiDataMahasiswaOlehMahasiswa;
 use App\Http\Controllers\DataMahasiswaOlehOperatorController;
@@ -27,49 +26,51 @@ Route::get('/', function () {
     return view('home');
 });
 
-// Route::get('/students', [StudentController::class, 'index'])->name('students.index');
-
-// Route::post('/students', [StudentController::class, 'store'])->name('students.store');
-
 Route::middleware(['guest'])->group(function () {
     Route::get('/login', [LoginController::class, 'index'])->name('login');
     Route::post('/login-proses', [LoginController::class, 'authenticate'])->name('login-proses');
 });
-Route::post('/logout', [LoginController::class, 'logout']);
-Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard')->middleware('auth');
 
-Route::middleware(['auth', 'checkrole:operator'])->group(function () {
-    Route::get('/tambah-mahasiswa', [DataMahasiswaOlehOperatorController::class, 'create'])->name('tambah-mahasiswa');
-    Route::post('/tambah-mahasiswa', [DataMahasiswaOlehOperatorController::class, 'store'])->name('simpan-mahasiswa');
+Route::middleware(['auth'])->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::post('/logout', [LoginController::class, 'logout']);
+
+    Route::middleware(['checkrole:operator'])->group(function () {
+        Route::get('/tambah-mahasiswa', [DataMahasiswaOlehOperatorController::class, 'create'])->name('tambah-mahasiswa');
+        Route::post('/tambah-mahasiswa', [DataMahasiswaOlehOperatorController::class, 'store'])->name('simpan-mahasiswa');
+    });
+
+    Route::middleware(['checkrole:mahasiswa'])->group(function () {
+        // Mahasiswa
+        Route::get('/isi-data/{nim}', [LengkapiDataMahasiswaOlehMahasiswa::class, 'edit'])->name('isi-data');
+        Route::put('/isi-data/{nim}', [LengkapiDataMahasiswaOlehMahasiswa::class, 'update']);
+
+        // IRS Mahasiswa
+        Route::get('/irs/{nim}', [DataIRSOlehMahasiswaController::class, 'index']);
+
+        Route::get('/irs/{nim}/{semester}/edit', [DataIRSOlehMahasiswaController::class, 'edit']);
+        Route::put('/irs/{nim}/{semester}', [DataIRSOlehMahasiswaController::class, 'update']);
+
+        Route::get('/irs/{nim}/{semester}', [DataIRSOlehMahasiswaController::class, 'show']);
+
+        // KHS Mahasiswa
+        Route::get('/khs/{nim}', [DataKHSOlehMahasiswaController::class, 'index']);
+
+        Route::get('/khs/{nim}/{semester}/edit', [DataKHSOlehMahasiswaController::class, 'edit']);
+        Route::put('/khs/{nim}/{semester}', [DataKHSOlehMahasiswaController::class, 'update']);
+
+        Route::get('/khs/{nim}/{semester}', [DataKHSOlehMahasiswaController::class, 'show']);
+
+        // Progres PKL
+        Route::get('/progres-pkl/{nim}', [DataPKLOlehMahasiswaController::class, 'show']);
+        Route::get('/progres-pkl/{nim}/edit', [DataPKLOlehMahasiswaController::class, 'edit']);
+        Route::put('/progres-pkl/{nim}', [DataPKLOlehMahasiswaController::class, 'update']);
+
+        // Progres Skripsi
+        Route::get('/progres-skripsi/{nim}', [DataSkripsiOlehMahasiswaController::class, 'show']);
+        Route::get('/progres-skripsi/{nim}/edit', [DataSkripsiOlehMahasiswaController::class, 'edit']);
+        Route::put('/progres-skripsi/{nim}', [DataSkripsiOlehMahasiswaController::class, 'update']);
+    });
 });
 
-
-// Mahasiswa
-Route::get('/isi-data/{nim}', [LengkapiDataMahasiswaOlehMahasiswa::class, 'edit'])->name('isi-data');
-Route::put('/isi-data/{nim}', [LengkapiDataMahasiswaOlehMahasiswa::class, 'update']);
-
-// IRS Mahasiswa
-Route::get('/irs/{nim}', [DataIRSOlehMahasiswaController::class, 'index']);
-
-Route::get('/irs/{nim}/{semester}/edit', [DataIRSOlehMahasiswaController::class, 'edit']);
-Route::put('/irs/{nim}/{semester}', [DataIRSOlehMahasiswaController::class, 'update']);
-
-Route::get('/irs/{nim}/{semester}', [DataIRSOlehMahasiswaController::class, 'show']);
-
-// KHS Mahasiswa
-Route::get('/khs/{nim}', [DataKHSOlehMahasiswaController::class, 'index']);
-
-Route::get('/khs/{nim}/{semester}/edit', [DataKHSOlehMahasiswaController::class, 'edit']);
-Route::put('/khs/{nim}/{semester}', [DataKHSOlehMahasiswaController::class, 'update']);
-
-Route::get('/khs/{nim}/{semester}', [DataKHSOlehMahasiswaController::class, 'show']);
-
-// Progres PKL
-Route::get('/progres-pkl/{nim}', [DataPKLOlehMahasiswaController::class, 'show']);
-Route::get('/progres-pkl/{nim}/edit', [DataPKLOlehMahasiswaController::class, 'edit']);
-Route::put('/progres-pkl/{nim}', [DataPKLOlehMahasiswaController::class, 'update']);
-
-// Progres Skripsi
-Route::get('/progres-skripsi/{nim}', [DataSkripsiOlehMahasiswaController::class, 'show']);
-Route::get('/progres-skripsi/{nim}/edit', [DataSkripsiOlehMahasiswaController::class, 'edit']);
-Route::put('/progres-skripsi/{nim}', [DataSkripsiOlehMahasiswaController::class, 'update']);
+Route::get('/irs-belum-disetujui', [SetujuiIRSOlehDosenWaliController::class, 'index']);
