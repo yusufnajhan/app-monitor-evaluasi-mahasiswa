@@ -43,6 +43,8 @@ class DataSkripsiOlehMahasiswaController extends Controller
         if (!$mahasiswa) {
             abort(404);
         }
+        $semester = $mahasiswa->hitungSemester();
+
 
         $skripsi = ProgresSkripsi::where('mahasiswa_id', $mahasiswa->id)
             ->first();
@@ -50,7 +52,7 @@ class DataSkripsiOlehMahasiswaController extends Controller
             abort(404);
         }
 
-        return view('mahasiswa.skripsi.show', compact('skripsi', 'nim'));
+        return view('mahasiswa.skripsi.show', compact('skripsi', 'nim', 'semester'));
     }
 
     /**

@@ -25,6 +25,7 @@ class UpdateProgresSkripsiOlehMahasiswaRequest extends FormRequest
             'status' => 'required',
             'nilai' => $this->input('status') === 'Lulus' ? 'required' : '',
             'nama_file' => $this->input('status') === 'Lulus' ? 'required|file|mimes:pdf' : '',
+            'tanggal_sidang' => $this->input('status') === 'Lulus' ? 'required|date' : ''
         ];
     }
 
@@ -35,7 +36,8 @@ class UpdateProgresSkripsiOlehMahasiswaRequest extends FormRequest
             'nilai.required' => 'Nilai harus diisikan jika sudah lulus',
             'nama_file.required' => 'File harus diisikan jika sudah lulus',
             'file' => 'File harus merupakan file',
-            'mimes' => 'File harus bertipe .pdf'
+            'mimes' => 'File harus bertipe .pdf',
+            'tanggal_sidang.required' => 'Tanggal sidang harus diisi'
         ];
     }
 }

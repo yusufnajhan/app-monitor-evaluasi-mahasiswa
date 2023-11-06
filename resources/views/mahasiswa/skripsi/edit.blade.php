@@ -101,15 +101,18 @@
         document.addEventListener('DOMContentLoaded', function() {
             const statusSelect = document.getElementById('status');
             const nilaiInput = document.getElementById('nilai');
+            const tanggalSidangInput = document.getElementById('tanggal_sidang');
             const namaFileInput = document.getElementById('nama_file');
 
             statusSelect.addEventListener('change', function() {
                 if (statusSelect.value === 'Lulus') {
                     nilaiInput.disabled = false;
                     namaFileInput.disabled = false;
+                    tanggalSidangInput.disabled = false;
                 } else {
                     nilaiInput.disabled = true;
                     namaFileInput.disabled = true;
+                    tanggalSidangInput.disabled = true;
                 }
             });
         });
