@@ -43,13 +43,26 @@
                     </div>
                 </div>
                 @if ($mahasiswa->hitungSemester() >= 6)
-                    <br>
-                    <a href="/progres-pkl/{{ $mahasiswa->nim }}">Progres PKL Mahasiswa</a>
-                @endif
-                @if ($mahasiswa->hitungSemester() >= 7)
-                    <br>
-                    <a href="/progres-skripsi/{{ $mahasiswa->nim }}">Progres Skripsi Mahasiswa</a>
-                @endif
+                <br>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="card card-primary card-outline">
+                            <div class="card-body">
+                                <h5 class="text-center"><a href="/progres-pkl/{{ $mahasiswa->nim }}">Progres PKL Mahasiswa</a></h5>
+                            </div>
+                        </div><!-- /.card -->
+                    </div>
+                    @endif
+                    @if ($mahasiswa->hitungSemester() >= 7)
+                    <div class="col-lg-6">
+                        <div class="card card-primary card-outline">
+                            <div class="card-body">
+                                <h5 class="text-center"><a href="/progres-skripsi/{{ $mahasiswa->nim }}">Progres Skripsi Mahasiswa</a></h5>
+                            </div>
+                        </div><!-- /.card -->
+                    </div>
+                    @endif
+                </div>
             </div>
         </div>
     </div>
