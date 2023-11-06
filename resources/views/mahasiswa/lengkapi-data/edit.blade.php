@@ -77,9 +77,11 @@
                                 <label for="jalur_masuk">Jalur Masuk</label>
                                 <select type="text" name="jalur_masuk" class="form-control" id="jalur_masuk">
                                     <option value="" selected disabled>-- Pilih Jalur Masuk --</option>
-                                    <option value="SNMPTN" {{ old('jalur_masuk') === 'SNMPTN' ? 'selected' : '' }}">SNMPTN</option>
-                                    <option value="SBMPTN" {{ old('jalur_masuk') === 'SBMPTN' ? 'selected' : '' }}">SBMPTN</option>
-                                    <option value="UM" {{ old('jalur_masuk') === 'UM' ? 'selected' : '' }}">UM</option>
+                                    <option value="SNMPTN" {{ old('jalur_masuk') === 'SNMPTN' ? 'selected' : '' }}>SNMPTN
+                                    </option>
+                                    <option value="SBMPTN" {{ old('jalur_masuk') === 'SBMPTN' ? 'selected' : '' }}>SBMPTN
+                                    </option>
+                                    <option value="UM" {{ old('jalur_masuk') === 'UM' ? 'selected' : '' }}>UM</option>
                                 </select>
                             </div>
                             <div class="form-group">

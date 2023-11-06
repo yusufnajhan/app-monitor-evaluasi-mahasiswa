@@ -96,11 +96,16 @@ class DataSkripsiOlehMahasiswaController extends Controller
         if ($data['status'] == 'Lulus') {
             $skripsi->nilai = $data['nilai'];
 
-            $namaFileBaru = 'pkl_' . str_replace(' ', '_', strtolower($mahasiswa->nama)) . '.pdf';
+            $namaFileBaru = 'skripsi_' . str_replace(' ', '_', strtolower($mahasiswa->nama)) . '.pdf';
             $skripsi->nama_file = $request->file('nama_file')->storeAs('progres-skripsi', $namaFileBaru);
+
+            $skripsi->tanggal_sidang = $data['tanggal_sidang'];
+            $skripsi->semester_tempuh = $mahasiswa->hitungSemester();
         } else {
             $skripsi->nilai = NULL;
             $skripsi->nama_file = NULL;
+            $skripsi->tanggal_sidang = NULL;
+            $skripsi->semester_tempuh = NULL;
         }
 
         $skripsi->save();

@@ -28,34 +28,47 @@
                     </div>
                     <!-- /.card-header -->
                     <!-- form start -->
-                    <form action="" method="" enctype="multipart/form-data">
+                    @if (!isset($irs->sudah_disetujui))
                         <div class="card-body">
-                            <div class="form-group">
-                                <label for="status">Status Persetujuan</label>
-                                <input type="text" name="status" class="form-control" id="status"
-                                    value="{{ $irs->statusPersetujuan() }}" disabled>
-                            </div>
-                            <div class="form-group">
-                                <label for="semester">Semester</label>
-                                <input type="text" name="semester" class="form-control" id="semester"
-                                    value="{{ $irs->semester }}" disabled>
-                            </div>
-                            <div class="form-group">
-                                <label for="sks">Jumlah SKS yang diambil</label>
-                                <input type="text" name="sks" class="form-control" id="sks"
-                                    value="{{ $irs->sks }}" disabled>
-                            </div>
-                            <div class="form-group">
-                                <label for="nama_file">Scan IRS </label>
-                                <embed src="/storage/{{ $irs->nama_file }}" width="100%" height="600"
-                                    type="application/pdf">
-                            </div>
+                            <h1>Isi IRS semester {{ $irs->semester }} di
+                                <a href="/irs/{{ $nim }}/{{ $irs->semester }}/edit">
+                                    sini
+                                </a>
+                            </h1>
                         </div>
-                        <!-- /.card-body -->
                         <div class="card-footer">
                             <a href="/irs/{{ $nim }}">Back</a>
                         </div>
-                    </form>
+                    @else
+                        <form action="" method="" enctype="multipart/form-data">
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label for="status">Status Persetujuan</label>
+                                    <input type="text" name="status" class="form-control" id="status"
+                                        value="{{ $irs->statusPersetujuan() }}" disabled>
+                                </div>
+                                <div class="form-group">
+                                    <label for="semester">Semester</label>
+                                    <input type="text" name="semester" class="form-control" id="semester"
+                                        value="{{ $irs->semester }}" disabled>
+                                </div>
+                                <div class="form-group">
+                                    <label for="sks">Jumlah SKS yang diambil</label>
+                                    <input type="text" name="sks" class="form-control" id="sks"
+                                        value="{{ $irs->sks }}" disabled>
+                                </div>
+                                <div class="form-group">
+                                    <label for="nama_file">Scan IRS </label>
+                                    <embed src="/storage/{{ $irs->nama_file }}" width="100%" height="600"
+                                        type="application/pdf">
+                                </div>
+                            </div>
+                            <!-- /.card-body -->
+                            <div class="card-footer">
+                                <a href="/irs/{{ $nim }}">Back</a>
+                            </div>
+                        </form>
+                    @endif
                 </div>
                 <!-- /.card -->
             </div><!-- /.row -->
