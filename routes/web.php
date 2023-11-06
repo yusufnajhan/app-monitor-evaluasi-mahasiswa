@@ -7,6 +7,8 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\RegisterMahasiswaController;
 use App\Http\Controllers\DataIRSOlehMahasiswaController;
 use App\Http\Controllers\DataKHSOlehMahasiswaController;
+use App\Http\Controllers\DataPKLOlehMahasiswaController;
+use App\Http\Controllers\DataSkripsiOlehMahasiswaController;
 use App\Http\Controllers\LengkapiDataMahasiswaOlehMahasiswa;
 use App\Http\Controllers\DataMahasiswaOlehOperatorController;
 
@@ -61,3 +63,13 @@ Route::get('/khs/{nim}/{semester}/edit', [DataKHSOlehMahasiswaController::class,
 Route::put('/khs/{nim}/{semester}', [DataKHSOlehMahasiswaController::class, 'update']);
 
 Route::get('/khs/{nim}/{semester}', [DataKHSOlehMahasiswaController::class, 'show']);
+
+// Progres PKL
+Route::get('/progres-pkl/{nim}', [DataPKLOlehMahasiswaController::class, 'show']);
+Route::get('/progres-pkl/{nim}/edit', [DataPKLOlehMahasiswaController::class, 'edit']);
+Route::put('/progres-pkl/{nim}', [DataPKLOlehMahasiswaController::class, 'update']);
+
+// Progres Skripsi
+Route::get('/progres-skripsi/{nim}', [DataSkripsiOlehMahasiswaController::class, 'show']);
+Route::get('/progres-skripsi/{nim}/edit', [DataSkripsiOlehMahasiswaController::class, 'edit']);
+Route::put('/progres-skripsi/{nim}', [DataSkripsiOlehMahasiswaController::class, 'update']);

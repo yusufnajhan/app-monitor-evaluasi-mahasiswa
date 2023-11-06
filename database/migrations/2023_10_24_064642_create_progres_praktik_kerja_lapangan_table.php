@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('status')->nullable();
             $table->char('nilai')->nullable();
             $table->string('nama_file')->nullable();
+            $table->boolean('sudah_disetujui')->nullable();
             $table->unsignedBigInteger('mahasiswa_id');
             $table->timestamps();
 

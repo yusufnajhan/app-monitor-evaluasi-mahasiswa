@@ -11,6 +11,7 @@ use App\Models\IsianRencanaSemester;
 use App\Models\KartuHasilStudi;
 use App\Models\ProgresPraktikKerjaLapangan;
 use App\Models\ProgresSkripsi;
+use Illuminate\Support\Facades\Hash;
 
 class DataMahasiswaOlehOperatorController extends Controller
 {
@@ -27,7 +28,7 @@ class DataMahasiswaOlehOperatorController extends Controller
      */
     public function create()
     {
-        $allDosenWali = DosenWali::all();
+        $allDosenWali = DosenWali::select('id', 'nama')->get();
 
         return view('operator.data-mahasiswa.create', compact('allDosenWali'));
     }
@@ -39,9 +40,9 @@ class DataMahasiswaOlehOperatorController extends Controller
     {
         $data = $request->validated();
 
-        $user = User::factory()->create([
+        $user = User::create([
             'email' => strtolower(str_replace(' ', '.', $data['nama'])) . '@students.undip.ac.id',
-            'password' => bcrypt(12345),
+            'password' => Hash::make('12345'),
             'role' => 'mahasiswa'
         ]);
 
@@ -56,17 +57,15 @@ class DataMahasiswaOlehOperatorController extends Controller
 
         $semester = $mahasiswa->hitungSemester();
 
-        if ($semester >= 6) {
-            ProgresPraktikKerjaLapangan::create([
-                'mahasiswa_id' => $mahasiswa->id
-            ]);
-        }
+        ProgresPraktikKerjaLapangan::create([
+            'status' => 'Belum Ambil',
+            'mahasiswa_id' => $mahasiswa->id
+        ]);
 
-        if ($semester >= 7) {
-            ProgresSkripsi::create([
-                'mahasiswa_id' => $mahasiswa->id
-            ]);
-        }
+        ProgresSkripsi::create([
+            'status' => 'Belum Ambil',
+            'mahasiswa_id' => $mahasiswa->id
+        ]);
 
         for ($i = 1; $i <= $semester; $i++) {
             IsianRencanaSemester::create([

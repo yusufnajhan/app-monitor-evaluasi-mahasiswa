@@ -16,4 +16,14 @@ class ProgresPraktikKerjaLapangan extends Model
     {
         return $this->belongsTo(Mahasiswa::class);
     }
+
+    public function statusPersetujuan()
+    {
+        $statusBiner = $this->sudah_disetujui;
+        if (!isset($statusBiner)) {
+            return 'Belum diisi';
+        } else {
+            return $statusBiner == 0 ? 'Belum disetujui' : 'Sudah disetujui';
+        }
+    }
 }

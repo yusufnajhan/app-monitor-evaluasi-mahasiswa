@@ -76,6 +76,6 @@
                     Back
                 </a>
             </div><!-- /.container -->
-        </div> 
+        </div>
     </div>
 @endsection

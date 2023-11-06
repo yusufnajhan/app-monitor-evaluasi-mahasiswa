@@ -23,7 +23,7 @@ class UpdateDataMahasiswaOlehMahasiswaRequest extends FormRequest
     {
         return [
             'jalur_masuk' => 'required',
-            'no_telepon' => 'required|min:10|max:13',
+            'no_telepon' => 'required|min:10|max:13|number',
             'alamat' => 'required|min:5',
             'kota' => 'required',
             'provinsi' => 'required',
@@ -52,6 +52,7 @@ class UpdateDataMahasiswaOlehMahasiswaRequest extends FormRequest
         return [
             'required' => ':Attribute wajib diisi!',
             'unique' => ':ATTRIBUTE sudah terdaftar!',
+            'number' => ':Attribute harus berisi angka saja!',
             'min' => ':Attribute minimal terdiri dari :min karakter!',
             'max' => ':Attribute maksimal terdiri dari :max karakter!',
             'same' => ':Attribute harus sama!'
