@@ -57,11 +57,7 @@
                                         <td>{{ $itemKhs->sks_semester ? $itemKhs->sks_semester : 'Kosong' }}</td>
                                         <td>{{ $itemKhs->ip_semester ? $itemKhs->ip_semester : 'Kosong' }}</td>
                                         <td>
-                                            @if ($itemKhs->sudah_disetujui == null)
-                                                Belum diisi
-                                            @else
-                                                {{ $itemKhs->statusPersetujuan() }}
-                                            @endif
+                                            {{ $itemKhs->statusPersetujuan() }}
                                         </td>
                                         <td>
                                             <a href="/khs/{{ $nim }}/{{ $itemKhs->semester }}">Detail</a>

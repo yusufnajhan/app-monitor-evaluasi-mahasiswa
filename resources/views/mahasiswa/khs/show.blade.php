@@ -28,49 +28,62 @@
                     </div>
                     <!-- /.card-header -->
                     <!-- form start -->
-                    <form action="" method="" enctype="multipart/form-data">
+                    @if (!isset($khs->sudah_disetujui))
                         <div class="card-body">
-                            <div class="form-group">
-                                <label for="status">Status Persetujuan</label>
-                                <input type="text" name="status" class="form-control" id="status"
-                                    value="{{ $khs->statusPersetujuan() }}" disabled>
-                            </div>
-                            <div class="form-group">
-                                <label for="semester">Semester</label>
-                                <input type="text" name="semester" class="form-control" id="semester"
-                                    value="{{ $khs->semester }}" disabled>
-                            </div>
-                            <div class="form-group">
-                                <label for="sks_semester">SKS Semester Ini</label>
-                                <input type="text" name="sks_semester" class="form-control" id="sks_semester"
-                                    value="{{ $khs->sks_semester }}" disabled>
-                            </div>
-                            <div class="form-group">
-                                <label for="sks_kumulatif">SKS Kumulatif</label>
-                                <input type="text" name="sks_kumulatif" class="form-control" id="sks_kumulatif"
-                                    value="{{ $khs->sks_kumulatif }}" disabled>
-                            </div>
-                            <div class="form-group">
-                                <label for="ip_semester">IP Semester Ini</label>
-                                <input type="text" name="ip_semester" class="form-control" id="ip_semester"
-                                    value="{{ $khs->ip_semester }}" disabled>
-                            </div>
-                            <div class="form-group">
-                                <label for="ip_kumulatif">IP Kumulatif</label>
-                                <input type="text" name="ip_kumulatif" class="form-control" id="ip_kumulatif"
-                                    value="{{ $khs->ip_kumulatif }}" disabled>
-                            </div>
-                            <div class="form-group">
-                                <label for="nama_file">Scan KHS </label>
-                                <embed src="/storage/{{ $khs->nama_file }}" width="100%" height="600"
-                                    type="application/pdf">
-                            </div>
+                            <h1>Isi KHS semester {{ $khs->semester }} di
+                                <a href="/khs/{{ $nim }}/{{ $khs->semester }}/edit">
+                                    sini
+                                </a>
+                            </h1>
                         </div>
-                        <!-- /.card-body -->
                         <div class="card-footer">
                             <a href="/khs/{{ $nim }}">Back</a>
                         </div>
-                    </form>
+                    @else
+                        <form action="" method="" enctype="multipart/form-data">
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label for="status">Status Persetujuan</label>
+                                    <input type="text" name="status" class="form-control" id="status"
+                                        value="{{ $khs->statusPersetujuan() }}" disabled>
+                                </div>
+                                <div class="form-group">
+                                    <label for="semester">Semester</label>
+                                    <input type="text" name="semester" class="form-control" id="semester"
+                                        value="{{ $khs->semester }}" disabled>
+                                </div>
+                                <div class="form-group">
+                                    <label for="sks_semester">SKS Semester Ini</label>
+                                    <input type="text" name="sks_semester" class="form-control" id="sks_semester"
+                                        value="{{ $khs->sks_semester }}" disabled>
+                                </div>
+                                <div class="form-group">
+                                    <label for="sks_kumulatif">SKS Kumulatif</label>
+                                    <input type="text" name="sks_kumulatif" class="form-control" id="sks_kumulatif"
+                                        value="{{ $khs->sks_kumulatif }}" disabled>
+                                </div>
+                                <div class="form-group">
+                                    <label for="ip_semester">IP Semester Ini</label>
+                                    <input type="text" name="ip_semester" class="form-control" id="ip_semester"
+                                        value="{{ $khs->ip_semester }}" disabled>
+                                </div>
+                                <div class="form-group">
+                                    <label for="ip_kumulatif">IP Kumulatif</label>
+                                    <input type="text" name="ip_kumulatif" class="form-control" id="ip_kumulatif"
+                                        value="{{ $khs->ip_kumulatif }}" disabled>
+                                </div>
+                                <div class="form-group">
+                                    <label for="nama_file">Scan KHS </label>
+                                    <embed src="/storage/{{ $khs->nama_file }}" width="100%" height="600"
+                                        type="application/pdf">
+                                </div>
+                            </div>
+                            <!-- /.card-body -->
+                            <div class="card-footer">
+                                <a href="/khs/{{ $nim }}">Back</a>
+                            </div>
+                        </form>
+                    @endif
                 </div>
                 <!-- /.card -->
             </div><!-- /.row -->
