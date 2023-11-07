@@ -80,8 +80,10 @@ Route::middleware(['auth'])->group(function () {
 
             Route::get('/irs-belum-disetujui', [SetujuiIRSOlehDosenWaliController::class, 'indexMahasiswa']);
 
-            Route::get('/irs/{nim}', [SetujuiIRSOlehDosenWaliController::class, 'indexIRS']);
+            Route::get('/irs/{nim}', [SetujuiIRSOlehDosenWaliController::class, 'index']);
             Route::get('/irs/{nim}/{semester}/setujui', [SetujuiIRSOlehDosenWaliController::class, 'edit']);
+            Route::get('/irs/{nim}/{semester}/edit', [SetujuiIRSOlehDosenWaliController::class, 'editDanSetujui']);
+            Route::put('/irs/{nim}/{semester}/update-dan-setujui', [SetujuiIRSOlehDosenWaliController::class, 'updateDanSetujui']);
             Route::put('/irs/{nim}/{semester}', [SetujuiIRSOlehDosenWaliController::class, 'setujui']);
         });
     });

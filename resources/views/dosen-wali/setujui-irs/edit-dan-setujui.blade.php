@@ -37,8 +37,8 @@
                             <a href="/dosen-wali/irs/{{ $mahasiswa->nim }}">Back</a>
                         </div>
                     @else
-                        <form action="/dosen-wali/irs/{{ $mahasiswa->nim }}/{{ $irs->semester }}" method="POST"
-                            enctype="multipart/form-data">
+                        <form action="/dosen-wali/irs/{{ $mahasiswa->nim }}/{{ $irs->semester }}/update-dan-setujui"
+                            method="POST" enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
                             <div class="card-body">
@@ -50,7 +50,7 @@
                                 <div class="form-group">
                                     <label for="sks">Jumlah SKS yang diambil</label>
                                     <input type="text" name="sks" class="form-control" id="sks"
-                                        value="{{ $irs->sks }}" disabled>
+                                        value="{{ old('sks', $irs->sks) }}">
                                 </div>
                                 <div class="form-group">
                                     <label for="nama_file">Scan IRS </label>
@@ -60,13 +60,8 @@
                             </div>
                             <!-- /.card-body -->
                             <div class="card-footer">
-                                @if ($irs->sudah_disetujui == 0)
-                                    <button type="submit" name="sudah_disetujui" value="1">Setujui</button>|
-                                    <a href="/dosen-wali/irs/{{ $mahasiswa->nim }}/{{ $irs->semester }}/edit">Edit</a>|
-                                @else
-                                    <button type="submit" name="sudah_disetujui" value="0">Batalkan
-                                        Persetujuan</button>|
-                                @endif
+                                <button type="submit" name="sudah_disetujui" value="1">Update dan
+                                    Setujui</button>|
                                 <a href="/dosen-wali/irs/{{ $mahasiswa->nim }}">Back</a>
                             </div>
                         </form>

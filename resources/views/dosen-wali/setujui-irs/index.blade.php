@@ -61,7 +61,7 @@
                                         </td>
                                         <td>
                                             <a
-                                                href="/dosen-wali/irs/{{ $mahasiswa->nim }}/{{ $itemIrs->semester }}/setujui">Setujui</a>
+                                                href="/dosen-wali/irs/{{ $mahasiswa->nim }}/{{ $itemIrs->semester }}/setujui">Detail</a>
                                         </td>
                                     </tr>
                                 @endforeach
