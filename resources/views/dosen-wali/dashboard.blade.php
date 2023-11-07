@@ -31,7 +31,7 @@
                         </button>
                     </form>
                 </div><!-- /.container-fluid -->
-                <a href="dosen-wali/irs-belum-disetujui">Cek IRS yang belum disetujui</a>
+                <a href="dosen-wali/daftar-mahasiswa">Lihat mahasiswa</a>
             </section>
             <!-- /.content -->
         </div>

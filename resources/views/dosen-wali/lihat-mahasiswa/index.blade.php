@@ -46,7 +46,6 @@
                                     <th>No</th>
                                     <th>NIM</th>
                                     <th>Nama Mahasiswa</th>
-                                    <th>Yang Belum Disetujui</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
@@ -57,10 +56,7 @@
                                         <td>{{ $mhs->nim }}</td>
                                         <td>{{ $mhs->nama }}</td>
                                         <td>
-                                            {{ $mhs->isianRencanaSemester->where('sudah_disetujui', 0)->count() }}
-                                        </td>
-                                        <td>
-                                            <a href="/dosen-wali/irs/{{ $mhs->nim }}">Detail</a>
+                                            <a href="/detail-mahasiswa/{{ $mhs->nim }}">Detail</a>
                                         </td>
                                     </tr>
                                 @endforeach

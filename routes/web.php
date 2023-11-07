@@ -10,6 +10,7 @@ use App\Http\Controllers\SetujuiIRSOlehDosenWaliController;
 use App\Http\Controllers\DataSkripsiOlehMahasiswaController;
 use App\Http\Controllers\LengkapiDataMahasiswaOlehMahasiswa;
 use App\Http\Controllers\DataMahasiswaOlehOperatorController;
+use App\Http\Controllers\DataMahasiswaOlehDosenWaliController;
 
 /*
 |--------------------------------------------------------------------------
@@ -74,6 +75,9 @@ Route::middleware(['auth'])->group(function () {
 
     Route::middleware(['checkrole:dosenWali'])->group(function () {
         Route::prefix('dosen-wali')->group(function () {
+            Route::get('/daftar-mahasiswa', [DataMahasiswaOlehDosenWaliController::class, 'index']);
+            Route::get('/detail-mahasiswa/{nim}', [DataMahasiswaOlehDosenWaliController::class, 'show']);
+
             Route::get('/irs-belum-disetujui', [SetujuiIRSOlehDosenWaliController::class, 'indexMahasiswa']);
 
             Route::get('/irs/{nim}', [SetujuiIRSOlehDosenWaliController::class, 'indexIRS']);
