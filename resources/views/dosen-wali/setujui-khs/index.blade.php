@@ -23,7 +23,7 @@
         <!-- Main content -->
         <div class="content">
             <div class="container">
-                <h1 class="m-0">IRS Mahasiswa</h1>
+                <h1 class="m-0">KHS Mahasiswa</h1>
                 <br>
 
                 @if ($errors->any())
@@ -44,19 +44,24 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>NIM</th>
-                                    <th>Nama Mahasiswa</th>
+                                    <th>Semester</th>
+                                    <th>SKS</th>
+                                    <th>Status Persetujuan</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($mahasiswa as $mhs)
+                                @foreach ($khs as $itemKhs)
                                     <tr>
-                                        <td>{{ $loop->index + 1 }}</td>
-                                        <td>{{ $mhs->nim }}</td>
-                                        <td>{{ $mhs->nama }}</td>
+                                        <td>{{ $itemKhs->semester }}</td>
+                                        <td>{{ $itemKhs->sks_semester }}</td>
+                                        <td>{{ $itemKhs->ip_semester }}</td>
                                         <td>
-                                            <a href="/dosen-wali/detail-mahasiswa/{{ $mhs->nim }}">Detail</a>
+                                            {{ $itemKhs->statusPersetujuan() }}
+                                        </td>
+                                        <td>
+                                            <a
+                                                href="/dosen-wali/khs/{{ $mahasiswa->nim }}/{{ $itemKhs->semester }}/setujui">Detail</a>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -66,7 +71,7 @@
                 </div>
                 <!-- /.card -->
                 <br>
-                <a href="/dashboard"
+                <a href="/dosen-wali/irs-belum-disetujui"
                     class="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-primary rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900">
                     Back
                 </a>

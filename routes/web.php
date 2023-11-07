@@ -7,6 +7,7 @@ use App\Http\Controllers\DataIRSOlehMahasiswaController;
 use App\Http\Controllers\DataKHSOlehMahasiswaController;
 use App\Http\Controllers\DataPKLOlehMahasiswaController;
 use App\Http\Controllers\SetujuiIRSOlehDosenWaliController;
+use App\Http\Controllers\SetujuiKHSOlehDosenWaliController;
 use App\Http\Controllers\DataSkripsiOlehMahasiswaController;
 use App\Http\Controllers\LengkapiDataMahasiswaOlehMahasiswa;
 use App\Http\Controllers\DataMahasiswaOlehOperatorController;
@@ -75,16 +76,23 @@ Route::middleware(['auth'])->group(function () {
 
     Route::middleware(['checkrole:dosenWali'])->group(function () {
         Route::prefix('dosen-wali')->group(function () {
+            // Lihat mahasiswa
             Route::get('/daftar-mahasiswa', [DataMahasiswaOlehDosenWaliController::class, 'index']);
             Route::get('/detail-mahasiswa/{nim}', [DataMahasiswaOlehDosenWaliController::class, 'show']);
 
-            Route::get('/irs-belum-disetujui', [SetujuiIRSOlehDosenWaliController::class, 'indexMahasiswa']);
-
+            // Lihat IRS per mahasiswa
             Route::get('/irs/{nim}', [SetujuiIRSOlehDosenWaliController::class, 'index']);
             Route::get('/irs/{nim}/{semester}/setujui', [SetujuiIRSOlehDosenWaliController::class, 'edit']);
             Route::get('/irs/{nim}/{semester}/edit', [SetujuiIRSOlehDosenWaliController::class, 'editDanSetujui']);
             Route::put('/irs/{nim}/{semester}/update-dan-setujui', [SetujuiIRSOlehDosenWaliController::class, 'updateDanSetujui']);
             Route::put('/irs/{nim}/{semester}', [SetujuiIRSOlehDosenWaliController::class, 'setujui']);
+
+            // Lihat KHS per mahasiswa
+            Route::get('/khs/{nim}', [SetujuiKHSOlehDosenWaliController::class, 'index']);
+            Route::get('/khs/{nim}/{semester}/setujui', [SetujuiKHSOlehDosenWaliController::class, 'edit']);
+            Route::get('/khs/{nim}/{semester}/edit', [SetujuiKHSOlehDosenWaliController::class, 'editDanSetujui']);
+            Route::put('/khs/{nim}/{semester}/update-dan-setujui', [SetujuiKHSOlehDosenWaliController::class, 'updateDanSetujui']);
+            Route::put('/khs/{nim}/{semester}', [SetujuiKHSOlehDosenWaliController::class, 'setujui']);
         });
     });
 });
