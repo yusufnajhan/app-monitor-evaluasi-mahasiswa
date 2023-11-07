@@ -38,7 +38,8 @@
                     </div>
                     <!-- /.card-header -->
                     <!-- form start -->
-                    <form action="/progres-skripsi/{{ $nim }}" method="POST" enctype="multipart/form-data">
+                    <form action="/mahasiswa/progres-skripsi/{{ $nim }}" method="POST"
+                        enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
                         <div class="card-body">

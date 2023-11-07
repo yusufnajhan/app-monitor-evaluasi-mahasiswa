@@ -30,10 +30,10 @@ class DataPKLOlehMahasiswaController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreProgresPraktikKerjaLapanganRequest $request)
-    {
-        //
-    }
+    // public function store(StoreProgresPraktikKerjaLapanganRequest $request)
+    // {
+    //     //
+    // }
 
     /**
      * Display the specified resource.
@@ -107,7 +107,7 @@ class DataPKLOlehMahasiswaController extends Controller
 
         $pkl->save();
 
-        return redirect('/progres-pkl/' . $nim);
+        return redirect('/mahasiswa/progres-pkl/' . $nim);
     }
 
     /**

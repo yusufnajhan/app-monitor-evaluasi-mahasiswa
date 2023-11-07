@@ -39,7 +39,7 @@
                         @if (!isset($skripsi->sudah_disetujui))
                             <div class="card-body">
                                 <h1>Isi progres skripsi di
-                                    <a href="/progres-skripsi/{{ $nim }}/edit">
+                                    <a href="/mahasiswa/progres-skripsi/{{ $nim }}/edit">
                                         sini
                                     </a>
                                 </h1>
@@ -81,7 +81,7 @@
                                 <!-- /.card-body -->
                                 <div class="card-footer">
                                     <a href="/dashboard">Back</a>
-                                    <a href="/progres-skripsi/{{ $nim }}/edit">Edit</a>
+                                    <a href="/mahasiswa/progres-skripsi/{{ $nim }}/edit">Edit</a>
                                 </div>
                             </form>
                         @endif

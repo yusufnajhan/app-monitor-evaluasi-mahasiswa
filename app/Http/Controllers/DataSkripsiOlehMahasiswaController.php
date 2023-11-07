@@ -29,10 +29,10 @@ class DataSkripsiOlehMahasiswaController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreProgresSkripsiRequest $request)
-    {
-        //
-    }
+    // public function store(StoreProgresSkripsiRequest $request)
+    // {
+    //     //
+    // }
 
     /**
      * Display the specified resource.
@@ -112,7 +112,7 @@ class DataSkripsiOlehMahasiswaController extends Controller
 
         $skripsi->save();
 
-        return redirect('/progres-skripsi/' . $nim);
+        return redirect('/mahasiswa/progres-skripsi/' . $nim);
     }
 
     /**

@@ -60,8 +60,9 @@
                                             {{ $itemKhs->statusPersetujuan() }}
                                         </td>
                                         <td>
-                                            <a href="/khs/{{ $nim }}/{{ $itemKhs->semester }}">Detail</a>
-                                            <a href="/khs/{{ $nim }}/{{ $itemKhs->semester }}/edit">Edit</a>
+                                            <a href="/mahasiswa/khs/{{ $nim }}/{{ $itemKhs->semester }}">Detail</a>
+                                            <a
+                                                href="/mahasiswa/khs/{{ $nim }}/{{ $itemKhs->semester }}/edit">Edit</a>
                                         </td>
                                     </tr>
                                 @endforeach
