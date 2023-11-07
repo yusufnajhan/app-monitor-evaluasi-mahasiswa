@@ -6,7 +6,6 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0">Dashboard Dosen Wali</h1>
                     </div><!-- /.row -->
                 </div><!-- /.container-fluid -->
             </div>
@@ -15,23 +14,23 @@
             <!-- Main content -->
             <section class="content">
                 <div class="container-fluid">
-                    <h1>Hai</h1>
-                    <h2>Ini dasbor dosen wali</h2>
-                    <h2>Dosen {{ auth()->user()->dosenWali->nama }}</h2>
-                    <form action="/logout" method="POST">
-                        @csrf
-                        <button type="submit"
-                            class="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900">
-                            Log out
-                            <svg class="w-3.5 h-3.5 ml-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                fill="none" viewBox="0 0 14 10">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M1 5h12m0 0L9 1m4 4L9 9" />
-                            </svg>
-                        </button>
-                    </form>
+                    <h1>Selamat datang,</h1>
+                    <h2>Dosen {{ auth()->user()->dosenWali->nama }}!</h2>
                 </div><!-- /.container-fluid -->
-                <a href="dosen-wali/daftar-mahasiswa">Lihat mahasiswa</a>
+                <div class="content">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="card card-primary card-outline">
+                                    <div class="card-body">
+                                        <h5 class="text-center"><a href="dosen-wali/daftar-mahasiswa">Daftar Mahasiswa</a>
+                                        </h5>
+                                    </div>
+                                </div><!-- /.card -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </section>
             <!-- /.content -->
         </div>
