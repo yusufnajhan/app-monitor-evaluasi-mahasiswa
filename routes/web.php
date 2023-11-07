@@ -52,7 +52,7 @@ Route::middleware(['auth'])->group(function () {
         // IRS Mahasiswa
         Route::prefix('mahasiswa')->group(function () {
             // IRS
-            Route::get('/irs/{nim}', [DataIRSOlehMahasiswaController::class, 'index']);
+            Route::get('/irs/{nim}', [DataIRSOlehMahasiswaController::class, 'index'])->name('mahasiswa.irs.index');
             Route::get('/irs/{nim}/{semester}', [DataIRSOlehMahasiswaController::class, 'show']);
             Route::get('/irs/{nim}/{semester}/edit', [DataIRSOlehMahasiswaController::class, 'edit']);
             Route::put('/irs/{nim}/{semester}', [DataIRSOlehMahasiswaController::class, 'update']);

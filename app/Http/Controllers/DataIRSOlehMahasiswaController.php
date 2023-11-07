@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\IsianRencanaSemester;
-use App\Http\Requests\StoreIsianRencanaSemesterRequest;
-use App\Http\Requests\UpdateIRSOlehMahasiswaRequest;
-use App\Http\Requests\UpdateIsianRencanaSemesterRequest;
 use App\Models\Mahasiswa;
+use App\Models\IsianRencanaSemester;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\UpdateIRSOlehMahasiswaRequest;
+
 
 class DataIRSOlehMahasiswaController extends Controller
 {
@@ -20,7 +20,9 @@ class DataIRSOlehMahasiswaController extends Controller
             abort(404);
         }
 
-        $irs = IsianRencanaSemester::where('mahasiswa_id', $mahasiswa->id)->get();
+        $irs = IsianRencanaSemester::whereIn('mahasiswa_id', [$mahasiswa->id])->get();
+
+        $this->authorize('viewAny', IsianRencanaSemester::class);
 
         return view('mahasiswa.irs.index', compact('irs', 'nim'));
     }
@@ -57,6 +59,8 @@ class DataIRSOlehMahasiswaController extends Controller
         if (!$irs) {
             abort(404);
         }
+
+        $this->authorize('view', $irs);
 
         return view('mahasiswa.irs.show', compact('irs', 'nim'));
     }
