@@ -22,7 +22,7 @@ class UpdateKHSOlehDosenWaliRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'sks_semester' => 'required|gte:18|lte:24',
+            'sks_semester' => 'required|lte:24',
             'sks_kumulatif' => 'required|numeric',
             'ip_semester' => 'required|gte:0.0|lte:4.0',
             'ip_kumulatif' => 'required|numeric',

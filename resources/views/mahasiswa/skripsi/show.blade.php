@@ -72,6 +72,11 @@
                                                 id="tanggal_sidang" value="{{ $skripsi->tanggal_sidang }}" disabled>
                                         </div>
                                         <div class="form-group">
+                                            <label for="semester_tempuh">Semester Tempuh</label>
+                                            <input type="text" name="semester_tempuh" class="form-control"
+                                                id="semester_tempuh" value="{{ $skripsi->semester_tempuh }}" disabled>
+                                        </div>
+                                        <div class="form-group">
                                             <label for="nama_file">Scan Berita Acara skripsi </label>
                                             <embed src="/storage/{{ $skripsi->nama_file }}" width="100%" height="600"
                                                 type="application/pdf">

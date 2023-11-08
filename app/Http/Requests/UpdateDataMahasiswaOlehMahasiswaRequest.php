@@ -23,7 +23,7 @@ class UpdateDataMahasiswaOlehMahasiswaRequest extends FormRequest
     {
         return [
             'jalur_masuk' => 'required',
-            'no_telepon' => 'required|min:10|max:13|number',
+            'no_telepon' => 'required|min:10|max:13',
             'alamat' => 'required|min:5',
             'kota' => 'required',
             'provinsi' => 'required',
