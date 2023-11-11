@@ -22,7 +22,7 @@ class IsianRencanaSemesterSeeder extends Seeder
 
                 IsianRencanaSemester::create([
                     'semester' => $i,
-                    'sks' => rand(18, 24),
+                    'sks' => rand(2, 24),
                     'nama_file' => $namaFile,
                     'sudah_disetujui' => rand(0, 1),
                     'mahasiswa_id' => $mahasiswa->id

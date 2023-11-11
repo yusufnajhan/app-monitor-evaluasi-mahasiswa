@@ -13,9 +13,8 @@ return new class extends Migration
     {
         Schema::create('progres_praktik_kerja_lapangan', function (Blueprint $table) {
             $table->id();
-            // Belum ambil, sedang ambil, lulus
-            $table->string('status')->nullable();
-            $table->char('nilai')->nullable();
+            $table->integer('semester')->nullable();
+            $table->integer('nilai')->nullable();
             $table->string('nama_file')->nullable();
             $table->boolean('sudah_disetujui')->nullable();
             $table->unsignedBigInteger('mahasiswa_id');
