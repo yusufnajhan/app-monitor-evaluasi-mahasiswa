@@ -81,6 +81,8 @@ Route::middleware(['auth'])->group(function () {
 
     Route::middleware(['checkrole:dosenWali'])->group(function () {
         Route::prefix('dosen-wali')->group(function () {
+            Route::get('/search-mahasiswa', [DataMahasiswaOlehDosenWaliController::class, 'searchMahasiswa']);
+
             // Lihat mahasiswa
             Route::get('/daftar-mahasiswa', [DataMahasiswaOlehDosenWaliController::class, 'index']);
             Route::get('/detail-mahasiswa/{nim}', [DataMahasiswaOlehDosenWaliController::class, 'show']);
