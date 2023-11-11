@@ -81,7 +81,10 @@
                                     </option>
                                     <option value="SBMPTN" {{ old('jalur_masuk') === 'SBMPTN' ? 'selected' : '' }}>SBMPTN
                                     </option>
-                                    <option value="UM" {{ old('jalur_masuk') === 'UM' ? 'selected' : '' }}>UM</option>
+                                    <option value="Mandiri" {{ old('jalur_masuk') === 'Mandiri' ? 'selected' : '' }}>
+                                        Mandiri</option>
+                                    <option value="Lainnya" {{ old('jalur_masuk') === 'Lainnya' ? 'selected' : '' }}>
+                                        Lainnya</option>
                                 </select>
                             </div>
                             <div class="form-group">

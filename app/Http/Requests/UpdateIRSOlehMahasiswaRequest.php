@@ -40,7 +40,9 @@ class UpdateIRSOlehMahasiswaRequest extends FormRequest
         return [
             'required' => ':Attribute harus diisi',
             'sks.gte' => ':Attribute harus lebih besar atau sama dengan :value',
-            'sks.lte' => ':Attribute harus lebih kecil atau sama dengan :value'
+            'sks.lte' => ':Attribute harus lebih kecil atau sama dengan :value',
+            'file' => ':Attribute harus berupa file',
+            'mimes' => ':Attribute harus bertipe PDF (berakhiran .pdf)'
         ];
     }
 }
