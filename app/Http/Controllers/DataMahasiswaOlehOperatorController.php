@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Hash;
 use App\Models\ProgresPraktikKerjaLapangan;
 use App\Http\Requests\UpdateMahasiswaRequest;
 use App\Http\Requests\StoreDataMahasiswaOlehOperatorRequest;
+use Illuminate\Http\Request;
 
 class DataMahasiswaOlehOperatorController extends Controller
 {
@@ -86,6 +87,20 @@ class DataMahasiswaOlehOperatorController extends Controller
         }
 
         return redirect()->route('dashboard');
+    }
+
+    public function searchMahasiswa(Request $request)
+    {
+        $keyword = $request->input('keyword');
+        $results = [];
+
+        if ($keyword !== '') {
+            $results = Mahasiswa::where('nama', 'like', '%' . $keyword . '%')->get();
+        } else {
+            $results = '';
+        }
+
+        return response()->json(['results' => $results]);
     }
 
     /**

@@ -43,6 +43,8 @@ Route::middleware(['auth'])->group(function () {
     Route::middleware(['checkrole:operator'])->group(function () {
         Route::get('/tambah-mahasiswa', [DataMahasiswaOlehOperatorController::class, 'create'])->name('tambah-mahasiswa');
         Route::post('/tambah-mahasiswa', [DataMahasiswaOlehOperatorController::class, 'store'])->name('simpan-mahasiswa');
+
+        Route::get('/search-mahasiswa', [DataMahasiswaOlehOperatorController::class, 'searchMahasiswa']);
     });
 
     Route::middleware(['checkrole:mahasiswa'])->group(function () {
