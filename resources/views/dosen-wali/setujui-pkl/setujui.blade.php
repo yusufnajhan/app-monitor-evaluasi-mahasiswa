@@ -51,37 +51,30 @@
                                 @method('PUT')
                                 <div class="card-body">
                                     <div class="form-group">
-                                        <label for="status_persetujuan">Status Persetujuan</label>
-                                        <input type="text" name="status_persetujuan" class="form-control"
-                                            id="status_persetujuan" value="{{ $pkl->statusPersetujuan() }}" disabled>
+                                        <label for="semester">Semester</label>
+                                        <input type="text" name="semester" class="form-control" id="semester"
+                                            value="{{ $pkl->semester }}" disabled>
                                     </div>
                                     <div class="form-group">
-                                        <label for="status">Status</label>
-                                        <input type="text" name="status" class="form-control" id="status"
-                                            value="{{ $pkl->status }}" disabled>
+                                        <label for="nilai">Nilai</label>
+                                        <input type="text" name="nilai" class="form-control" id="nilai"
+                                            value="{{ $pkl->nilai }}" disabled>
                                     </div>
-                                    @if ($pkl->status == 'Lulus')
-                                        <div class="form-group">
-                                            <label for="nilai">Nilai</label>
-                                            <input type="text" name="nilai" class="form-control" id="nilai"
-                                                value="{{ $pkl->nilai }}" disabled>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="nama_file">Scan Berita Acara PKL </label>
-                                            <embed src="/storage/{{ $pkl->nama_file }}" width="100%" height="600"
-                                                type="application/pdf">
-                                        </div>
-                                    @endif
+                                    <div class="form-group">
+                                        <label for="nama_file">Scan Berita Acara PKL </label>
+                                        <embed src="/storage/{{ $pkl->nama_file }}" width="100%" height="600"
+                                            type="application/pdf">
+                                    </div>
                                 </div>
                                 <!-- /.card-body -->
                                 <div class="card-footer">
                                     @if ($pkl->sudah_disetujui == 0)
                                         <button type="submit" name="sudah_disetujui" value="1">Setujui</button> |
-                                        <a href="/dosen-wali/progres-pkl/{{ $nim }}/edit">Edit</a> |
                                     @else
                                         <button type="submit" name="sudah_disetujui" value="0">Batalkan
-                                            Persetujuan</button>
+                                            Persetujuan</button> |
                                     @endif
+                                    <a href="/dosen-wali/setujui-pkl">Back ke Persetujuan</a> |
                                     <a href="/dashboard">Back</a>
                                 </div>
                             </form>
@@ -90,13 +83,10 @@
                 </div>
                 <!-- /.card -->
             </div><!-- /.row -->
-
-
         </div><!-- /.container-fluid -->
         <br>
         <a href="/dashboard" class="">
             Back
         </a>
-    </div>
     </div>
 @endsection

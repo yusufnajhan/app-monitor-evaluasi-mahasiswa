@@ -84,6 +84,8 @@ Route::middleware(['auth'])->group(function () {
             // Lihat IRS yang belum disetujui
             Route::get('/setujui-irs', [SetujuiIRSOlehDosenWaliController::class, 'indexMahasiswa']);
             Route::get('/setujui-khs', [SetujuiKHSOlehDosenWaliController::class, 'indexMahasiswa']);
+            Route::get('/setujui-pkl', [SetujuiPKLOlehDosenWaliController::class, 'indexMahasiswa']);
+            Route::get('/setujui-skripsi', [SetujuiSkripsiOlehDosenWaliController::class, 'indexMahasiswa']);
 
             // Lihat IRS per mahasiswa
             Route::get('/irs/{nim}', [SetujuiIRSOlehDosenWaliController::class, 'indexIRS']);
@@ -100,7 +102,7 @@ Route::middleware(['auth'])->group(function () {
             Route::put('/khs/{nim}/{semester}', [SetujuiKHSOlehDosenWaliController::class, 'setujui']);
 
             // Lihat PKL mahasiswa
-            Route::get('/progres-pkl/{nim}', [SetujuiPKLOlehDosenWaliController::class, 'show']);
+            Route::get('/progres-pkl/{nim}/setujui', [SetujuiPKLOlehDosenWaliController::class, 'confirmSetujui']);
             Route::get('/progres-pkl/{nim}/edit', [SetujuiPKLOlehDosenWaliController::class, 'editDanSetujui']);
             Route::put('/progres-pkl/{nim}/update-dan-setujui', [SetujuiPKLOlehDosenWaliController::class, 'updateDanSetujui']);
             Route::put('/progres-pkl/{nim}', [SetujuiPKLOlehDosenWaliController::class, 'setujui']);

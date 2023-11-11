@@ -73,31 +73,27 @@
                                         type="application/pdf">
                                 </div>
                             </div>
-                </div>
-                <!-- /.card-body -->
-                <div class="card-footer">
-                    @if ($khs->sudah_disetujui == 0)
-                        <button type="submit" name="sudah_disetujui" value="1">Setujui</button> |
-                    @else
-                        <button type="submit" name="sudah_disetujui" value="0">Batalkan
-                            Persetujuan</button>|
+                            <!-- /.card-body -->
+                            <div class="card-footer">
+                                @if ($khs->sudah_disetujui == 0)
+                                    <button type="submit" name="sudah_disetujui" value="1">Setujui</button> |
+                                @else
+                                    <button type="submit" name="sudah_disetujui" value="0">Batalkan
+                                        Persetujuan</button>|
+                                @endif
+                                <a href="/dosen-wali/setujui-khs">Back To Persetujuan</a> |
+                                <a href="/dosen-wali/khs/{{ $mahasiswa->nim }}">Back</a>
+                            </div>
+                        </form>
                     @endif
-                    <a href="/dosen-wali/setujui-khs">Back To Persetujuan</a> |
-                    <a href="/dosen-wali/khs/{{ $mahasiswa->nim }}">Back</a>
                 </div>
-                </form>
-                @endif
-            </div>
-            <!-- /.card -->
-        </div><!-- /.row -->
-
-
-    </div><!-- /.container-fluid -->
-    <br>
-    <a href="/dashboard"
-        class="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900">
-        Back
-    </a>
-    </div>
+                <!-- /.card -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+        <br>
+        <a href="/dashboard"
+            class="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900">
+            Back
+        </a>
     </div>
 @endsection

@@ -39,6 +39,18 @@
                                         </h5>
                                     </div>
                                 </div><!-- /.card -->
+                                <div class="card card-primary card-outline">
+                                    <div class="card-body">
+                                        <h5 class="text-center"><a href="dosen-wali/setujui-pkl">Setujui PKL</a>
+                                        </h5>
+                                    </div>
+                                </div><!-- /.card -->
+                                <div class="card card-primary card-outline">
+                                    <div class="card-body">
+                                        <h5 class="text-center"><a href="dosen-wali/setujui-skripsi">Setujui Skripsi</a>
+                                        </h5>
+                                    </div>
+                                </div><!-- /.card -->
                             </div>
                         </div>
                     </div>
