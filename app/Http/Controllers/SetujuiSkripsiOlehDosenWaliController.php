@@ -3,12 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Mahasiswa;
+use Illuminate\Http\Request;
 use App\Models\ProgresSkripsi;
-use App\Http\Requests\StoreProgresSkripsiRequest;
-use App\Http\Requests\UpdateProgresSkripsiOlehMahasiswaRequest;
-use App\Http\Requests\UpdateProgresSkripsiRequest;
+use App\Http\Requests\UpdateProgresSkripsiOlehDosenWaliRequest;
 
-class DataSkripsiOlehMahasiswaController extends Controller
+class SetujuiSkripsiOlehDosenWaliController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -29,7 +28,7 @@ class DataSkripsiOlehMahasiswaController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    // public function store(StoreProgresSkripsiRequest $request)
+    // public function store(StoreProgresPraktikKerjaLapanganRequest $request)
     // {
     //     //
     // }
@@ -39,12 +38,11 @@ class DataSkripsiOlehMahasiswaController extends Controller
      */
     public function show($nim)
     {
-        $mahasiswa = Mahasiswa::where('nim', $nim)->first();
+        $mahasiswa = Mahasiswa::where('nim', $nim)->select()->first();
         if (!$mahasiswa) {
             abort(404);
         }
         $semester = $mahasiswa->hitungSemester();
-
 
         $skripsi = ProgresSkripsi::where('mahasiswa_id', $mahasiswa->id)
             ->first();
@@ -52,13 +50,13 @@ class DataSkripsiOlehMahasiswaController extends Controller
             abort(404);
         }
 
-        return view('mahasiswa.skripsi.show', compact('skripsi', 'nim', 'semester'));
+        return view('dosen-wali.setujui-skripsi.show', compact('skripsi', 'nim', 'semester'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit($nim)
+    public function editDanSetujui($nim)
     {
         $mahasiswa = Mahasiswa::where('nim', $nim)->first();
         if (!$mahasiswa) {
@@ -71,13 +69,37 @@ class DataSkripsiOlehMahasiswaController extends Controller
             abort(404);
         }
 
-        return view('mahasiswa.skripsi.edit', compact('skripsi', 'nim'));
+        return view('dosen-wali.setujui-skripsi.edit', compact('skripsi', 'nim'));
     }
+
+    public function setujui(Request $request, $nim)
+    {
+        $mahasiswa = Mahasiswa::where('nim', $nim)->first();
+        if (!$mahasiswa) {
+            abort(404);
+        }
+
+        $skripsi = ProgresSkripsi::where('mahasiswa_id', $mahasiswa->id)
+            ->first();
+        if (!$skripsi) {
+            abort(404);
+        }
+
+        if ($request->sudah_disetujui == 1) {
+            $skripsi->sudah_disetujui = 1;
+        } else if ($request->sudah_disetujui == 0) {
+            $skripsi->sudah_disetujui = 0;
+        }
+        $skripsi->save();
+
+        return redirect('/dosen-wali/progres-skripsi/' . $nim);
+    }
+
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateProgresSkripsiOlehMahasiswaRequest $request, $nim)
+    public function updateDanSetujui(UpdateProgresSkripsiOlehDosenWaliRequest $request, $nim)
     {
         $mahasiswa = Mahasiswa::where('nim', $nim)->first();
         if (!$mahasiswa) {
@@ -93,32 +115,27 @@ class DataSkripsiOlehMahasiswaController extends Controller
         $data = $request->validated();
 
         $skripsi->status = $data['status'];
-        $skripsi->sudah_disetujui = 0;
+        $skripsi->sudah_disetujui = 1;
 
         if ($data['status'] == 'Lulus') {
             $skripsi->nilai = $data['nilai'];
-
-            $namaFileBaru = 'skripsi_' . str_replace(' ', '_', strtolower($mahasiswa->nama)) . '.pdf';
-            $skripsi->nama_file = $request->file('nama_file')->storeAs('progres-skripsi', $namaFileBaru);
-
             $skripsi->tanggal_sidang = $data['tanggal_sidang'];
             $skripsi->semester_tempuh = $mahasiswa->hitungSemester();
         } else {
             $skripsi->nilai = NULL;
-            $skripsi->nama_file = NULL;
             $skripsi->tanggal_sidang = NULL;
             $skripsi->semester_tempuh = NULL;
         }
 
         $skripsi->save();
 
-        return redirect('/mahasiswa/progres-skripsi/' . $nim);
+        return redirect('/dosen-wali/progres-skripsi/' . $nim);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(ProgresSkripsi $progresSkripsi)
+    public function destroy(ProgresSkripsi $progresPraktikKerjaLapangan)
     {
         //
     }

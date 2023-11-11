@@ -4,6 +4,7 @@ namespace App\Policies;
 
 use App\Models\IsianRencanaSemester;
 use App\Models\User;
+use GuzzleHttp\Promise\Is;
 use Illuminate\Auth\Access\Response;
 
 class IsianRencanaSemesterPolicy
@@ -13,7 +14,14 @@ class IsianRencanaSemesterPolicy
      */
     public function viewAny(User $user): bool
     {
-        //
+        // Cek apakah pengguna adalah mahasiswa yang memiliki IRs tersebut
+        if ($user->role === 'mahasiswa') {
+            if (route('mahasiswa.irs.index', $user->mahasiswa->nim) === url()->current()) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /**
@@ -21,7 +29,17 @@ class IsianRencanaSemesterPolicy
      */
     public function view(User $user, IsianRencanaSemester $isianRencanaSemester): bool
     {
-        //
+        // Cek apakah pengguna adalah mahasiswa yang memiliki IRs tersebut
+        if ($user->role === 'mahasiswa' && $user->mahasiswa->id === $isianRencanaSemester->mahasiswa_id) {
+            return true;
+        }
+
+        // Cek apakah pengguna adalah dosen wali dari mahasiswa yang memiliki IRs tersebut
+        if ($user->role === 'dosenWali' && $user->dosenWali->id === $isianRencanaSemester->mahasiswa->dosen_wali_id) {
+            return true;
+        }
+
+        return false;
     }
 
     /**

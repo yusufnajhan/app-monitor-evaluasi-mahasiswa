@@ -38,7 +38,8 @@
                     <div class="col-lg-6">
                         <div class="card card-primary card-outline">
                             <div class="card-body">
-                                <h5 class="text-center"><a href="/khs/{{ $mahasiswa->nim }}"> KHS Mahasiswa </a></h5>
+                                <h5 class="text-center"><a href="/mahasiswa/khs/{{ $mahasiswa->nim }}"> KHS Mahasiswa </a>
+                                </h5>
                             </div>
                         </div><!-- /.card -->
                     </div>
@@ -49,7 +50,8 @@
                         <div class="col-lg-6">
                             <div class="card card-primary card-outline">
                                 <div class="card-body">
-                                    <h5 class="text-center"><a href="/progres-pkl/{{ $mahasiswa->nim }}">Progres PKL
+                                    <h5 class="text-center"><a href="/mahasiswa/progres-pkl/{{ $mahasiswa->nim }}">Progres
+                                            PKL
                                             Mahasiswa</a></h5>
                                 </div>
                             </div><!-- /.card -->
@@ -59,7 +61,8 @@
                     <div class="col-lg-6">
                         <div class="card card-primary card-outline">
                             <div class="card-body">
-                                <h5 class="text-center"><a href="/progres-skripsi/{{ $mahasiswa->nim }}">Progres Skripsi
+                                <h5 class="text-center"><a href="/mahasiswa/progres-skripsi/{{ $mahasiswa->nim }}">Progres
+                                        Skripsi
                                         Mahasiswa</a></h5>
                             </div>
                         </div><!-- /.card -->

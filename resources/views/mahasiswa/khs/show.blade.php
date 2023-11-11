@@ -31,13 +31,13 @@
                     @if (!isset($khs->sudah_disetujui))
                         <div class="card-body">
                             <h1>Isi KHS semester {{ $khs->semester }} di
-                                <a href="/khs/{{ $nim }}/{{ $khs->semester }}/edit">
+                                <a href="/mahasiswa/khs/{{ $nim }}/{{ $khs->semester }}/edit">
                                     sini
                                 </a>
                             </h1>
                         </div>
                         <div class="card-footer">
-                            <a href="/khs/{{ $nim }}">Back</a>
+                            <a href="/mahasiswa/khs/{{ $nim }}">Back</a>
                         </div>
                     @else
                         <form action="" method="" enctype="multipart/form-data">
@@ -80,7 +80,7 @@
                             </div>
                             <!-- /.card-body -->
                             <div class="card-footer">
-                                <a href="/khs/{{ $nim }}">Back</a>
+                                <a href="/mahasiswa/khs/{{ $nim }}">Back</a>
                             </div>
                         </form>
                     @endif

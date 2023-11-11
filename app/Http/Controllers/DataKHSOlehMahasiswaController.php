@@ -108,7 +108,7 @@ class DataKHSOlehMahasiswaController extends Controller
         $khs->sudah_disetujui = 0;
         $khs->save();
 
-        return redirect('/khs/' . $nim);
+        return redirect('/mahasiswa/khs/' . $nim);
     }
 
     /**

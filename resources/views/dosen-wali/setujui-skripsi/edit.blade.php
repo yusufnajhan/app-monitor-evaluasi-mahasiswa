@@ -18,7 +18,7 @@
                     </div><!-- /.col -->
                 </div><!-- /.row -->
 
-                <h1 class="m-0">Detail PKL</h1>
+                <h1 class="m-0">Detail skripsi</h1>
                 <br>
 
                 @if ($errors->any())
@@ -34,11 +34,12 @@
                 <!-- general form elements -->
                 <div class="card card-primary">
                     <div class="card-header">
-                        <h3 class="card-title">PKL</h3>
+                        <h3 class="card-title">skripsi</h3>
                     </div>
                     <!-- /.card-header -->
                     <!-- form start -->
-                    <form action="/mahasiswa/progres-pkl/{{ $nim }}" method="POST" enctype="multipart/form-data">
+                    <form action="/dosen-wali/progres-skripsi/{{ $nim }}/update-dan-setujui" method="POST"
+                        enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
                         <div class="card-body">
@@ -47,30 +48,39 @@
                                 <select name="status" id="status">
                                     <option value="" selected disabled>-- Pilih Status --</option>
                                     <option value="Belum Ambil"
-                                        {{ old('status', $pkl->status) == 'Belum Ambil' ? 'selected' : '' }}>Belum
+                                        {{ old('status', $skripsi->status) == 'Belum Ambil' ? 'selected' : '' }}>Belum
                                         Ambil</option>
                                     <option value="Sedang Ambil"
-                                        {{ old('status', $pkl->status) == 'Sedang Ambil' ? 'selected' : '' }}>
+                                        {{ old('status', $skripsi->status) == 'Sedang Ambil' ? 'selected' : '' }}>
                                         Sedang Ambil</option>
-                                    <option value="Lulus" {{ old('status', $pkl->status) == 'Lulus' ? 'selected' : '' }}>
+                                    <option value="Lulus"
+                                        {{ old('status', $skripsi->status) == 'Lulus' ? 'selected' : '' }}>
                                         Lulus</option>
                                 </select>
                             </div>
-                            <div class="form-group">
-                                <label for="nilai">Nilai</label>
-                                <input type="text" name="nilai" class="form-control" id="nilai"
-                                    value="{{ $pkl->nilai }}" {{ $pkl->status == 'Lulus' ? '' : 'disabled' }}>
-                            </div>
-                            <div class="form-group">
-                                <label for="nama_file">Scan KHS </label>
-                                <input type="file" name="nama_file" class="form-control" id="nama_file"
-                                    {{ $pkl->status == 'Lulus' ? '' : 'disabled' }}>
+                            <div id="visible-when-lulus" hidden>
+                                <div class="form-group">
+                                    <label for="nilai">Nilai</label>
+                                    <input type="text" name="nilai" class="form-control" id="nilai"
+                                        value="{{ old('nilai', $skripsi->nilai) }}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="tanggal_sidang">Tanggal Sidang</label>
+                                    <input type="date" name="tanggal_sidang" class="form-control" id="tanggal_sidang"
+                                        value="{{ old('tanggal_sidang', $skripsi->tanggal_sidang) }}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="nama_file">Scan Berita Acara skripsi </label>
+                                    <embed src="/storage/{{ $skripsi->nama_file }}" width="100%" height="600"
+                                        type="application/pdf">
+                                </div>
                             </div>
                         </div>
                         <!-- /.card-body -->
                         <div class="card-footer">
                             <button type="submit" class="btn btn-primary">Submit</button>
                             <a href="/dashboard">Back to Dashboard</a>
+                            <a href="/dosen-wali/progres-skripsi/{{ $nim }}"></a>
                         </div>
                     </form>
                 </div>
@@ -92,16 +102,14 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const statusSelect = document.getElementById('status');
-            const nilaiInput = document.getElementById('nilai');
-            const namaFileInput = document.getElementById('nama_file');
+            const inputSaatLulus = document.getElementById('visible-when-lulus');
+            // const namaFileInput = document.getElementById('nama_file');
 
             statusSelect.addEventListener('change', function() {
                 if (statusSelect.value === 'Lulus') {
-                    nilaiInput.disabled = false;
-                    namaFileInput.disabled = false;
+                    inputSaatLulus.hidden = false;
                 } else {
-                    nilaiInput.disabled = true;
-                    namaFileInput.disabled = true;
+                    inputSaatLulus.hidden = true;
                 }
             });
         });

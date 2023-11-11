@@ -38,7 +38,7 @@
                     </div>
                     <!-- /.card-header -->
                     <!-- form start -->
-                    <form action="/khs/{{ $nim }}/{{ $khs->semester }}" method="POST"
+                    <form action="/mahasiswa/khs/{{ $nim }}/{{ $khs->semester }}" method="POST"
                         enctype="multipart/form-data">
                         @csrf
                         @method('PUT')

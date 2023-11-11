@@ -2,16 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Mahasiswa;
 use App\Models\User;
-use App\Http\Requests\StoreDataMahasiswaOlehOperatorRequest;
-use App\Http\Requests\UpdateMahasiswaRequest;
 use App\Models\DosenWali;
-use App\Models\IsianRencanaSemester;
-use App\Models\KartuHasilStudi;
-use App\Models\ProgresPraktikKerjaLapangan;
+use App\Models\Mahasiswa;
 use App\Models\ProgresSkripsi;
+use App\Models\KartuHasilStudi;
+use App\Models\IsianRencanaSemester;
+use Illuminate\Auth\Access\Response;
 use Illuminate\Support\Facades\Hash;
+use App\Models\ProgresPraktikKerjaLapangan;
+use App\Http\Requests\UpdateMahasiswaRequest;
+use App\Http\Requests\StoreDataMahasiswaOlehOperatorRequest;
 
 class DataMahasiswaOlehOperatorController extends Controller
 {
@@ -28,6 +29,10 @@ class DataMahasiswaOlehOperatorController extends Controller
      */
     public function create()
     {
+        $this->authorize('create', Mahasiswa::class)
+            ? Response::allow()
+            : Response::denyWithStatus(403);
+
         $allDosenWali = DosenWali::select('id', 'nama')->get();
 
         return view('operator.data-mahasiswa.create', compact('allDosenWali'));
@@ -38,7 +43,9 @@ class DataMahasiswaOlehOperatorController extends Controller
      */
     public function store(StoreDataMahasiswaOlehOperatorRequest $request)
     {
-        $this->authorize('create', Mahasiswa::class);
+        $this->authorize('create', Mahasiswa::class)
+            ? Response::allow()
+            : Response::denyWithStatus(403);
 
         $data = $request->validated();
 
@@ -102,10 +109,10 @@ class DataMahasiswaOlehOperatorController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateMahasiswaRequest $request, Mahasiswa $mahasiswa)
-    {
-        //
-    }
+    // public function update(UpdateMahasiswaRequest $request, Mahasiswa $mahasiswa)
+    // {
+    //     //
+    // }
 
     /**
      * Remove the specified resource from storage.

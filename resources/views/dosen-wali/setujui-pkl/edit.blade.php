@@ -38,7 +38,8 @@
                     </div>
                     <!-- /.card-header -->
                     <!-- form start -->
-                    <form action="/mahasiswa/progres-pkl/{{ $nim }}" method="POST" enctype="multipart/form-data">
+                    <form action="/dosen-wali/progres-pkl/{{ $nim }}/update-dan-setujui" method="POST"
+                        enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
                         <div class="card-body">
@@ -56,21 +57,24 @@
                                         Lulus</option>
                                 </select>
                             </div>
-                            <div class="form-group">
-                                <label for="nilai">Nilai</label>
-                                <input type="text" name="nilai" class="form-control" id="nilai"
-                                    value="{{ $pkl->nilai }}" {{ $pkl->status == 'Lulus' ? '' : 'disabled' }}>
-                            </div>
-                            <div class="form-group">
-                                <label for="nama_file">Scan KHS </label>
-                                <input type="file" name="nama_file" class="form-control" id="nama_file"
-                                    {{ $pkl->status == 'Lulus' ? '' : 'disabled' }}>
+                            <div id="visible-when-lulus" hidden>
+                                <div class="form-group">
+                                    <label for="nilai">Nilai</label>
+                                    <input type="text" name="nilai" class="form-control" id="nilai"
+                                        value="{{ $pkl->nilai }}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="nama_file">Scan Berita Acara PKL </label>
+                                    <embed src="/storage/{{ $pkl->nama_file }}" width="100%" height="600"
+                                        type="application/pdf">
+                                </div>
                             </div>
                         </div>
                         <!-- /.card-body -->
                         <div class="card-footer">
                             <button type="submit" class="btn btn-primary">Submit</button>
                             <a href="/dashboard">Back to Dashboard</a>
+                            <a href="/dosen-wali/progres-pkl/{{ $nim }}"></a>
                         </div>
                     </form>
                 </div>
@@ -92,16 +96,14 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const statusSelect = document.getElementById('status');
-            const nilaiInput = document.getElementById('nilai');
-            const namaFileInput = document.getElementById('nama_file');
+            const inputSaatLulus = document.getElementById('visible-when-lulus');
+            // const namaFileInput = document.getElementById('nama_file');
 
             statusSelect.addEventListener('change', function() {
                 if (statusSelect.value === 'Lulus') {
-                    nilaiInput.disabled = false;
-                    namaFileInput.disabled = false;
+                    inputSaatLulus.hidden = false;
                 } else {
-                    nilaiInput.disabled = true;
-                    namaFileInput.disabled = true;
+                    inputSaatLulus.hidden = true;
                 }
             });
         });

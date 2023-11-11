@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateIRSOlehMahasiswaRequest extends FormRequest
+class UpdateProgresPKLOlehDosenWaliRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,25 +22,16 @@ class UpdateIRSOlehMahasiswaRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'sks' => 'required|lte:24',
-            'nama_file' => 'required|file|mimes:pdf'
-        ];
-    }
-
-    public function attributes()
-    {
-        return [
-            'sks' => 'Satuan kredit semester/SKS',
-            'nama_file' => 'File'
+            'status' => 'required',
+            'nilai' => $this->input('status') === 'Lulus' ? 'required' : ''
         ];
     }
 
     public function messages()
     {
         return [
-            'required' => ':Attribute harus diisi',
-            'sks.gte' => ':Attribute harus lebih besar atau sama dengan :value',
-            'sks.lte' => ':Attribute harus lebih kecil atau sama dengan :value'
+            'status.required' => 'Status pengambilan harus diisi',
+            'nilai.required' => 'Nilai harus diisikan jika sudah lulus',
         ];
     }
 }

@@ -22,7 +22,7 @@ class UpdateIRSOlehDosenWaliRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'sks' => 'required|gte:18|lte:24',
+            'sks' => 'required|lte:24',
         ];
     }
 

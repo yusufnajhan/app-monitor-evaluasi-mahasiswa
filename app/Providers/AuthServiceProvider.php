@@ -4,7 +4,9 @@ namespace App\Providers;
 
 // use Illuminate\Support\Facades\Gate;
 
+use App\Models\IsianRencanaSemester;
 use App\Models\Mahasiswa;
+use App\Policies\IsianRencanaSemesterPolicy;
 use App\Policies\MahasiswaPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
@@ -16,7 +18,8 @@ class AuthServiceProvider extends ServiceProvider
      * @var array<class-string, class-string>
      */
     protected $policies = [
-        Mahasiswa::class => MahasiswaPolicy::class
+        Mahasiswa::class => MahasiswaPolicy::class,
+        IsianRencanaSemester::class => IsianRencanaSemesterPolicy::class,
     ];
 
     /**
@@ -24,6 +27,6 @@ class AuthServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        // $this->registerPolicies();
     }
 }

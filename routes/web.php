@@ -8,10 +8,12 @@ use App\Http\Controllers\DataKHSOlehMahasiswaController;
 use App\Http\Controllers\DataPKLOlehMahasiswaController;
 use App\Http\Controllers\SetujuiIRSOlehDosenWaliController;
 use App\Http\Controllers\SetujuiKHSOlehDosenWaliController;
+use App\Http\Controllers\SetujuiPKLOlehDosenWaliController;
 use App\Http\Controllers\DataSkripsiOlehMahasiswaController;
 use App\Http\Controllers\LengkapiDataMahasiswaOlehMahasiswa;
 use App\Http\Controllers\DataMahasiswaOlehOperatorController;
 use App\Http\Controllers\DataMahasiswaOlehDosenWaliController;
+use App\Http\Controllers\SetujuiSkripsiOlehDosenWaliController;
 
 /*
 |--------------------------------------------------------------------------
@@ -50,7 +52,7 @@ Route::middleware(['auth'])->group(function () {
         // IRS Mahasiswa
         Route::prefix('mahasiswa')->group(function () {
             // IRS
-            Route::get('/irs/{nim}', [DataIRSOlehMahasiswaController::class, 'index']);
+            Route::get('/irs/{nim}', [DataIRSOlehMahasiswaController::class, 'index'])->name('mahasiswa.irs.index');
             Route::get('/irs/{nim}/{semester}', [DataIRSOlehMahasiswaController::class, 'show']);
             Route::get('/irs/{nim}/{semester}/edit', [DataIRSOlehMahasiswaController::class, 'edit']);
             Route::put('/irs/{nim}/{semester}', [DataIRSOlehMahasiswaController::class, 'update']);
@@ -60,7 +62,6 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/khs/{nim}/{semester}', [DataKHSOlehMahasiswaController::class, 'show']);
             Route::get('/khs/{nim}/{semester}/edit', [DataKHSOlehMahasiswaController::class, 'edit']);
             Route::put('/khs/{nim}/{semester}', [DataKHSOlehMahasiswaController::class, 'update']);
-
 
             // Progres PKL
             Route::get('/progres-pkl/{nim}', [DataPKLOlehMahasiswaController::class, 'show']);
@@ -93,6 +94,18 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/khs/{nim}/{semester}/edit', [SetujuiKHSOlehDosenWaliController::class, 'editDanSetujui']);
             Route::put('/khs/{nim}/{semester}/update-dan-setujui', [SetujuiKHSOlehDosenWaliController::class, 'updateDanSetujui']);
             Route::put('/khs/{nim}/{semester}', [SetujuiKHSOlehDosenWaliController::class, 'setujui']);
+
+            // Lihat PKL mahasiswa
+            Route::get('/progres-pkl/{nim}', [SetujuiPKLOlehDosenWaliController::class, 'show']);
+            Route::get('/progres-pkl/{nim}/edit', [SetujuiPKLOlehDosenWaliController::class, 'editDanSetujui']);
+            Route::put('/progres-pkl/{nim}/update-dan-setujui', [SetujuiPKLOlehDosenWaliController::class, 'updateDanSetujui']);
+            Route::put('/progres-pkl/{nim}', [SetujuiPKLOlehDosenWaliController::class, 'setujui']);
+
+            // Lihat Skripsi mahasiswa
+            Route::get('/progres-skripsi/{nim}', [SetujuiSkripsiOlehDosenWaliController::class, 'show']);
+            Route::get('/progres-skripsi/{nim}/edit', [SetujuiSkripsiOlehDosenWaliController::class, 'editDanSetujui']);
+            Route::put('/progres-skripsi/{nim}/update-dan-setujui', [SetujuiSkripsiOlehDosenWaliController::class, 'updateDanSetujui']);
+            Route::put('/progres-skripsi/{nim}', [SetujuiSkripsiOlehDosenWaliController::class, 'setujui']);
         });
     });
 });

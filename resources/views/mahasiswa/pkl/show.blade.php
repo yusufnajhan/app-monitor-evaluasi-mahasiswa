@@ -39,7 +39,7 @@
                         @if (!isset($pkl->sudah_disetujui))
                             <div class="card-body">
                                 <h1>Isi progres PKL di
-                                    <a href="/progres-pkl/{{ $nim }}/edit">
+                                    <a href="/mahasiswa/progres-pkl/{{ $nim }}/edit">
                                         sini
                                     </a>
                                 </h1>
@@ -76,7 +76,7 @@
                                 <!-- /.card-body -->
                                 <div class="card-footer">
                                     <a href="/dashboard">Back</a>
-                                    <a href="/progres-pkl/{{ $nim }}/edit">Edit</a>
+                                    <a href="/mahasiswa/progres-pkl/{{ $nim }}/edit">Edit</a>
                                 </div>
                             </form>
                         @endif

@@ -5,11 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Mahasiswa;
 use Illuminate\Http\Request;
 use App\Models\ProgresPraktikKerjaLapangan;
-use App\Http\Requests\StoreProgresPraktikKerjaLapanganRequest;
-use App\Http\Requests\UpdateProgresPKLOlehMahasiswaRequest;
-use App\Http\Requests\UpdateProgresPraktikKerjaLapanganRequest;
+use App\Http\Requests\UpdateProgresPKLOlehDosenWaliRequest;
 
-class DataPKLOlehMahasiswaController extends Controller
+class SetujuiPKLOlehDosenWaliController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -52,13 +50,13 @@ class DataPKLOlehMahasiswaController extends Controller
             abort(404);
         }
 
-        return view('mahasiswa.pkl.show', compact('pkl', 'nim', 'semester'));
+        return view('dosen-wali.setujui-pkl.show', compact('pkl', 'nim', 'semester'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit($nim)
+    public function editDanSetujui($nim)
     {
         $mahasiswa = Mahasiswa::where('nim', $nim)->first();
         if (!$mahasiswa) {
@@ -71,13 +69,37 @@ class DataPKLOlehMahasiswaController extends Controller
             abort(404);
         }
 
-        return view('mahasiswa.pkl.edit', compact('pkl', 'nim'));
+        return view('dosen-wali.setujui-pkl.edit', compact('pkl', 'nim'));
     }
+
+    public function setujui(Request $request, $nim)
+    {
+        $mahasiswa = Mahasiswa::where('nim', $nim)->first();
+        if (!$mahasiswa) {
+            abort(404);
+        }
+
+        $pkl = ProgresPraktikKerjaLapangan::where('mahasiswa_id', $mahasiswa->id)
+            ->first();
+        if (!$pkl) {
+            abort(404);
+        }
+
+        if ($request->sudah_disetujui == 1) {
+            $pkl->sudah_disetujui = 1;
+        } else if ($request->sudah_disetujui == 0) {
+            $pkl->sudah_disetujui = 0;
+        }
+        $pkl->save();
+
+        return redirect('/dosen-wali/progres-pkl/' . $nim);
+    }
+
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateProgresPKLOlehMahasiswaRequest $request, $nim)
+    public function updateDanSetujui(UpdateProgresPKLOlehDosenWaliRequest $request, $nim)
     {
         $mahasiswa = Mahasiswa::where('nim', $nim)->first();
         if (!$mahasiswa) {
@@ -93,21 +115,17 @@ class DataPKLOlehMahasiswaController extends Controller
         $data = $request->validated();
 
         $pkl->status = $data['status'];
-        $pkl->sudah_disetujui = 0;
+        $pkl->sudah_disetujui = 1;
 
         if ($data['status'] == 'Lulus') {
             $pkl->nilai = $data['nilai'];
-
-            $namaFileBaru = 'pkl_' . str_replace(' ', '_', strtolower($mahasiswa->nama)) . '.pdf';
-            $pkl->nama_file = $request->file('nama_file')->storeAs('progres-pkl', $namaFileBaru);
         } else {
             $pkl->nilai = NULL;
-            $pkl->nama_file = NULL;
         }
 
         $pkl->save();
 
-        return redirect('/mahasiswa/progres-pkl/' . $nim);
+        return redirect('/dosen-wali/progres-pkl/' . $nim);
     }
 
     /**

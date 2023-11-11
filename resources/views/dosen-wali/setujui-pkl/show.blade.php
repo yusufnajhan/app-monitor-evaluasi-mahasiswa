@@ -7,7 +7,7 @@
             <div class="container">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0"></h1>
+                        <h1 class="m-0"> </h1>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
@@ -18,75 +18,71 @@
                     </div><!-- /.col -->
                 </div><!-- /.row -->
 
-                <h1 class="m-0">Detail skripsi</h1>
+                <h1 class="m-0">Detail PKL</h1>
                 <br>
 
                 <!-- general form elements -->
                 <div class="card card-primary">
                     <div class="card-header">
-                        <h3 class="card-title">skripsi</h3>
+                        <h3 class="card-title">PKL</h3>
                     </div>
                     <!-- /.card-header -->
                     <!-- form start -->
-                    @if ($semester < 7)
+                    @if ($semester < 6)
                         <div class="card-body">
-                            <h1>Anda belum memasuki masa skripsi</h1>
+                            <h1>Mahasiswa belum memasuki masa PKL</h1>
                         </div>
                         <div class="card-footer">
-                            <a href="/dashboard">Back</a>
+                            <a href="/dosen-wali/detail-mahasiswa/{{ $nim }}">Back</a>
                         </div>
                     @else
-                        @if (!isset($skripsi->sudah_disetujui))
+                        @if (!isset($pkl->sudah_disetujui))
                             <div class="card-body">
-                                <h1>Isi progres skripsi di
-                                    <a href="/mahasiswa/progres-skripsi/{{ $nim }}/edit">
-                                        sini
-                                    </a>
+                                <h1>Progres PKL belum diisi oleh mahasiswa
                                 </h1>
                             </div>
                             <div class="card-footer">
-                                <a href="/dashboard">Back</a>
+                                <a href="/dosen-wali/detail-mahasiswa/{{ $nim }}">Back</a>
                             </div>
                         @else
-                            <form action="" method="" enctype="multipart/form-data">
+                            <form action="/dosen-wali/progres-pkl/{{ $nim }}" method="POST"
+                                enctype="multipart/form-data">
+                                @csrf
+                                @method('PUT')
                                 <div class="card-body">
                                     <div class="form-group">
                                         <label for="status_persetujuan">Status Persetujuan</label>
                                         <input type="text" name="status_persetujuan" class="form-control"
-                                            id="status_persetujuan" value="{{ $skripsi->statusPersetujuan() }}" disabled>
+                                            id="status_persetujuan" value="{{ $pkl->statusPersetujuan() }}" disabled>
                                     </div>
                                     <div class="form-group">
                                         <label for="status">Status</label>
                                         <input type="text" name="status" class="form-control" id="status"
-                                            value="{{ $skripsi->status }}" disabled>
+                                            value="{{ $pkl->status }}" disabled>
                                     </div>
-                                    @if ($skripsi->status == 'Lulus')
+                                    @if ($pkl->status == 'Lulus')
                                         <div class="form-group">
                                             <label for="nilai">Nilai</label>
                                             <input type="text" name="nilai" class="form-control" id="nilai"
-                                                value="{{ $skripsi->nilai }}" disabled>
+                                                value="{{ $pkl->nilai }}" disabled>
                                         </div>
                                         <div class="form-group">
-                                            <label for="tanggal_sidang">Tanggal Sidang</label>
-                                            <input type="text" name="tanggal_sidang" class="form-control"
-                                                id="tanggal_sidang" value="{{ $skripsi->tanggal_sidang }}" disabled>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="semester_tempuh">Semester Tempuh</label>
-                                            <input type="text" name="semester_tempuh" class="form-control"
-                                                id="semester_tempuh" value="{{ $skripsi->semester_tempuh }}" disabled>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="nama_file">Scan Berita Acara skripsi </label>
-                                            <embed src="/storage/{{ $skripsi->nama_file }}" width="100%" height="600"
+                                            <label for="nama_file">Scan Berita Acara PKL </label>
+                                            <embed src="/storage/{{ $pkl->nama_file }}" width="100%" height="600"
                                                 type="application/pdf">
                                         </div>
                                     @endif
                                 </div>
                                 <!-- /.card-body -->
                                 <div class="card-footer">
+                                    @if ($pkl->sudah_disetujui == 0)
+                                        <button type="submit" name="sudah_disetujui" value="1">Setujui</button> |
+                                        <a href="/dosen-wali/progres-pkl/{{ $nim }}/edit">Edit</a> |
+                                    @else
+                                        <button type="submit" name="sudah_disetujui" value="0">Batalkan
+                                            Persetujuan</button>
+                                    @endif
                                     <a href="/dashboard">Back</a>
-                                    <a href="/mahasiswa/progres-skripsi/{{ $nim }}/edit">Edit</a>
                                 </div>
                             </form>
                         @endif
@@ -94,7 +90,13 @@
                 </div>
                 <!-- /.card -->
             </div><!-- /.row -->
+
+
         </div><!-- /.container-fluid -->
+        <br>
+        <a href="/dashboard" class="">
+            Back
+        </a>
     </div>
     </div>
 @endsection

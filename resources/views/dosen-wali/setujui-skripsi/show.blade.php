@@ -7,7 +7,7 @@
             <div class="container">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0"></h1>
+                        <h1 class="m-0"> </h1>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
@@ -30,25 +30,25 @@
                     <!-- form start -->
                     @if ($semester < 7)
                         <div class="card-body">
-                            <h1>Anda belum memasuki masa skripsi</h1>
+                            <h1>Mahasiswa belum memasuki masa skripsi</h1>
                         </div>
                         <div class="card-footer">
-                            <a href="/dashboard">Back</a>
+                            <a href="/dosen-wali/detail-mahasiswa/{{ $nim }}">Back</a>
                         </div>
                     @else
                         @if (!isset($skripsi->sudah_disetujui))
                             <div class="card-body">
-                                <h1>Isi progres skripsi di
-                                    <a href="/mahasiswa/progres-skripsi/{{ $nim }}/edit">
-                                        sini
-                                    </a>
+                                <h1>Progres skripsi belum diisi oleh mahasiswa
                                 </h1>
                             </div>
                             <div class="card-footer">
-                                <a href="/dashboard">Back</a>
+                                <a href="/dosen-wali/detail-mahasiswa/{{ $nim }}">Back</a>
                             </div>
                         @else
-                            <form action="" method="" enctype="multipart/form-data">
+                            <form action="/dosen-wali/progres-skripsi/{{ $nim }}" method="POST"
+                                enctype="multipart/form-data">
+                                @csrf
+                                @method('PUT')
                                 <div class="card-body">
                                     <div class="form-group">
                                         <label for="status_persetujuan">Status Persetujuan</label>
@@ -85,8 +85,14 @@
                                 </div>
                                 <!-- /.card-body -->
                                 <div class="card-footer">
+                                    @if ($skripsi->sudah_disetujui == 0)
+                                        <button type="submit" name="sudah_disetujui" value="1">Setujui</button> |
+                                        <a href="/dosen-wali/progres-skripsi/{{ $nim }}/edit">Edit</a> |
+                                    @else
+                                        <button type="submit" name="sudah_disetujui" value="0">Batalkan
+                                            Persetujuan</button>
+                                    @endif
                                     <a href="/dashboard">Back</a>
-                                    <a href="/mahasiswa/progres-skripsi/{{ $nim }}/edit">Edit</a>
                                 </div>
                             </form>
                         @endif
@@ -94,7 +100,13 @@
                 </div>
                 <!-- /.card -->
             </div><!-- /.row -->
+
+
         </div><!-- /.container-fluid -->
+        <br>
+        <a href="/dashboard" class="">
+            Back
+        </a>
     </div>
     </div>
 @endsection
