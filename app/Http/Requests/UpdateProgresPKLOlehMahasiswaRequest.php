@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateProgresPKLOlehMahasiswaRequest extends FormRequest
@@ -21,19 +22,38 @@ class UpdateProgresPKLOlehMahasiswaRequest extends FormRequest
      */
     public function rules(): array
     {
+        $semesterMaks = auth()->user()->mahasiswa->hitungSemester();
+
         return [
-            'status' => 'required',
-            'nilai' => $this->input('status') === 'Lulus' ? 'required' : '',
-            'nama_file' => $this->input('status') === 'Lulus' ? 'required|file|mimes:pdf' : '',
+            'semester' => [
+                'required',
+                'gte:6',
+                function ($attribute, $value, $fail) use ($semesterMaks) {
+                    if ($value > $semesterMaks) {
+                        $fail('Semester harus lebih kecil atau sama dengan semester saat ini');
+                    }
+                }
+            ],
+            'nilai' => 'required|gte:0|lte:100',
+            'nama_file' => 'required|file|mimes:pdf'
+        ];
+    }
+
+    public function attributes()
+    {
+        return [
+            'semester' => 'Semester',
+            'nilai' => 'Nilai',
+            'nama_file' => 'File'
         ];
     }
 
     public function messages()
     {
         return [
-            'status.required' => 'Status pengambilan harus diisi',
-            'nilai.required' => 'Nilai harus diisikan jika sudah lulus',
-            'nama_file.required' => 'File harus diisikan jika sudah lulus',
+            'required' => ':Attribute harus diisi',
+            'gte' => ':Attribute harus lebih besar atau sama dengan :value',
+            'lte' => ':Attribute harus lebih kecil atau sama dengan :value',
             'file' => ':Attribute harus berupa file',
             'mimes' => ':Attribute harus bertipe PDF (berakhiran .pdf)'
         ];

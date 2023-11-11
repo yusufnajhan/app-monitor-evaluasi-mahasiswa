@@ -56,22 +56,20 @@
                                             id="status_persetujuan" value="{{ $pkl->statusPersetujuan() }}" disabled>
                                     </div>
                                     <div class="form-group">
-                                        <label for="status">Status</label>
-                                        <input type="text" name="status" class="form-control" id="status"
-                                            value="{{ $pkl->status }}" disabled>
+                                        <label for="semester">Semester</label>
+                                        <input type="text" name="semester" class="form-control" id="semester"
+                                            value="{{ $pkl->semester }}" disabled>
                                     </div>
-                                    @if ($pkl->status == 'Lulus')
-                                        <div class="form-group">
-                                            <label for="nilai">Nilai</label>
-                                            <input type="text" name="nilai" class="form-control" id="nilai"
-                                                value="{{ $pkl->nilai }}" disabled>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="nama_file">Scan Berita Acara PKL </label>
-                                            <embed src="/storage/{{ $pkl->nama_file }}" width="100%" height="600"
-                                                type="application/pdf">
-                                        </div>
-                                    @endif
+                                    <div class="form-group">
+                                        <label for="nilai">Nilai</label>
+                                        <input type="text" name="nilai" class="form-control" id="nilai"
+                                            value="{{ $pkl->nilai }}" disabled>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="nama_file">Scan Berita Acara PKL </label>
+                                        <embed src="/storage/{{ $pkl->nama_file }}" width="100%" height="600"
+                                            type="application/pdf">
+                                    </div>
                                 </div>
                                 <!-- /.card-body -->
                                 <div class="card-footer">
