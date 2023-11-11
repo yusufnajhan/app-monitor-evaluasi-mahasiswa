@@ -56,7 +56,7 @@ class MahasiswaFactory extends Factory
             'kota' => $kodeKota,
             'provinsi' => $kodeProvinsi,
             'user_id' => $user->id,
-            'dosen_wali_id' => $this->faker->numberBetween([1, 5])
+            'dosen_wali_id' => $this->faker->numberBetween(1, 5)
         ];
     }
 }

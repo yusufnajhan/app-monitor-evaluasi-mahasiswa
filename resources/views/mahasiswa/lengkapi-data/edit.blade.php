@@ -90,7 +90,7 @@
                             <div class="form-group">
                                 <label for="no_telepon">Nomor Telepon</label>
                                 <input type="text" name="no_telepon" class="form-control" id="no_telepon"
-                                    value="{{ old('no_telepon') }}">
+                                    value="{{ old('no_telepon') }}" maxlength="13">
                             </div>
                             <div class="form-group">
                                 <label for="provinsi">Provinsi</label>
