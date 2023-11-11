@@ -98,7 +98,9 @@
                                     <option value="" selected disabled>-- Pilih Provinsi --
                                     </option>
                                     @foreach ($provinsi as $itemProvinsi)
-                                        <option value="{{ $itemProvinsi->kode_prov }}">{{ $itemProvinsi->nama_prov }}
+                                        <option value="{{ $itemProvinsi->kode_prov }}"
+                                            {{ old('provinsi') == $itemProvinsi->kode_prov ? 'selected' : '' }}>
+                                            {{ $itemProvinsi->nama_prov }}
                                         </option>
                                     @endforeach
                                 </select>
