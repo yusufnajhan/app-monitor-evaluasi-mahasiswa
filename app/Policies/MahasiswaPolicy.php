@@ -29,7 +29,7 @@ class MahasiswaPolicy
      */
     public function create(User $user): bool
     {
-        return $user->hasRole('operator');
+        return $user->role == 'operator';
     }
 
     /**
