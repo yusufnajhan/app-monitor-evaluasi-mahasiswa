@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\KabupatenController;
 use App\Http\Controllers\DataIRSOlehMahasiswaController;
 use App\Http\Controllers\DataKHSOlehMahasiswaController;
 use App\Http\Controllers\DataPKLOlehMahasiswaController;
@@ -46,6 +47,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::middleware(['checkrole:mahasiswa'])->group(function () {
         // Mahasiswa
+        Route::get('/kabupaten', [KabupatenController::class, 'index']);
         Route::get('/isi-data/{nim}', [LengkapiDataMahasiswaOlehMahasiswa::class, 'edit'])->name('isi-data');
         Route::put('/isi-data/{nim}', [LengkapiDataMahasiswaOlehMahasiswa::class, 'update']);
 

@@ -6,6 +6,7 @@ use App\Models\Mahasiswa;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\UpdateDataMahasiswaOlehMahasiswaRequest;
+use App\Models\Provinsi;
 use Illuminate\Support\Facades\Auth;
 
 class LengkapiDataMahasiswaOlehMahasiswa extends Controller
@@ -48,8 +49,9 @@ class LengkapiDataMahasiswaOlehMahasiswa extends Controller
     public function edit($nim)
     {
         $mahasiswa = Mahasiswa::where('nim', $nim)->first();
+        $provinsi = Provinsi::all();
 
-        return view('mahasiswa.lengkapi-data.edit', compact('mahasiswa'));
+        return view('mahasiswa.lengkapi-data.edit', compact('mahasiswa', 'provinsi'));
     }
 
     /**
@@ -66,7 +68,7 @@ class LengkapiDataMahasiswaOlehMahasiswa extends Controller
             $mahasiswa->alamat = $request->input('alamat');
             $mahasiswa->kota = $request->input('kota');
             $mahasiswa->provinsi = $request->input('provinsi');
-            
+
             // $userMahasiswa->email = $request->input('email');
             $userMahasiswa->password = bcrypt($request->input('password'));
 
