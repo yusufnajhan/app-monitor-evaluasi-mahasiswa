@@ -34,8 +34,8 @@ class UpdateProgresPKLOlehMahasiswaRequest extends FormRequest
             'status.required' => 'Status pengambilan harus diisi',
             'nilai.required' => 'Nilai harus diisikan jika sudah lulus',
             'nama_file.required' => 'File harus diisikan jika sudah lulus',
-            'file' => 'File harus merupakan file',
-            'mimes' => 'File harus bertipe .pdf'
+            'file' => ':Attribute harus berupa file',
+            'mimes' => ':Attribute harus bertipe PDF (berakhiran .pdf)'
         ];
     }
 }

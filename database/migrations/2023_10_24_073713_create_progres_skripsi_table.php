@@ -13,12 +13,10 @@ return new class extends Migration
     {
         Schema::create('progres_skripsi', function (Blueprint $table) {
             $table->id();
-            // Belum ambil, sedang ambil, lulus
-            $table->string('status')->nullable();
-            $table->char('nilai')->nullable();
+            $table->integer('semester')->nullable();
+            $table->integer('nilai')->nullable();
             $table->string('nama_file')->nullable();
-            $table->timestamp('tanggal_sidang')->nullable();
-            $table->integer('semester_tempuh')->nullable();
+            $table->date('tanggal_sidang')->nullable();
             $table->boolean('sudah_disetujui')->nullable();
             $table->unsignedBigInteger('mahasiswa_id');
             $table->timestamps();

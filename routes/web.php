@@ -81,28 +81,34 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/daftar-mahasiswa', [DataMahasiswaOlehDosenWaliController::class, 'index']);
             Route::get('/detail-mahasiswa/{nim}', [DataMahasiswaOlehDosenWaliController::class, 'show']);
 
+            // Lihat IRS yang belum disetujui
+            Route::get('/setujui-irs', [SetujuiIRSOlehDosenWaliController::class, 'indexMahasiswa']);
+            Route::get('/setujui-khs', [SetujuiKHSOlehDosenWaliController::class, 'indexMahasiswa']);
+            Route::get('/setujui-pkl', [SetujuiPKLOlehDosenWaliController::class, 'indexMahasiswa']);
+            Route::get('/setujui-skripsi', [SetujuiSkripsiOlehDosenWaliController::class, 'indexMahasiswa']);
+
             // Lihat IRS per mahasiswa
-            Route::get('/irs/{nim}', [SetujuiIRSOlehDosenWaliController::class, 'index']);
-            Route::get('/irs/{nim}/{semester}/setujui', [SetujuiIRSOlehDosenWaliController::class, 'edit']);
+            Route::get('/irs/{nim}', [SetujuiIRSOlehDosenWaliController::class, 'indexIRS']);
+            Route::get('/irs/{nim}/{semester}/setujui', [SetujuiIRSOlehDosenWaliController::class, 'confirmSetujui']);
             Route::get('/irs/{nim}/{semester}/edit', [SetujuiIRSOlehDosenWaliController::class, 'editDanSetujui']);
             Route::put('/irs/{nim}/{semester}/update-dan-setujui', [SetujuiIRSOlehDosenWaliController::class, 'updateDanSetujui']);
             Route::put('/irs/{nim}/{semester}', [SetujuiIRSOlehDosenWaliController::class, 'setujui']);
 
             // Lihat KHS per mahasiswa
             Route::get('/khs/{nim}', [SetujuiKHSOlehDosenWaliController::class, 'index']);
-            Route::get('/khs/{nim}/{semester}/setujui', [SetujuiKHSOlehDosenWaliController::class, 'edit']);
+            Route::get('/khs/{nim}/{semester}/setujui', [SetujuiKHSOlehDosenWaliController::class, 'confirmSetujui']);
             Route::get('/khs/{nim}/{semester}/edit', [SetujuiKHSOlehDosenWaliController::class, 'editDanSetujui']);
             Route::put('/khs/{nim}/{semester}/update-dan-setujui', [SetujuiKHSOlehDosenWaliController::class, 'updateDanSetujui']);
             Route::put('/khs/{nim}/{semester}', [SetujuiKHSOlehDosenWaliController::class, 'setujui']);
 
             // Lihat PKL mahasiswa
-            Route::get('/progres-pkl/{nim}', [SetujuiPKLOlehDosenWaliController::class, 'show']);
+            Route::get('/progres-pkl/{nim}/setujui', [SetujuiPKLOlehDosenWaliController::class, 'confirmSetujui']);
             Route::get('/progres-pkl/{nim}/edit', [SetujuiPKLOlehDosenWaliController::class, 'editDanSetujui']);
             Route::put('/progres-pkl/{nim}/update-dan-setujui', [SetujuiPKLOlehDosenWaliController::class, 'updateDanSetujui']);
             Route::put('/progres-pkl/{nim}', [SetujuiPKLOlehDosenWaliController::class, 'setujui']);
 
             // Lihat Skripsi mahasiswa
-            Route::get('/progres-skripsi/{nim}', [SetujuiSkripsiOlehDosenWaliController::class, 'show']);
+            Route::get('/progres-skripsi/{nim}/setujui', [SetujuiSkripsiOlehDosenWaliController::class, 'confirmSetujui']);
             Route::get('/progres-skripsi/{nim}/edit', [SetujuiSkripsiOlehDosenWaliController::class, 'editDanSetujui']);
             Route::put('/progres-skripsi/{nim}/update-dan-setujui', [SetujuiSkripsiOlehDosenWaliController::class, 'updateDanSetujui']);
             Route::put('/progres-skripsi/{nim}', [SetujuiSkripsiOlehDosenWaliController::class, 'setujui']);

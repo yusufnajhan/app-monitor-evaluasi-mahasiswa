@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Mahasiswa;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Models\ProgresPraktikKerjaLapangan;
 use App\Http\Requests\UpdateProgresPKLOlehDosenWaliRequest;
 
@@ -15,6 +16,36 @@ class SetujuiPKLOlehDosenWaliController extends Controller
     public function index()
     {
         //
+    }
+
+    public function indexMahasiswa()
+    {
+        // Mendapatkan ID dosen wali yang sedang login
+        $idDosenWali = Auth::user()->dosenWali->id;
+
+        // $mahasiswa = Mahasiswa::where('dosen_wali_id', $idDosenWali)
+        //     ->whereHas('isianRencanaSemester', function ($query) {
+        //         $query->where(function ($q) {
+        //             $q->whereNull('sudah_disetujui')
+        //                 ->orWhere('sudah_disetujui', '=', 0);
+        //         });
+        //     })->get();
+        // $mahasiswa = Mahasiswa::where('dosen_wali_id', $idDosenWali)
+        //     ->whereHas('isianRencanaSemester', function ($query) {
+        //         $query->where(function ($q) {
+        //             $q->where('sudah_disetujui', '=', 0);
+        //         });
+        //     })->get();
+        $pkl = ProgresPraktikKerjaLapangan::where(function ($query) {
+            $query->whereHas('mahasiswa', function ($query) {
+                $query->whereHas('dosenWali', function ($query) {
+                    $query->where('id', Auth::user()->dosenWali->id);
+                });
+            });
+        })->where('sudah_disetujui', 0)
+            ->get();
+
+        return view('dosen-wali.setujui-pkl.index-mahasiswa', compact('pkl'));
     }
 
     /**
@@ -36,7 +67,7 @@ class SetujuiPKLOlehDosenWaliController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show($nim)
+    public function confirmSetujui($nim)
     {
         $mahasiswa = Mahasiswa::where('nim', $nim)->select()->first();
         if (!$mahasiswa) {
@@ -50,27 +81,27 @@ class SetujuiPKLOlehDosenWaliController extends Controller
             abort(404);
         }
 
-        return view('dosen-wali.setujui-pkl.show', compact('pkl', 'nim', 'semester'));
+        return view('dosen-wali.setujui-pkl.setujui', compact('pkl', 'nim', 'semester'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function editDanSetujui($nim)
-    {
-        $mahasiswa = Mahasiswa::where('nim', $nim)->first();
-        if (!$mahasiswa) {
-            abort(404);
-        }
+    // public function editDanSetujui($nim)
+    // {
+    //     $mahasiswa = Mahasiswa::where('nim', $nim)->first();
+    //     if (!$mahasiswa) {
+    //         abort(404);
+    //     }
 
-        $pkl = ProgresPraktikKerjaLapangan::where('mahasiswa_id', $mahasiswa->id)
-            ->first();
-        if (!$pkl) {
-            abort(404);
-        }
+    //     $pkl = ProgresPraktikKerjaLapangan::where('mahasiswa_id', $mahasiswa->id)
+    //         ->first();
+    //     if (!$pkl) {
+    //         abort(404);
+    //     }
 
-        return view('dosen-wali.setujui-pkl.edit', compact('pkl', 'nim'));
-    }
+    //     return view('dosen-wali.setujui-pkl.edit', compact('pkl', 'nim'));
+    // }
 
     public function setujui(Request $request, $nim)
     {
@@ -92,7 +123,7 @@ class SetujuiPKLOlehDosenWaliController extends Controller
         }
         $pkl->save();
 
-        return redirect('/dosen-wali/progres-pkl/' . $nim);
+        return redirect('/dosen-wali/setujui-pkl/');
     }
 
 

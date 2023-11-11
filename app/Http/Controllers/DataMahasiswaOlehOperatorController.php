@@ -59,7 +59,7 @@ class DataMahasiswaOlehOperatorController extends Controller
             'nama' => $data['nama'],
             'nim' => $data['nim'],
             'angkatan' => $data['angkatan'],
-            'status' => $data['status'],
+            'status' => 'Aktif',
             'user_id' => $user->id,
             'dosen_wali_id' => $data['dosen_wali']
         ]);
@@ -67,12 +67,10 @@ class DataMahasiswaOlehOperatorController extends Controller
         $semester = $mahasiswa->hitungSemester();
 
         ProgresPraktikKerjaLapangan::create([
-            'status' => 'Belum Ambil',
             'mahasiswa_id' => $mahasiswa->id
         ]);
 
         ProgresSkripsi::create([
-            'status' => 'Belum Ambil',
             'mahasiswa_id' => $mahasiswa->id
         ]);
 
