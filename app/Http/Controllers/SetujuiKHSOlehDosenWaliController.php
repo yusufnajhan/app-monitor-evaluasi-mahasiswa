@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Mahasiswa;
 use Illuminate\Http\Request;
 use App\Models\KartuHasilStudi;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\UpdateKHSOlehDosenWaliRequest;
 
 class SetujuiKHSOlehDosenWaliController extends Controller
@@ -12,27 +13,35 @@ class SetujuiKHSOlehDosenWaliController extends Controller
     /**
      * Display a listing of the resource.
      */
-    // public function indexMahasiswa()
-    // {
-    //     // Mendapatkan ID dosen wali yang sedang login
-    //     $idDosenWali = Auth::user()->dosenWali->id;
+    public function indexMahasiswa()
+    {
+        // Mendapatkan ID dosen wali yang sedang login
+        $idDosenWali = Auth::user()->dosenWali->id;
 
-    //     // $mahasiswa = Mahasiswa::where('dosen_wali_id', $idDosenWali)
-    //     //     ->whereHas('isianRencanaSemester', function ($query) {
-    //     //         $query->where(function ($q) {
-    //     //             $q->whereNull('sudah_disetujui')
-    //     //                 ->orWhere('sudah_disetujui', '=', 0);
-    //     //         });
-    //     //     })->get();
-    //     $mahasiswa = Mahasiswa::where('dosen_wali_id', $idDosenWali)
-    //         ->whereHas('isianRencanaSemester', function ($query) {
-    //             $query->where(function ($q) {
-    //                 $q->where('sudah_disetujui', '=', 0);
-    //             });
-    //         })->get();
+        // $mahasiswa = Mahasiswa::where('dosen_wali_id', $idDosenWali)
+        //     ->whereHas('isianRencanaSemester', function ($query) {
+        //         $query->where(function ($q) {
+        //             $q->whereNull('sudah_disetujui')
+        //                 ->orWhere('sudah_disetujui', '=', 0);
+        //         });
+        //     })->get();
+        // $mahasiswa = Mahasiswa::where('dosen_wali_id', $idDosenWali)
+        //     ->whereHas('isianRencanaSemester', function ($query) {
+        //         $query->where(function ($q) {
+        //             $q->where('sudah_disetujui', '=', 0);
+        //         });
+        //     })->get();
+        $khs = KartuHasilStudi::where(function ($query) {
+            $query->whereHas('mahasiswa', function ($query) {
+                $query->whereHas('dosenWali', function ($query) {
+                    $query->where('id', Auth::user()->dosenWali->id);
+                });
+            });
+        })->where('sudah_disetujui', 0)
+            ->get();
 
-    //     return view('dosen-wali.setujui-khs.index-mahasiswa', compact('mahasiswa'));
-    // }
+        return view('dosen-wali.setujui-khs.index-mahasiswa', compact('khs'));
+    }
 
     public function index($nim)
     {
@@ -76,7 +85,7 @@ class SetujuiKHSOlehDosenWaliController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit($nim, $semester)
+    public function confirmSetujui($nim, $semester)
     {
         $mahasiswa = Mahasiswa::where('nim', $nim)->first();
         if (!$mahasiswa) {
@@ -90,25 +99,25 @@ class SetujuiKHSOlehDosenWaliController extends Controller
             abort(404);
         }
 
-        return view('dosen-wali.setujui-khs.edit', compact('mahasiswa', 'khs'));
+        return view('dosen-wali.setujui-khs.setujui', compact('mahasiswa', 'khs'));
     }
 
-    public function editDanSetujui($nim, $semester)
-    {
-        $mahasiswa = Mahasiswa::where('nim', $nim)->first();
-        if (!$mahasiswa) {
-            abort(404);
-        }
+    // public function editDanSetujui($nim, $semester)
+    // {
+    //     $mahasiswa = Mahasiswa::where('nim', $nim)->first();
+    //     if (!$mahasiswa) {
+    //         abort(404);
+    //     }
 
-        $khs = KartuHasilStudi::where('mahasiswa_id', $mahasiswa->id)
-            ->where('semester', $semester)
-            ->first();
-        if (!$khs) {
-            abort(404);
-        }
+    //     $khs = KartuHasilStudi::where('mahasiswa_id', $mahasiswa->id)
+    //         ->where('semester', $semester)
+    //         ->first();
+    //     if (!$khs) {
+    //         abort(404);
+    //     }
 
-        return view('dosen-wali.setujui-khs.edit-dan-setujui', compact('mahasiswa', 'khs'));
-    }
+    //     return view('dosen-wali.setujui-khs.edit-dan-setujui', compact('mahasiswa', 'khs'));
+    // }
 
     public function setujui(Request $request, $nim, $semester)
     {
@@ -132,35 +141,35 @@ class SetujuiKHSOlehDosenWaliController extends Controller
         }
 
         $khs->save();
-        return redirect('dosen-wali/khs/' . $nim);
+        return redirect('/dosen-wali/setujui-khs/');
     }
 
-    public function updateDanSetujui(UpdateKHSOlehDosenWaliRequest $request, $nim, $semester)
-    {
+    // public function updateDanSetujui(UpdateKHSOlehDosenWaliRequest $request, $nim, $semester)
+    // {
 
-        $mahasiswa = Mahasiswa::where('nim', $nim)->first();
-        if (!$mahasiswa) {
-            abort(404);
-        }
+    //     $mahasiswa = Mahasiswa::where('nim', $nim)->first();
+    //     if (!$mahasiswa) {
+    //         abort(404);
+    //     }
 
-        $khs = KartuHasilStudi::where('mahasiswa_id', $mahasiswa->id)
-            ->where('semester', $semester)
-            ->first();
-        if (!$khs) {
-            abort(404);
-        }
+    //     $khs = KartuHasilStudi::where('mahasiswa_id', $mahasiswa->id)
+    //         ->where('semester', $semester)
+    //         ->first();
+    //     if (!$khs) {
+    //         abort(404);
+    //     }
 
-        $data = $request->validated();
+    //     $data = $request->validated();
 
-        $khs->sks_semester = $data['sks_semester'];
-        $khs->sks_kumulatif = $data['sks_kumulatif'];
-        $khs->ip_semester = $data['ip_semester'];
-        $khs->ip_kumulatif = $data['ip_kumulatif'];
-        $khs->sudah_disetujui = 1;
+    //     $khs->sks_semester = $data['sks_semester'];
+    //     $khs->sks_kumulatif = $data['sks_kumulatif'];
+    //     $khs->ip_semester = $data['ip_semester'];
+    //     $khs->ip_kumulatif = $data['ip_kumulatif'];
+    //     $khs->sudah_disetujui = 1;
 
-        $khs->save();
-        return redirect('dosen-wali/khs/' . $nim);
-    }
+    //     $khs->save();
+    //     return redirect('dosen-wali/khs/' . $nim);
+    // }
     /**
      * Update the specified resource in storage.
      */

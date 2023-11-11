@@ -29,8 +29,13 @@
                                 </div><!-- /.card -->
                                 <div class="card card-primary card-outline">
                                     <div class="card-body">
-                                        <h5 class="text-center"><a href="dosen-wali/setujui-irs">Setujui IRS yang belum
-                                                disetujui</a>
+                                        <h5 class="text-center"><a href="dosen-wali/setujui-irs">Setujui IRS</a>
+                                        </h5>
+                                    </div>
+                                </div><!-- /.card -->
+                                <div class="card card-primary card-outline">
+                                    <div class="card-body">
+                                        <h5 class="text-center"><a href="dosen-wali/setujui-khs">Setujui KHS</a>
                                         </h5>
                                     </div>
                                 </div><!-- /.card -->

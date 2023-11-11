@@ -83,6 +83,7 @@ Route::middleware(['auth'])->group(function () {
 
             // Lihat IRS yang belum disetujui
             Route::get('/setujui-irs', [SetujuiIRSOlehDosenWaliController::class, 'indexMahasiswa']);
+            Route::get('/setujui-khs', [SetujuiKHSOlehDosenWaliController::class, 'indexMahasiswa']);
 
             // Lihat IRS per mahasiswa
             Route::get('/irs/{nim}', [SetujuiIRSOlehDosenWaliController::class, 'indexIRS']);
@@ -93,7 +94,7 @@ Route::middleware(['auth'])->group(function () {
 
             // Lihat KHS per mahasiswa
             Route::get('/khs/{nim}', [SetujuiKHSOlehDosenWaliController::class, 'index']);
-            Route::get('/khs/{nim}/{semester}/setujui', [SetujuiKHSOlehDosenWaliController::class, 'edit']);
+            Route::get('/khs/{nim}/{semester}/setujui', [SetujuiKHSOlehDosenWaliController::class, 'confirmSetujui']);
             Route::get('/khs/{nim}/{semester}/edit', [SetujuiKHSOlehDosenWaliController::class, 'editDanSetujui']);
             Route::put('/khs/{nim}/{semester}/update-dan-setujui', [SetujuiKHSOlehDosenWaliController::class, 'updateDanSetujui']);
             Route::put('/khs/{nim}/{semester}', [SetujuiKHSOlehDosenWaliController::class, 'setujui']);
