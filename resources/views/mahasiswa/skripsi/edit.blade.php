@@ -44,36 +44,23 @@
                         @method('PUT')
                         <div class="card-body">
                             <div class="form-group">
-                                <label for="status">Status</label>
-                                <select name="status" id="status">
-                                    <option value="" selected disabled>-- Pilih Status --</option>
-                                    <option value="Belum Ambil"
-                                        {{ old('status', $skripsi->status) == 'Belum Ambil' ? 'selected' : '' }}>Belum
-                                        Ambil</option>
-                                    <option value="Sedang Ambil"
-                                        {{ old('status', $skripsi->status) == 'Sedang Ambil' ? 'selected' : '' }}>
-                                        Sedang Ambil</option>
-                                    <option value="Lulus"
-                                        {{ old('status', $skripsi->status) == 'Lulus' ? 'selected' : '' }}>
-                                        Lulus</option>
-                                </select>
+                                <label for="semester">Semester</label>
+                                <input type="number" name="semester" class="form-control" id="semester"
+                                    value="{{ old('semester', $skripsi->semester) }}" min="7" max="14">
                             </div>
                             <div class="form-group">
                                 <label for="nilai">Nilai</label>
-                                <input type="text" name="nilai" class="form-control" id="nilai"
-                                    value="{{ old('nilai', $skripsi->nilai) }}"
-                                    {{ $skripsi->status == 'Lulus' ? '' : 'disabled' }}>
+                                <input type="number" name="nilai" class="form-control" id="nilai"
+                                    value="{{ old('nilai', $skripsi->nilai) }}" min="0" max="100">
                             </div>
                             <div class="form-group">
                                 <label for="tanggal_sidang">Tanggal Sidang</label>
                                 <input type="date" name="tanggal_sidang" id="tanggal_sidang" class="form-control"
-                                    value="{{ old('tanggal_sidang', $skripsi->tanggal_sidang) }}"
-                                    {{ $skripsi->status == 'Lulus' ? '' : 'disabled' }}>
+                                    value="{{ old('tanggal_sidang', $skripsi->tanggal_sidang) }}">
                             </div>
                             <div class="form-group">
                                 <label for="nama_file">Scan Sidang Skripsi </label>
-                                <input type="file" name="nama_file" class="form-control" id="nama_file"
-                                    {{ $skripsi->status == 'Lulus' ? '' : 'disabled' }}>
+                                <input type="file" name="nama_file" class="form-control" id="nama_file">
                             </div>
                         </div>
                         <!-- /.card-body -->

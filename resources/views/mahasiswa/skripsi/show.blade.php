@@ -56,32 +56,25 @@
                                             id="status_persetujuan" value="{{ $skripsi->statusPersetujuan() }}" disabled>
                                     </div>
                                     <div class="form-group">
-                                        <label for="status">Status</label>
-                                        <input type="text" name="status" class="form-control" id="status"
-                                            value="{{ $skripsi->status }}" disabled>
+                                        <label for="semester">Semester</label>
+                                        <input type="text" name="semester" class="form-control" id="semester"
+                                            value="{{ $skripsi->semester }}" disabled>
                                     </div>
-                                    @if ($skripsi->status == 'Lulus')
-                                        <div class="form-group">
-                                            <label for="nilai">Nilai</label>
-                                            <input type="text" name="nilai" class="form-control" id="nilai"
-                                                value="{{ $skripsi->nilai }}" disabled>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="tanggal_sidang">Tanggal Sidang</label>
-                                            <input type="text" name="tanggal_sidang" class="form-control"
-                                                id="tanggal_sidang" value="{{ $skripsi->tanggal_sidang }}" disabled>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="semester_tempuh">Semester Tempuh</label>
-                                            <input type="text" name="semester_tempuh" class="form-control"
-                                                id="semester_tempuh" value="{{ $skripsi->semester_tempuh }}" disabled>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="nama_file">Scan Berita Acara skripsi </label>
-                                            <embed src="/storage/{{ $skripsi->nama_file }}" width="100%" height="600"
-                                                type="application/pdf">
-                                        </div>
-                                    @endif
+                                    <div class="form-group">
+                                        <label for="nilai">Nilai</label>
+                                        <input type="text" name="nilai" class="form-control" id="nilai"
+                                            value="{{ $skripsi->nilai }}" disabled>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="tanggal_sidang">Tanggal Sidang</label>
+                                        <input type="text" name="tanggal_sidang" class="form-control" id="tanggal_sidang"
+                                            value="{{ $skripsi->tanggal_sidang }}" disabled>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="nama_file">Scan Berita Acara skripsi </label>
+                                        <embed src="/storage/{{ $skripsi->nama_file }}" width="100%" height="600"
+                                            type="application/pdf">
+                                    </div>
                                 </div>
                                 <!-- /.card-body -->
                                 <div class="card-footer">
