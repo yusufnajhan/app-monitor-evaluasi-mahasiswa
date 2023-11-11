@@ -3,6 +3,8 @@
 namespace Database\Factories;
 
 use App\Models\User;
+use App\Models\Provinsi;
+use App\Models\Kabupaten;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -28,6 +30,21 @@ class MahasiswaFactory extends Factory
             'role' => 'mahasiswa'
         ]);
 
+        $kota = $this->faker->city();
+        $provinsi = $this->faker->state();
+
+        // Dapatkan kode kota dan provinsi jika sesuai dari database
+        $kodeKota = Kabupaten::where('nama_kab', 'like', '%' . $kota . '%')->value('kode_kab');
+        $kodeProvinsi = Provinsi::where('nama_prov', 'like', '%' . $provinsi . '%')->value('kode_prov');
+
+        // Jika tidak sesuai, gunakan nilai default
+        if (!$kodeKota) {
+            $kodeKota = '9999';
+        }
+        if (!$kodeProvinsi) {
+            $kodeProvinsi = '99';
+        }
+
         return [
             'nim' => $nim,
             'nama' => $this->faker->name(),
@@ -36,10 +53,10 @@ class MahasiswaFactory extends Factory
             'jalur_masuk' => $this->faker->randomElement(['SNMPTN', 'SBMPTN', 'Mandiri']),
             'no_telepon' => $this->faker->phoneNumber(),
             'alamat' => $this->faker->address(),
-            'kota' => $this->faker->city(),
-            'provinsi' => $this->faker->state(),
+            'kota' => $kodeKota,
+            'provinsi' => $kodeProvinsi,
             'user_id' => $user->id,
-            'dosen_wali_id' => $this->faker->randomElement([1, 2, 3])
+            'dosen_wali_id' => $this->faker->numberBetween([1, 5])
         ];
     }
 }

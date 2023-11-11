@@ -68,7 +68,8 @@ VALUES ('11', 'Aceh'),
   ('81', 'Maluku'),
   ('82', 'Maluku Utara'),
   ('91', 'Papua Barat'),
-  ('94', 'Papua');
+  ('94', 'Papua'),
+  ('99', 'Provinsikan');
 --
 -- Indexes for dumped tables
 --

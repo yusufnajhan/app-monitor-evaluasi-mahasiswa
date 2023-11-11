@@ -19,9 +19,9 @@ return new class extends Migration
             $table->string('status')->default('Aktif');
             $table->string('jalur_masuk')->nullable();
             $table->string('no_telepon')->nullable();
-            $table->string('alamat')->nullable();
-            $table->string('kota')->nullable();
             $table->string('provinsi')->nullable();
+            $table->string('kota')->nullable();
+            $table->string('alamat')->nullable();
             $table->unsignedBigInteger('user_id')->nullable();
             $table->unsignedBigInteger('dosen_wali_id')->nullable();
             // $table->unsignedBigInteger('isian_rencana_semester_id')->nullable();
@@ -29,6 +29,8 @@ return new class extends Migration
             $table->index('user_id');
             // $table->index('isian_rencana_semester_id');
             $table->foreign('user_id')->references('id')->on('users');
+            // $table->foreign('provinsi')->references('kode_prov')->on('tb_provs');
+            // $table->foreign('kota')->references('kode_kab')->on('tb_kabs');
             // $table->foreign('isian_rencana_semester_id')->references('id')->on('isian_rencana_semester');
         });
     }
