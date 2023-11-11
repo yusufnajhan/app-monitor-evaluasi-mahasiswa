@@ -61,13 +61,13 @@
                             <!-- /.card-body -->
                             <div class="card-footer">
                                 @if ($irs->sudah_disetujui == 0)
-                                    <button type="submit" name="sudah_disetujui" value="1">Setujui</button>|
-                                    <a href="/dosen-wali/irs/{{ $mahasiswa->nim }}/{{ $irs->semester }}/edit">Edit</a>|
+                                    <button type="submit" name="sudah_disetujui" value="1">Setujui</button> |
                                 @else
                                     <button type="submit" name="sudah_disetujui" value="0">Batalkan
                                         Persetujuan</button>|
                                 @endif
-                                <a href="/dosen-wali/irs/{{ $mahasiswa->nim }}">Back</a>
+                                <a href="/dosen-wali/setujui-irs">Back ke Persetujuan</a> |
+                                <a href="/dosen-wali/irs/{{ $mahasiswa->nim }}">Back</a> |
                             </div>
                         </form>
                     @endif
