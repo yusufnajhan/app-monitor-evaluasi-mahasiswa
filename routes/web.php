@@ -108,7 +108,7 @@ Route::middleware(['auth'])->group(function () {
             Route::put('/progres-pkl/{nim}', [SetujuiPKLOlehDosenWaliController::class, 'setujui']);
 
             // Lihat Skripsi mahasiswa
-            Route::get('/progres-skripsi/{nim}', [SetujuiSkripsiOlehDosenWaliController::class, 'show']);
+            Route::get('/progres-skripsi/{nim}/setujui', [SetujuiSkripsiOlehDosenWaliController::class, 'confirmSetujui']);
             Route::get('/progres-skripsi/{nim}/edit', [SetujuiSkripsiOlehDosenWaliController::class, 'editDanSetujui']);
             Route::put('/progres-skripsi/{nim}/update-dan-setujui', [SetujuiSkripsiOlehDosenWaliController::class, 'updateDanSetujui']);
             Route::put('/progres-skripsi/{nim}', [SetujuiSkripsiOlehDosenWaliController::class, 'setujui']);
