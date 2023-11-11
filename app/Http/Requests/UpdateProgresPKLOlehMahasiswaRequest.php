@@ -33,7 +33,7 @@ class UpdateProgresPKLOlehMahasiswaRequest extends FormRequest
                     }
                 }
             ],
-            'nilai' => 'required|gte:0|lte:100',
+            'nilai' => 'required',
             'nama_file' => 'required|file|mimes:pdf'
         ];
     }

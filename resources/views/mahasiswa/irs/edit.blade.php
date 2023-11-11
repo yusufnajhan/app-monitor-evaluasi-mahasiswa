@@ -62,13 +62,13 @@
                             </div>
                         </div><!-- /.card-body -->
                         <div class="card-footer">
-                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <button type="submit" class="btn btn-primary">Submit</button> |
+                            <a href="/mahasiswa/irs/{{ $nim }}">Back</a>
                         </div>
                     </form>
                 </div><!-- /.card -->
                 <br>
-                <a href="/dashboard"
-                    class="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900">
+                <a href="/dashboard" class="">
                     Back
                 </a>
             </div><!-- /.container -->

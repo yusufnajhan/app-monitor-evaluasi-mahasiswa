@@ -26,7 +26,7 @@ class ProgresSkripsiSeeder extends Seeder
 
                 ProgresSkripsi::create([
                     'semester' => $semester,
-                    'nilai' => rand(71, 100),
+                    'nilai' => 'A',
                     'nama_file' => $namaFile,
                     'tanggal_sidang' => $tanggalSidang,
                     'sudah_disetujui' => rand(0, 1),

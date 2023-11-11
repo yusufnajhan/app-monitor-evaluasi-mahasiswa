@@ -50,8 +50,8 @@
                             </div>
                             <div class="form-group">
                                 <label for="nilai">Nilai</label>
-                                <input type="number" name="nilai" class="form-control" id="nilai"
-                                    value="{{ old('nilai', $skripsi->nilai) }}" min="0" max="100">
+                                <input type="text" name="nilai" class="form-control" id="nilai"
+                                    value="{{ old('nilai', $skripsi->nilai) }}">
                             </div>
                             <div class="form-group">
                                 <label for="tanggal_sidang">Tanggal Sidang</label>
@@ -66,6 +66,7 @@
                         <!-- /.card-body -->
                         <div class="card-footer">
                             <button type="submit" class="btn btn-primary">Submit</button>
+                            <a href="/mahasiswa/progres-pkl/{{ $nim }}">Back</a> |
                             <a href="/dashboard">Back to Dashboard</a>
                         </div>
                     </form>
@@ -84,7 +85,7 @@
     </div>
 @endsection
 
-@section('script')
+{{-- @section('script')
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const statusSelect = document.getElementById('status');
@@ -105,4 +106,4 @@
             });
         });
     </script>
-@endsection
+@endsection --}}
