@@ -26,7 +26,7 @@ class ProgresPraktikKerjaLapanganSeeder extends Seeder
 
                 ProgresPraktikKerjaLapangan::create([
                     'semester' => $semester,
-                    'nilai' => rand(71, 100),
+                    'nilai' => 'A',
                     'nama_file' => $namaFile,
                     'sudah_disetujui' => rand(0, 1),
                     'mahasiswa_id' => $mahasiswa->id

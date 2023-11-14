@@ -90,22 +90,31 @@
                             <div class="form-group">
                                 <label for="no_telepon">Nomor Telepon</label>
                                 <input type="text" name="no_telepon" class="form-control" id="no_telepon"
-                                    value="{{ old('no_telepon') }}">
+                                    value="{{ old('no_telepon') }}" maxlength="13">
+                            </div>
+                            <div class="form-group">
+                                <label for="provinsi">Provinsi</label>
+                                <select name="provinsi" id="provinsi" class="form-control" onchange="getKabupaten()">
+                                    <option value="" selected disabled>-- Pilih Provinsi --
+                                    </option>
+                                    @foreach ($provinsi as $itemProvinsi)
+                                        <option value="{{ $itemProvinsi->kode_prov }}"
+                                            {{ old('provinsi') == $itemProvinsi->kode_prov ? 'selected' : '' }}>
+                                            {{ $itemProvinsi->nama_prov }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="kota">Kota</label>
+                                <select name="kota" id="kota" class="form-control">
+                                    <option value="" selected disabled>-- Pilih Kota/Kabupaten --</option>
+                                </select>
                             </div>
                             <div class="form-group">
                                 <label for="alamat">Alamat</label>
                                 <input type="text" name="alamat" class="form-control" id="alamat"
                                     value="{{ old('alamat') }}">
-                            </div>
-                            <div class="form-group">
-                                <label for="kota">Kota</label>
-                                <input type="text" name="kota" class="form-control" id="kota"
-                                    value="{{ old('kota') }}">
-                            </div>
-                            <div class="form-group">
-                                <label for="provinsi">Provinsi</label>
-                                <input type="text" name="provinsi" class="form-control" id="provinsi"
-                                    value="{{ old('provinsi') }}">
                             </div>
                             <div class="form-group">
                                 <label for="password">Password</label>
@@ -137,4 +146,34 @@
         </a>
     </div>
     </div>
+@endsection
+
+@section('script')
+    <script>
+        function getKabupaten() {
+            const provinsi = document.getElementById('provinsi').value;
+
+            $.ajax({
+                url: '/kabupaten',
+                method: 'get',
+                data: {
+                    kode_prov: provinsi,
+                },
+                success: function(data) {
+                    document.getElementById('kota').innerHTML = '';
+                    let option = document.createElement('option');
+                    option.value = '';
+                    option.text = '-- Pilih Kota/Kabupaten --';
+                    document.getElementById('kota').appendChild(option);
+
+                    for (const kabupaten of data) {
+                        const option = document.createElement('option');
+                        option.value = kabupaten.kode_kab;
+                        option.text = kabupaten.nama_kab;
+                        document.getElementById('kota').appendChild(option);
+                    }
+                }
+            })
+        }
+    </script>
 @endsection

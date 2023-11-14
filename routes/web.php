@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\KabupatenController;
 use App\Http\Controllers\DataIRSOlehMahasiswaController;
 use App\Http\Controllers\DataKHSOlehMahasiswaController;
 use App\Http\Controllers\DataPKLOlehMahasiswaController;
@@ -42,10 +43,13 @@ Route::middleware(['auth'])->group(function () {
     Route::middleware(['checkrole:operator'])->group(function () {
         Route::get('/tambah-mahasiswa', [DataMahasiswaOlehOperatorController::class, 'create'])->name('tambah-mahasiswa');
         Route::post('/tambah-mahasiswa', [DataMahasiswaOlehOperatorController::class, 'store'])->name('simpan-mahasiswa');
+
+        Route::get('/search-mahasiswa', [DataMahasiswaOlehOperatorController::class, 'searchMahasiswa']);
     });
 
     Route::middleware(['checkrole:mahasiswa'])->group(function () {
         // Mahasiswa
+        Route::get('/kabupaten', [KabupatenController::class, 'index']);
         Route::get('/isi-data/{nim}', [LengkapiDataMahasiswaOlehMahasiswa::class, 'edit'])->name('isi-data');
         Route::put('/isi-data/{nim}', [LengkapiDataMahasiswaOlehMahasiswa::class, 'update']);
 
@@ -77,6 +81,8 @@ Route::middleware(['auth'])->group(function () {
 
     Route::middleware(['checkrole:dosenWali'])->group(function () {
         Route::prefix('dosen-wali')->group(function () {
+            Route::get('/search-mahasiswa', [DataMahasiswaOlehDosenWaliController::class, 'searchMahasiswa']);
+
             // Lihat mahasiswa
             Route::get('/daftar-mahasiswa', [DataMahasiswaOlehDosenWaliController::class, 'index']);
             Route::get('/detail-mahasiswa/{nim}', [DataMahasiswaOlehDosenWaliController::class, 'show']);

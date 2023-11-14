@@ -92,19 +92,12 @@ class DataPKLOlehMahasiswaController extends Controller
 
         $data = $request->validated();
 
-        $pkl->status = $data['status'];
+        $pkl->semester = $data['semester'];
+        $pkl->nilai = $data['nilai'];
+        $namaFileBaru = 'pkl_' . str_replace(' ', '_', strtolower($mahasiswa->nama)) . '.pdf';
+        $pkl->nama_file = $request->file('nama_file')->storeAs('progres-pkl', $namaFileBaru);
+
         $pkl->sudah_disetujui = 0;
-
-        if ($data['status'] == 'Lulus') {
-            $pkl->nilai = $data['nilai'];
-
-            $namaFileBaru = 'pkl_' . str_replace(' ', '_', strtolower($mahasiswa->nama)) . '.pdf';
-            $pkl->nama_file = $request->file('nama_file')->storeAs('progres-pkl', $namaFileBaru);
-        } else {
-            $pkl->nilai = NULL;
-            $pkl->nama_file = NULL;
-        }
-
         $pkl->save();
 
         return redirect('/mahasiswa/progres-pkl/' . $nim);

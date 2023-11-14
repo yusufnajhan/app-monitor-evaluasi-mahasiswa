@@ -43,41 +43,30 @@
                         @method('PUT')
                         <div class="card-body">
                             <div class="form-group">
-                                <label for="status">Status</label>
-                                <select name="status" id="status">
-                                    <option value="" selected disabled>-- Pilih Status --</option>
-                                    <option value="Belum Ambil"
-                                        {{ old('status', $pkl->status) == 'Belum Ambil' ? 'selected' : '' }}>Belum
-                                        Ambil</option>
-                                    <option value="Sedang Ambil"
-                                        {{ old('status', $pkl->status) == 'Sedang Ambil' ? 'selected' : '' }}>
-                                        Sedang Ambil</option>
-                                    <option value="Lulus" {{ old('status', $pkl->status) == 'Lulus' ? 'selected' : '' }}>
-                                        Lulus</option>
-                                </select>
+                                <label for="semester">Semester</label>
+                                <input type="number" name="semester" class="form-control" id="semester"
+                                    value="{{ old('semester', $pkl->semester) }}" min="6" max="14">
                             </div>
                             <div class="form-group">
                                 <label for="nilai">Nilai</label>
                                 <input type="text" name="nilai" class="form-control" id="nilai"
-                                    value="{{ $pkl->nilai }}" {{ $pkl->status == 'Lulus' ? '' : 'disabled' }}>
+                                    value="{{ old('nilai', $pkl->nilai) }}">
                             </div>
                             <div class="form-group">
-                                <label for="nama_file">Scan KHS </label>
-                                <input type="file" name="nama_file" class="form-control" id="nama_file"
-                                    {{ $pkl->status == 'Lulus' ? '' : 'disabled' }}>
+                                <label for="nama_file">Scan Berita Acara PKL </label>
+                                <input type="file" name="nama_file" class="form-control" id="nama_file">
                             </div>
                         </div>
                         <!-- /.card-body -->
                         <div class="card-footer">
-                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <button type="submit" class="btn btn-primary">Submit</button> |
+                            <a href="/mahasiswa/progres-pkl/{{ $nim }}">Back</a> |
                             <a href="/dashboard">Back to Dashboard</a>
                         </div>
                     </form>
                 </div>
                 <!-- /.card -->
             </div><!-- /.row -->
-
-
         </div><!-- /.container-fluid -->
         <br>
         <a href="/dashboard"
@@ -88,7 +77,7 @@
     </div>
 @endsection
 
-@section('script')
+{{-- @section('script')
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const statusSelect = document.getElementById('status');
@@ -106,4 +95,4 @@
             });
         });
     </script>
-@endsection
+@endsection --}}

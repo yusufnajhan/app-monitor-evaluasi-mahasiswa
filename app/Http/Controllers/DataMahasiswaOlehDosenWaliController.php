@@ -21,6 +21,24 @@ class DataMahasiswaOlehDosenWaliController extends Controller
         return view('dosen-wali.lihat-mahasiswa.index', compact('mahasiswa'));
     }
 
+    public function searchMahasiswa(Request $request)
+    {
+        $keyword = $request->input('keyword');
+        $results = [];
+
+        if ($keyword !== '') {
+            $idDosenWali = Auth::user()->dosenWali->id;
+
+            $results = Mahasiswa::where('nama', 'like', '%' . $keyword . '%')
+                ->where('dosen_wali_id', $idDosenWali)
+                ->get();
+        } else {
+            $results = '';
+        }
+
+        return response()->json(['results' => $results]);
+    }
+
     /**
      * Show the form for creating a new resource.
      */
