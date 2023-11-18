@@ -57,7 +57,7 @@
                             <div class="row">
                                 <div class="col-md-10 offset-md-1">
                                     <div class="row">
-                                        <div class="col-6">
+                                        {{-- <div class="col-6">
                                             <div class="form-group">
                                                 <label>Lorem Ipsum:</label>
                                                 <select class="select2" multiple="multiple" data-placeholder="Any"
@@ -85,7 +85,7 @@
                                                     <option>Lorem Ipsum</option>
                                                 </select>
                                             </div>
-                                        </div>
+                                        </div> --}}
                                     </div>
                                     <div class="form-group">
                                         <div class="input-group input-group-lg">

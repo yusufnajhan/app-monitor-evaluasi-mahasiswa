@@ -23,7 +23,7 @@
         <!-- Main content -->
         <div class="content">
             <div class="container">
-                <h1 class="m-0">IRS Mahasiswa</h1>
+                <h1 class="m-0">Daftar Mahasiswa</h1>
                 <br>
 
                 @if ($errors->any())
