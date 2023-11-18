@@ -21,69 +21,69 @@
                 </div><!-- /.row -->
             </div><!-- /.container -->
         </div>
-        <!-- Main content -->                
-            <div class="content">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-6">
+        <!-- Main content -->
+        <div class="content">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6">
                         <section class="content">
-                        <div class="container-fluid">
-                            <h2 class="text-center display-4">Search</h2>
-                            <div class="row">
-                                <div class="col-md-8 offset-md-2">
-                                    <form action="simple-results.html">
-                                        <div class="input-group input-group-lg">
-                                            <input type="search" class="form-control form-control-lg" id="search-input" placeholder="Masukkan nama mahasiswa..">
-                                            <div class="input-group-append">
-                                                <button type="submit" class="btn btn-lg btn-default">
-                                                    <i class="fa fa-search"></i>
-                                                </button>
+                            <div class="container-fluid">
+                                <h2 class="text-center display-4">Search</h2>
+                                <div class="row">
+                                    <div class="col-md-8 offset-md-2">
+                                        <form action="simple-results.html">
+                                            <div class="input-group input-group-lg">
+                                                <input type="search" class="form-control form-control-lg" id="search-input"
+                                                    placeholder="Masukkan nama mahasiswa..">
+                                                <div class="input-group-append">
+                                                    <button type="submit" class="btn btn-lg btn-default">
+                                                        <i class="fa fa-search"></i>
+                                                    </button>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </form>
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
+                        </section>
+                        <div class="search-result">
                         </div>
-                    </section>
-                    <div class="search-result">
-                    </div>
-                            <div class="card card-primary card-outline">
-                                <div class="card-body">
-                                    <h5 class="text-center"><a href="dosen-wali/daftar-mahasiswa">Daftar Mahasiswa</a>
-                                    </h5>
-                                </div>
-                            </div><!-- /.card -->
-                            <div class="card card-primary card-outline">
-                                <div class="card-body">
-                                    <h5 class="text-center"><a href="dosen-wali/setujui-irs">Setujui IRS</a>
-                                    </h5>
-                                </div>
-                            </div><!-- /.card -->
-                            <div class="card card-primary card-outline">
-                                <div class="card-body">
-                                    <h5 class="text-center"><a href="dosen-wali/setujui-khs">Setujui KHS</a>
-                                    </h5>
-                                </div>
-                            </div><!-- /.card -->
-                            <div class="card card-primary card-outline">
-                                <div class="card-body">
-                                    <h5 class="text-center"><a href="dosen-wali/setujui-pkl">Setujui PKL</a>
-                                    </h5>
-                                </div>
-                            </div><!-- /.card -->
-                            <div class="card card-primary card-outline">
-                                <div class="card-body">
-                                    <h5 class="text-center"><a href="dosen-wali/setujui-skripsi">Setujui Skripsi</a>
-                                    </h5>
-                                </div>
-                            </div><!-- /.card -->
-                        </div>
+                        <div class="card card-primary card-outline">
+                            <div class="card-body">
+                                <h5 class="text-center"><a href="dosen-wali/daftar-mahasiswa">Daftar Mahasiswa</a>
+                                </h5>
+                            </div>
+                        </div><!-- /.card -->
+                        <div class="card card-primary card-outline">
+                            <div class="card-body">
+                                <h5 class="text-center"><a href="dosen-wali/setujui-irs">Setujui IRS</a>
+                                </h5>
+                            </div>
+                        </div><!-- /.card -->
+                        <div class="card card-primary card-outline">
+                            <div class="card-body">
+                                <h5 class="text-center"><a href="dosen-wali/setujui-khs">Setujui KHS</a>
+                                </h5>
+                            </div>
+                        </div><!-- /.card -->
+                        <div class="card card-primary card-outline">
+                            <div class="card-body">
+                                <h5 class="text-center"><a href="dosen-wali/setujui-pkl">Setujui PKL</a>
+                                </h5>
+                            </div>
+                        </div><!-- /.card -->
+                        <div class="card card-primary card-outline">
+                            <div class="card-body">
+                                <h5 class="text-center"><a href="dosen-wali/setujui-skripsi">Setujui Skripsi</a>
+                                </h5>
+                            </div>
+                        </div><!-- /.card -->
                     </div>
                 </div>
             </div>
+        </div>
         <!-- /.content -->
     </div>
-
 @endsection
 
 @section('script')
@@ -118,7 +118,9 @@
 
                 if (results.length > 0) {
                     for (let i = 0; i < results.length; i++) {
-                        resultContainer.append(`<p>${results[i].nama}</p>`);
+                        resultContainer.append(
+                            `<a href="/dosen-wali/detail-mahasiswa/${results[i].nim}">${results[i].nama}</a> <br>`
+                            );
                     }
                 } else {
                     resultContainer.append(`<p>Tidak ada hasil</p>`);
