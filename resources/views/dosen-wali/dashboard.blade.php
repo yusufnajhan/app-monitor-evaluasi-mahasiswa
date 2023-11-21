@@ -1,4 +1,11 @@
 @extends('layouts.main')
+
+@section('user-name')
+    @php
+        $dosen = auth()->user()->dosenWali;
+    @endphp 
+    {{ $dosen->nama }}
+
 @section('content')
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
@@ -6,11 +13,7 @@
             <div class="container">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        @php
-                            $dosen = auth()->user()->dosenWali;
-                        @endphp
-                        <h1>Selamat datang,</h1>
-                        <h1 class="m-0"> Dosen {{ $dosen->nama }}!</h1>
+                        <h3>Dashboard</h3>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
@@ -19,6 +22,13 @@
                         </ol>
                     </div><!-- /.col -->
                 </div><!-- /.row -->
+                <div class="card card-widget widget-user-2">
+                <div class="widget-user-header bg-navy">
+                    <div class="widget-user-image"> <img class="img-circle elevation-2" src="public/lte/dist/img/user.jpg" alt="User Avatar">
+                </div>
+                    <h3 class="info-box-text"><b>{{ $dosen->nama }}</b></h3>
+                    <h5 class="info-box-number"><b>NIP</b> {{ $dosen->nip }}</h5>
+                </div>
             </div><!-- /.container -->
         </div>
     
