@@ -31,7 +31,6 @@
                 </div>
             </div><!-- /.container -->
         </div>
-    
         <!-- Main content --> 
         <section class="content">
             <div class="container">
@@ -120,11 +119,9 @@
                                 
                                 </tbody>
                             </table><br>
-                            
                             </div>
                         </div><!-- /.card-body -->
                     </section>
-
 @endsection
 
 @section('script')
@@ -159,7 +156,9 @@
 
                 if (results.length > 0) {
                     for (let i = 0; i < results.length; i++) {
-                        resultContainer.append(`<p>${results[i].nama}</p>`);
+                        resultContainer.append(
+                            `<a href="/dosen-wali/detail-mahasiswa/${results[i].nim}">${results[i].nama}</a> <br>`
+                            );
                     }
                 } else {
                     resultContainer.append(`<p>Tidak ada hasil</p>`);

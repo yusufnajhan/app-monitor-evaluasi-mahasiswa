@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\IsianRencanaSemester;
+use App\Models\KartuHasilStudi;
 use App\Models\Mahasiswa;
+use App\Models\ProgresPraktikKerjaLapangan;
+use App\Models\ProgresSkripsi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -62,7 +66,13 @@ class DataMahasiswaOlehDosenWaliController extends Controller
     {
         $mahasiswa = Mahasiswa::where('nim', $nim)->first();
 
-        return view('dosen-wali.lihat-mahasiswa.show', compact('mahasiswa'));
+        $irs = IsianRencanaSemester::where('mahasiswa_id', $mahasiswa->id)->get();
+        $khs = KartuHasilStudi::where('mahasiswa_id', $mahasiswa->id)->get();
+        $pkl = ProgresPraktikKerjaLapangan::where('mahasiswa_id', $mahasiswa->id)->first();
+        $skripsi = ProgresSkripsi::where('mahasiswa_id', $mahasiswa->id)->first();
+
+        // dd($irs, $khs, $pkl, $skripsi);
+        return view('dosen-wali.lihat-mahasiswa.show', compact('mahasiswa', 'irs', 'khs', 'pkl', 'skripsi'));
     }
 
     /**

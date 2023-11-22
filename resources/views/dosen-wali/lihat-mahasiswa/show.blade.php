@@ -65,8 +65,76 @@
                         </div><!-- /.card -->
                     </div>
                 @endif
+
+                @for ($i = 1; $i <= $mahasiswa->hitungSemester(); $i++)
+                    {{-- @php
+                        $irs = IsianRencanaSemester::where('semester', $i)
+                            ->where('mahasiswa_id', $mahasiswa->id)
+                            ->first();
+                        $khs = KartuHasilStudi::where('semester', $i)
+                            ->where('mahasiswa_id', $mahasiswa->id)
+                            ->first();
+                    @endphp --}}
+
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-primary" data-toggle="modal"
+                        data-target="#smt-{{ $i }}">
+                        Semester {{ $i }}
+                    </button>
+                    <!-- Modal -->
+                    <div class="modal fade" id="smt-{{ $i }}" tabindex="-1"
+                        aria-labelledby="smt-{{ $i }}-modal" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="smt-{{ $i }}-modal">Data Akademik</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+
+                                <div class="modal-body">
+                                    {{ $irs[$i - 1]->semester }} <br>
+                                    {{ $irs[$i - 1]->sks }} <br>
+                                    <embed src="/storage/{{ $irs[$i - 1]->nama_file }}" width="100%" height="200"
+                                        type="application/pdf">
+
+                                    {{ $khs[$i - 1]->semester }} <br>
+                                    {{ $khs[$i - 1]->sks_semester }} <br>
+                                    {{ $khs[$i - 1]->sks_kumulatif }} <br>
+                                    {{ $khs[$i - 1]->ip_semester }} <br>
+                                    {{ $khs[$i - 1]->ip_kumulatif }} <br>
+                                    <embed src="/storage/{{ $khs[$i - 1]->nama_file }}" width="100%" height="200"
+                                        type="application/pdf">
+
+                                    @if ($i == $pkl->semester)
+                                        @if (isset($pkl->semester))
+                                            {{ $pkl->semester }} <br>
+                                            {{ $pkl->nilai }} <br>
+                                            <embed src="/storage/{{ $pkl->nama_file }}" width="100%" height="200"
+                                                type="application/pdf">
+                                        @endif
+                                    @endif
+
+                                    @if ($i == $skripsi->semester)
+                                        @if (isset($skripsi->semester))
+                                            {{ $skripsi->semester }} <br>
+                                            {{ $skripsi->nilai }} <br>
+                                            {{ $skripsi->tanggal_sidang }} <br>
+                                            <embed src="/storage/{{ $skripsi->nama_file }}" width="100%" height="200"
+                                                type="application/pdf">
+                                        @endif
+                                    @endif
+                                </div>
+
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @endfor
             </div>
         </div>
-    </div>
     </div>
 @endsection
