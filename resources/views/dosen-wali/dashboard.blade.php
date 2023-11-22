@@ -174,4 +174,3 @@
         });
     </script>
 @endsection
-@endsection
