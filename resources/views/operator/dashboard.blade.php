@@ -1,4 +1,10 @@
 @extends('layouts.main')
+@section('user-name')
+    @php
+        $operator = auth()->user()->operator;
+    @endphp 
+    {{ $operator->nama }}
+
 @section('content')
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
@@ -6,7 +12,7 @@
             <div class="container">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0"> Hai Operator {{ auth()->user()->operator->nama }}!</h1>
+                        <h3> Dashboard</h3>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
@@ -15,7 +21,14 @@
                         </ol>
                     </div><!-- /.col -->
                 </div><!-- /.row -->
-            </div><!-- /.container-fluid -->
+                <div class="card card-widget widget-user-2">
+                <div class="widget-user-header bg-navy">
+                    <div class="widget-user-image"> <img class="img-circle elevation-2" src="public/lte/dist/img/user.jpg" alt="User Avatar">
+                </div>
+                    <h3 class="info-box-text"><b>{{ $operator->nama }}</b></h3>
+                    <h5 class="info-box-number"><b>NIP</b> {{ $operator->nip}} </h5>
+                </div>
+            </div><!-- /.container -->
         </div>
         <!-- /.content-header -->
         <!-- Main content -->
@@ -52,7 +65,7 @@
                 </div><!-- /.card -->
                 <div class="card card-primary card-outline">
                     <div class="card-body">
-                        <h5 class="text-center">Pencarian Mahasiswa</h5><br>
+                        <h5 class="text-center"><b>Pencarian Mahasiswa<b></h5><br>
                         <form action="enhanced-results.html">
                             <div class="row">
                                 <div class="col-md-10 offset-md-1">
@@ -163,3 +176,5 @@
         });
     </script>
 @endsection
+@endsection
+

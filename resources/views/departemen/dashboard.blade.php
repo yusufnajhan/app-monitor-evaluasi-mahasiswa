@@ -1,38 +1,53 @@
 @extends('layouts.main')
+
+@section('user-name')
+    @php
+        $departemen = auth()->user()->departemen;
+    @endphp 
+    {{ $departemen->nama }}
+
 @section('content')
 <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <div class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1 class="m-0">Dashboard Departemen</h1>
-        </div><!-- /.row -->
-      </div><!-- /.container-fluid -->
-    </div>
-    <!-- /.content-header -->
+        <!-- Content Header (Page header) -->
+        <div class="content-header">
+            <div class="container">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h3>Dashboard</h3>
+                    </div><!-- /.col -->
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item active">Dashboard</li>
+                        </ol>
+                    </div><!-- /.col -->
+                </div><!-- /.row -->
+                <div class="card card-widget widget-user-2">
+                <div class="widget-user-header bg-navy">
+                    <div class="widget-user-image"> <img class="img-circle elevation-2" src="public/lte/dist/img/user.jpg" alt="User Avatar">
+                </div>
+                    <h3 class="info-box-text"><b>{{ $departemen->nama }}</b></h3>
+                    <h5 class="info-box-number"><b>NIP</b> {{ $departemen->nip }}</h5>
+                </div>
+            </div><!-- /.container -->
+        </div>
 
     <!-- Main content -->
     <section class="content">
-      <div class="container-fluid">
-        <h1>Hai</h1>
-        <h2>Ini dasbor departemen</h2>
-        <h2>Staf departemen {{ auth()->user()->departemen->nama }}</h2>
-        <form action="/logout" method="POST">
-            @csrf
-            <button type="submit"
-                class="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900">
-                Log out
-                <svg class="w-3.5 h-3.5 ml-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                    viewBox="0 0 14 10">
-                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M1 5h12m0 0L9 1m4 4L9 9" />
-                </svg>
-            </button>
-        </form>
-      </div><!-- /.container-fluid -->
+            <div class="container">
+                @if ($errors->any())
+                    <div class="red-alert">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+            </div><!-- /.container-fluid -->
     </section>
     <!-- /.content -->
   </div>
 
+@endsection
 @endsection

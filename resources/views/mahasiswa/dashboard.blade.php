@@ -1,4 +1,9 @@
 @extends('layouts.main')
+@section('user-name')
+    @php
+        $mahasiswa = auth()->user()->mahasiswa;
+    @endphp 
+    {{ $mahasiswa->nama }}
 
 @section('content')
     <div class="content-wrapper">
@@ -7,11 +12,7 @@
             <div class="container">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        @php
-                            $mahasiswa = auth()->user()->mahasiswa;
-                        @endphp
-                        <h1 class="m-0"> Hai {{ $mahasiswa->nama }}!</h1>
-                        <h1 class="m-0"> Semester {{ $mahasiswa->hitungSemester() }}, semangka</h1>
+                        <h3> Dashboard </h3>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
@@ -20,6 +21,13 @@
                         </ol>
                     </div><!-- /.col -->
                 </div><!-- /.row -->
+                <div class="card card-widget widget-user-2">
+                <div class="widget-user-header bg-navy">
+                    <div class="widget-user-image"> <img class="img-circle elevation-2" src="public/lte/dist/img/user.jpg" alt="User Avatar">
+                </div>
+                    <h3 class="info-box-text"><b>{{ $mahasiswa->nama }}</b></h3>
+                    <h5 class="info-box-number"><b>NIM</b> {{ $mahasiswa->nim}} | Semester {{ $mahasiswa->hitungSemester() }}</h5>
+                </div>
             </div><!-- /.container -->
         </div>
 
@@ -72,4 +80,5 @@
         </div>
     </div>
     </div>
+@endsection
 @endsection
