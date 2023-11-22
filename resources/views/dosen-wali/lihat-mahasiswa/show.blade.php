@@ -94,21 +94,107 @@
                                 </div>
 
                                 <div class="modal-body">
-                                    {{ $irs[$i - 1]->semester }} <br>
-                                    {{ $irs[$i - 1]->sks }} <br>
-                                    <embed src="/storage/{{ $irs[$i - 1]->nama_file }}" width="100%" height="200"
-                                        type="application/pdf">
+                                    <!-- Button trigger modal -->
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#irs">
+                                        Launch demo modal
+                                    </button>
 
-                                    {{ $khs[$i - 1]->semester }} <br>
-                                    {{ $khs[$i - 1]->sks_semester }} <br>
-                                    {{ $khs[$i - 1]->sks_kumulatif }} <br>
-                                    {{ $khs[$i - 1]->ip_semester }} <br>
-                                    {{ $khs[$i - 1]->ip_kumulatif }} <br>
-                                    <embed src="/storage/{{ $khs[$i - 1]->nama_file }}" width="100%" height="200"
-                                        type="application/pdf">
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="irs" tabindex="-1"
+                                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    {{ $irs[$i - 1]->semester }} <br>
+                                                    {{ $irs[$i - 1]->sks }} <br>
+                                                    <embed src="/storage/{{ $irs[$i - 1]->nama_file }}" width="100%"
+                                                        height="200" type="application/pdf">
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary"
+                                                        data-dismiss="modal">Close</button>
+                                                    <button type="button" class="btn btn-primary">Save changes</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#khs">
+                                        Launch demo modal
+                                    </button>
+
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="khs" tabindex="-1"
+                                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    {{ $khs[$i - 1]->semester }} <br>
+                                                    {{ $khs[$i - 1]->sks_semester }} <br>
+                                                    {{ $khs[$i - 1]->sks_kumulatif }} <br>
+                                                    {{ $khs[$i - 1]->ip_semester }} <br>
+                                                    {{ $khs[$i - 1]->ip_kumulatif }} <br>
+                                                    <embed src="/storage/{{ $khs[$i - 1]->nama_file }}" width="100%"
+                                                        height="200" type="application/pdf">
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary"
+                                                        data-dismiss="modal">Close</button>
+                                                    <button type="button" class="btn btn-primary">Save changes</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
 
                                     @if ($i == $pkl->semester)
                                         @if (isset($pkl->semester))
+                                            <button type="button" class="btn btn-primary" data-toggle="modal"
+                                                data-target="#irs">
+                                                Launch demo modal
+                                            </button>
+
+                                            <!-- Modal -->
+                                            <div class="modal fade" id="irs" tabindex="-1"
+                                                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="exampleModalLabel">Modal title
+                                                            </h5>
+                                                            <button type="button" class="close" data-dismiss="modal"
+                                                                aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            {{ $irs[$i - 1]->semester }} <br>
+                                                            {{ $irs[$i - 1]->sks }} <br>
+                                                            <embed src="/storage/{{ $irs[$i - 1]->nama_file }}"
+                                                                width="100%" height="200" type="application/pdf">
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary"
+                                                                data-dismiss="modal">Close</button>
+                                                            <button type="button" class="btn btn-primary">Save
+                                                                changes</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                             {{ $pkl->semester }} <br>
                                             {{ $pkl->nilai }} <br>
                                             <embed src="/storage/{{ $pkl->nama_file }}" width="100%" height="200"
@@ -121,8 +207,8 @@
                                             {{ $skripsi->semester }} <br>
                                             {{ $skripsi->nilai }} <br>
                                             {{ $skripsi->tanggal_sidang }} <br>
-                                            <embed src="/storage/{{ $skripsi->nama_file }}" width="100%" height="200"
-                                                type="application/pdf">
+                                            <embed src="/storage/{{ $skripsi->nama_file }}" width="100%"
+                                                height="200" type="application/pdf">
                                         @endif
                                     @endif
                                 </div>
