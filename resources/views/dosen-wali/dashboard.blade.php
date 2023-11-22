@@ -123,6 +123,8 @@
                         </div><!-- /.card-body -->
                     </section>
 @endsection
+@endsection
+
 
 @section('script')
     <script>
