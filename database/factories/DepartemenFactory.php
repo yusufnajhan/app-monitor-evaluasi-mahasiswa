@@ -28,10 +28,13 @@ class DepartemenFactory extends Factory
             'role' => 'departemen'
         ]);
 
+        $nama = $this->faker->name();
+
         return [
             'nip' => $nip,
-            'nama' => $this->faker->name(),
-            'user_id' => $user->id
+            'nama' => $nama,
+            'user_id' => $user->id,
+            'foto_profil' => "fp_" . strtolower(str_replace(' ', '_', $nama)) . ".jpg"
         ];
     }
 }

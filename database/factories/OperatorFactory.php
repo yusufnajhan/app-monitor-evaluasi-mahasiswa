@@ -23,10 +23,13 @@ class OperatorFactory extends Factory
             'role' => 'operator'
         ]);
 
+        $nama = 'Sepuh';
+
         return [
             'nip' => '1195671929239',
-            'nama' => 'Sepuh',
-            'user_id' => $user->id
+            'nama' => $nama,
+            'user_id' => $user->id,
+            'foto_profil' => "fp_" . strtolower(str_replace(' ', '_', $nama)) . ".jpg"
         ];
     }
 }

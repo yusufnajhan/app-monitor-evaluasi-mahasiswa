@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('provinsi')->nullable();
             $table->string('kota')->nullable();
             $table->string('alamat')->nullable();
+            $table->string('foto_profil')->nullable();
             $table->unsignedBigInteger('user_id')->nullable();
             $table->unsignedBigInteger('dosen_wali_id')->nullable();
             // $table->unsignedBigInteger('isian_rencana_semester_id')->nullable();

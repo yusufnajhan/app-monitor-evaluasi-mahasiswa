@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('nip')->unique();
             $table->string('nama');
+            $table->string('foto_profil')->nullable();
             $table->unsignedBigInteger('user_id');
 
             $table->index('user_id');

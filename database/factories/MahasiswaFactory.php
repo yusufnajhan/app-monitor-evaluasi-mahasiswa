@@ -45,9 +45,11 @@ class MahasiswaFactory extends Factory
             $kodeProvinsi = '99';
         }
 
+        $nama = $this->faker->name();
+
         return [
             'nim' => $nim,
-            'nama' => $this->faker->name(),
+            'nama' => $nama,
             'angkatan' => $this->faker->numberBetween(2017, 2023),
             'status' => 'Aktif',
             'jalur_masuk' => $this->faker->randomElement(['SNMPTN', 'SBMPTN', 'Mandiri']),
@@ -55,6 +57,7 @@ class MahasiswaFactory extends Factory
             'alamat' => $this->faker->address(),
             'kota' => $kodeKota,
             'provinsi' => $kodeProvinsi,
+            'foto_profil' => "fp_" . strtolower(str_replace(' ', '_', $nama)) . ".jpg",
             'user_id' => $user->id,
             'dosen_wali_id' => $this->faker->numberBetween(1, 5)
         ];
