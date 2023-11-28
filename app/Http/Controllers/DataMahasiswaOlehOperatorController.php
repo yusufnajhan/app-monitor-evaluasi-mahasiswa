@@ -25,6 +25,23 @@ class DataMahasiswaOlehOperatorController extends Controller
         //
     }
 
+    public function showAllMahasiswa()
+    {
+        $mahasiswa = Mahasiswa::paginate(5);
+
+        return view('operator.data-mahasiswa.show-all-mahasiswa', compact('mahasiswa'));
+    }
+
+    public function updateStatusMahasiswa(Request $request)
+    {
+        $nim = $request->input('nim');
+        $status = $request->input('status');
+
+        Mahasiswa::where('nim', $nim)->update(['status' => $status]);
+
+        return response()->json(['message' => 'Status berhasil diubah!']);
+    }
+
     /**
      * Show the form for creating a new resource.
      */

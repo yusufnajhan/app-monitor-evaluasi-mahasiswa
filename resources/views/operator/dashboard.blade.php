@@ -37,24 +37,21 @@
             <div class="content">
                 <div class="container">
                     <div class="row">
-                        <div class="col-lg-4">
+                        <div class="col-lg-6">
                             <div class="card card-primary card-outline">
                                 <div class="card-body">
                                     <h5 class="text-center"><a href="/tambah-mahasiswa"> Input Data Mahasiswa Baru </a></h5>
                                 </div>
                             </div><!-- /.card -->
                         </div>
-                        <div class="col-lg-4">
+                        <div class="col-lg-6">
                             <div class="card card-primary card-outline">
                                 <div class="card-body">
-                                    <h5 class="text-center"><a href="/tambah-doswal"> Input Data Dosen Wali </a></h5>
-                                </div>
-                            </div><!-- /.card -->
-                        </div>
-                        <div class="col-lg-4">
-                            <div class="card card-primary card-outline">
-                                <div class="card-body">
-                                    <h5 class="text-center"><a href="/tambah-departemen"> Input Data Departemen </a></h5>
+                                    <h5 class="text-center">
+                                        <a href="/operator/ubah-status-mahasiswa">
+                                            Ubah Status Mahasiswa
+                                        </a>
+                                    </h5>
                                 </div>
                             </div><!-- /.card -->
                         </div>

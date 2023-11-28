@@ -45,6 +45,11 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/tambah-mahasiswa', [DataMahasiswaOlehOperatorController::class, 'store'])->name('simpan-mahasiswa');
 
         Route::get('/search-mahasiswa', [DataMahasiswaOlehOperatorController::class, 'searchMahasiswa']);
+
+        Route::prefix('operator')->group(function () {
+            Route::get('/ubah-status-mahasiswa', [DataMahasiswaOlehOperatorController::class, 'showAllMahasiswa']);
+            Route::put('/update-status-mahasiswa', [DataMahasiswaOlehOperatorController::class, 'updateStatusMahasiswa']);
+        });
     });
 
     Route::middleware(['checkrole:mahasiswa'])->group(function () {
