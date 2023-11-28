@@ -38,18 +38,29 @@
 
                 <!-- general form elements -->
                 <div class="card card-primary">
-                    <div class="card-body p-0">
+            
+                    <!-- card body -->
+                    <div class="card-body">
                         <!-- form start -->
-                        <div class="form-group">
-                            <div class="input-group input-group-lg">
-                                <form action="" method="get">
-                                    <input type="search" class="form-control form-control-lg" id="search-input"
-                                        placeholder="Type your keywords here">
-                                </form>
-                            </div>
-                        </div>
-                        <div class="search-result">
-                        </div>
+                           <form action="">
+
+                                <div class="form-group">
+                                    <div class="input-group input-group-lg">
+                                        <form action="" method="get">
+                                            <input type="search" class="form-control form-control-lg"
+                                                id="search-input" placeholder="Cari Mahasiswa">
+                                                <div class="input-group-append">
+                                                    <button type="submit" class="btn btn-lg btn-default">
+                                                        <i class="fa fa-search"></i>
+                                                    </button>
+                                                </div>
+                                        </form>
+                                    </div>
+                                </div>
+                                <div class="search-result">
+                                </div>
+
+                            </form>
                         <table class="table">
                             <thead>
                                 <tr>
