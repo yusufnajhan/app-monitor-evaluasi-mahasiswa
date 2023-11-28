@@ -113,7 +113,7 @@
 
                     $.ajax({
                         type: 'GET',
-                        url: '/search-mahasiswa',
+                        url: '/operator/search-mahasiswa',
                         data: {
                             keyword: keyword
                         },

@@ -40,7 +40,16 @@
                 <div class="card card-primary">
                     <div class="card-body p-0">
                         <!-- form start -->
-
+                        <div class="form-group">
+                            <div class="input-group input-group-lg">
+                                <form action="" method="get">
+                                    <input type="search" class="form-control form-control-lg" id="search-input"
+                                        placeholder="Type your keywords here">
+                                </form>
+                            </div>
+                        </div>
+                        <div class="search-result">
+                        </div>
                         <table class="table">
                             <thead>
                                 <tr>
@@ -128,6 +137,47 @@
                     }
                 });
             });
+
+            $('#search-input').on('input', function(e) {
+
+                let keyword = $(this).val();
+                if (keyword.trim() === '') {
+                    clearResult();
+                    return;
+                }
+
+                $.ajax({
+                    type: 'GET',
+                    url: '/operator/search-mahasiswa-for-ubah-status',
+                    data: {
+                        keyword: keyword
+                    },
+                    success: function(response) {
+                        displayResults(response.results.data);
+                    },
+                    error: function(error) {
+                        console.log(error);
+                    }
+                });
+            });
+
+            function displayResults(results) {
+                let resultContainer = $('.search-result');
+                resultContainer.empty();
+
+                if (results.length > 0) {
+                    for (let i = 0; i < results.length; i++) {
+                        resultContainer.append(`<p>${results[i].nama}</p>`);
+                    }
+                } else {
+                    resultContainer.append(`<p>Tidak ada hasil</p>`);
+                }
+            }
+
+            function clearResult() {
+                let resultContainer = $('.search-result');
+                resultContainer.empty();
+            }
         });
     </script>
 @endsection

@@ -14,6 +14,7 @@ use App\Models\ProgresPraktikKerjaLapangan;
 use App\Http\Requests\UpdateMahasiswaRequest;
 use App\Http\Requests\StoreDataMahasiswaOlehOperatorRequest;
 use Illuminate\Http\Request;
+use Laravel\Ui\Presets\React;
 
 class DataMahasiswaOlehOperatorController extends Controller
 {
@@ -27,7 +28,7 @@ class DataMahasiswaOlehOperatorController extends Controller
 
     public function showAllMahasiswa()
     {
-        $mahasiswa = Mahasiswa::paginate(5);
+        $mahasiswa = Mahasiswa::paginate(10);
 
         return view('operator.data-mahasiswa.show-all-mahasiswa', compact('mahasiswa'));
     }
@@ -112,10 +113,30 @@ class DataMahasiswaOlehOperatorController extends Controller
         $results = [];
 
         if ($keyword !== '') {
-            $results = Mahasiswa::where('nama', 'like', '%' . $keyword . '%')->get();
+            $results = Mahasiswa::where('nama', 'like', '%' . $keyword . '%')
+                ->orWhere('nim', 'like', '%' . $keyword . '%')
+                ->get();
         } else {
             $results = '';
         }
+
+        return response()->json(['results' => $results]);
+    }
+
+    public function searchMahasiswaForUbahStatus(Request $request)
+    {
+        $keyword = $request->input('keyword');
+        $results = [];
+
+        if ($keyword !== '') {
+            $results = Mahasiswa::where('nama', 'like', '%' . $keyword . '%')
+                ->orWhere('nim', 'like', '%' . $keyword . '%')
+                ->paginate(10);
+        } else {
+            $results = '';
+        }
+
+        // return view('operator.data-mahasiswa.show-all-mahasiswa', compact('mahasiswa'));
 
         return response()->json(['results' => $results]);
     }
