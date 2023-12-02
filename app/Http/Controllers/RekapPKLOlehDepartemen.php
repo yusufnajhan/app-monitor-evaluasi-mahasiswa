@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
 use App\Models\Mahasiswa;
+use Illuminate\Http\Request;
+use Laravel\Ui\Presets\React;
 use App\Models\ProgresPraktikKerjaLapangan;
 use Database\Factories\ProgresSkripsiFactory;
-use Laravel\Ui\Presets\React;
 
 class RekapPKLOlehDepartemen extends Controller
 {
@@ -41,14 +42,14 @@ class RekapPKLOlehDepartemen extends Controller
         return view('departemen.rekap-pkl.show-by-year');
     }
 
+    public function printPDFByYear()
+    {
+        $pdf = Pdf::loadView('departemen.rekap-pkl.cetak-pdf-tahun')->setPaper('a4', 'landscape');
+        return $pdf->download('pkl-per-tahun.pdf');
+    }
+
     public function daftarMahasiswaSudahPKL($tahun)
     {
-        // $mahasiswa = Mahasiswa::whereHas('progresPraktikKerjaLapangan', function ($query) {
-        //     $query->where('sudah_disetujui', 1);
-        // })
-        //     ->where('angkatan', $request)
-        //     ->get();
-
         $mahasiswa = Mahasiswa::whereHas('progresPraktikKerjaLapangan', function ($query) {
             $query->where('sudah_disetujui', 1);
         })
@@ -56,6 +57,5 @@ class RekapPKLOlehDepartemen extends Controller
             ->get();
 
         return view('departemen.rekap-pkl.mahasiswa-sudah-pkl', compact('mahasiswa', 'tahun'));
-        // dd($tahun);
     }
 }

@@ -24,9 +24,15 @@
                 <!-- general form elements -->
                 <div class="card card-primary">
                     <div class="card-header">
-                        <h3 class="card-title">PKL</h3>
+                        <h3 class="card-title">
+                            PKL
+                        </h3>
                     </div>
                     <div class="card-body">
+                        <h3 class="text-center">
+                            Rekap Progres PKL Mahasiswa Informatika <br>
+                            Fakultas Sains dan Matematika UNDIP Semarang
+                        </h3>
                         <table class="table table-bordered">
                             <thead class="thead-light">
                                 <tr>
@@ -63,7 +69,9 @@
                         </table>
                     </div>
                     <div class="card-footer">
-
+                        <a href="/departemen/cetak-pdf-pkl" class="btn btn-primary">
+                            Cetak PDF
+                        </a>
                     </div>
                     <!-- /.card-header -->
                     <!-- form start -->

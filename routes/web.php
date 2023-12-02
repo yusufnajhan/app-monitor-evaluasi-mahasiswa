@@ -131,6 +131,8 @@ Route::middleware(['auth'])->group(function () {
     Route::middleware(['checkrole:departemen'])->group(function () {
         Route::prefix('departemen')->group(function () {
             Route::get('/rekap-pkl', [RekapPKLOlehDepartemen::class, 'showByYear']);
+            Route::get('/cetak-pdf-pkl', [RekapPKLOlehDepartemen::class, 'printPDFByYear']);
+
             Route::get('/mahasiswa-sudah-pkl/{tahun}', [RekapPKLOlehDepartemen::class, 'daftarMahasiswaSudahPKL']);
         });
     });
