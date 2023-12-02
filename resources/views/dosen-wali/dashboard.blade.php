@@ -124,6 +124,8 @@
                                     </table><br>
                                 </div>
                             </div><!-- /.card-body -->
+                        </div>
+                    </div>
             </section>
         @endsection
 

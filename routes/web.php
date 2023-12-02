@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\KabupatenController;
+use App\Http\Controllers\RekapPKLOlehDepartemen;
 use App\Http\Controllers\DataIRSOlehMahasiswaController;
 use App\Http\Controllers\DataKHSOlehMahasiswaController;
 use App\Http\Controllers\DataPKLOlehMahasiswaController;
@@ -124,6 +125,13 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/progres-skripsi/{nim}/edit', [SetujuiSkripsiOlehDosenWaliController::class, 'editDanSetujui']);
             Route::put('/progres-skripsi/{nim}/update-dan-setujui', [SetujuiSkripsiOlehDosenWaliController::class, 'updateDanSetujui']);
             Route::put('/progres-skripsi/{nim}', [SetujuiSkripsiOlehDosenWaliController::class, 'setujui']);
+        });
+    });
+
+    Route::middleware(['checkrole:departemen'])->group(function () {
+        Route::prefix('departemen')->group(function () {
+            Route::get('/rekap-pkl', [RekapPKLOlehDepartemen::class, 'showByYear']);
+            Route::get('/mahasiswa-sudah-pkl/{tahun}', [RekapPKLOlehDepartemen::class, 'daftarMahasiswaSudahPKL']);
         });
     });
 });

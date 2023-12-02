@@ -46,9 +46,39 @@
                             </ul>
                         </div>
                     @endif
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="card card-primary card-outline">
+                                <div class="card-body">
+                                    <h5 class="text-center">
+                                        <a href="/departemen/rekap-pkl">Rekap PKL</a>
+                                    </h5>
+                                </div>
+                            </div><!-- /.card -->
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="card card-primary card-outline">
+                                <div class="card-body">
+                                    <h5 class="text-center">
+                                        <a href="/departemen/rekap-skripsi">Rekap Skripsi</a>
+                                    </h5>
+                                </div>
+                            </div><!-- /.card -->
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="card card-primary card-outline">
+                                <div class="card-body">
+                                    <h5 class="text-center">
+                                        <a href="/departemen/rekap-mahasiswa">Rekap Mahasiswa</a>
+                                    </h5>
+                                </div>
+                            </div><!-- /.card -->
+                        </div>
+                    </div>
                 </div><!-- /.container-fluid -->
             </section>
             <!-- /.content -->
         </div>
-    @endsection
+    </div>
+@endsection
 @endsection
