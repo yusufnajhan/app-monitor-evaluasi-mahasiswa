@@ -148,8 +148,8 @@ Route::middleware(['auth'])->group(function () {
 
             Route::get('/rekap-mahasiswa', [RekapMahasiswaOlehDepartemenController::class, 'showByYear']);
             Route::get('/cetak-pdf-mahasiswa', [RekapMahasiswaOlehDepartemenController::class, 'printPDFByYear']);
-            Route::get('/rekap-mahasiswa/{tahun}/{status}', [RekapMahasiswaOlehDepartemenController::class, 'daftarMahasiswaSudahSkripsi']);
-            Route::get('/cetak-mahasiswa-tahun-{tahun}-status-{status}', [RekapMahasiswaOlehDepartemenController::class, 'printPDFSudahSkripsi']);
+            Route::get('/rekap-mahasiswa/{tahun}/{status}', [RekapMahasiswaOlehDepartemenController::class, 'mahasiswaByYearAndStatusShow']);
+            Route::get('/cetak-mahasiswa-tahun-{tahun}-status-{status}', [RekapMahasiswaOlehDepartemenController::class, 'printPDFShowMahasiswa']);
         });
     });
 });

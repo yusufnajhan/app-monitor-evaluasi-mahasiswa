@@ -48,7 +48,12 @@
                                     <tr>
                                         <td>{{ $status }}</td>
                                         @for ($year = now()->year - 6; $year <= now()->year; $year++)
-                                            <td>{{ $mahasiswa->mahasiswaByYearAndStatus($year, $status) }}</td>
+                                            <td>
+                                                <a
+                                                    href="/departemen/rekap-mahasiswa/{{ $year }}/{{ $status }}">
+                                                    {{ $mahasiswa->mahasiswaByYearAndStatus($year, $status) }}
+                                                </a>
+                                            </td>
                                         @endfor
                                     </tr>
                                 @endforeach

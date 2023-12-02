@@ -13,18 +13,23 @@
 <body class="align-items-center justify-content-center">
     <div class="text-center">
         <h3>
-            Daftar Mahasiswa Angkatan {{ $tahun }} Sudah Lulus Skripsi <br>
+            Daftar Mahasiswa Angkatan {{ $tahun }} Status {{ $status }} <br>
             Departemen Informatika Fakultas Sains dan Matematika UNDIP Semarang
         </h3>
     </div>
     <table class="table table-bordered">
         <thead class="thead-light">
             <tr>
-                <th>No</th>
-                <th>NIM</th>
-                <th>Nama</th>
-                <th>Angkatan</th>
-                <th>Nilai</th>
+                <th scope="col">No</th>
+                <th scope="col">NIM</th>
+                <th scope="col">Nama</th>
+                <th scope="col">Angkatan</th>
+                <th scope="col">Status</th>
+                <th scope="col">Jalur Masuk</th>
+                <th scope="col">Nomor Telepon</th>
+                <th scope="col">Provinsi</th>
+                <th scope="col">Kota</th>
+                <th scope="col">Alamat</th>
             </tr>
         </thead>
         <tbody>
@@ -34,7 +39,12 @@
                     <td>{{ $mhs->nim }}</td>
                     <td>{{ $mhs->nama }}</td>
                     <td>{{ $mhs->angkatan }}</td>
-                    <td>{{ $mhs->progresSkripsi->nilai }}</td>
+                    <td>{{ $mhs->status }}</td>
+                    <td>{{ $mhs->jalur_masuk }}</td>
+                    <td>{{ $mhs->no_telepon }}</td>
+                    <td>{{ $mhs->getNamaProvinsi() }}</td>
+                    <td>{{ $mhs->getNamaKabupaten() }}</td>
+                    <td>{{ $mhs->alamat }}</td>
                 </tr>
             @endforeach
         </tbody>

@@ -57,4 +57,25 @@ class Mahasiswa extends Model
 
         return $semester;
     }
+
+    public function getNamaProvinsi()
+    {
+        $kode = $this->provinsi;
+
+        $provinsi = Provinsi::where('kode_prov', $kode)
+            ->select('nama_prov')
+            ->first();
+        return $provinsi->nama_prov;
+    }
+
+    public function getNamaKabupaten()
+    {
+        $kode = $this->kota;
+
+        $kabupaten = Kabupaten::where('kode_kab', $kode)
+            ->select('nama_kab')
+            ->first();
+
+        return $kabupaten->nama_kab;
+    }
 }
