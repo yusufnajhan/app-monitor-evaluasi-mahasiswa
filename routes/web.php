@@ -135,6 +135,9 @@ Route::middleware(['auth'])->group(function () {
 
             Route::get('/mahasiswa-sudah-pkl/{tahun}', [RekapPKLOlehDepartemen::class, 'daftarMahasiswaSudahPKL']);
             Route::get('/cetak-sudah-pkl-tahun-{tahun}', [RekapPKLOlehDepartemen::class, 'printPDFSudahPKL']);
+
+            Route::get('/mahasiswa-belum-pkl/{tahun}', [RekapPKLOlehDepartemen::class, 'daftarMahasiswaBelumPKL']);
+            Route::get('/cetak-belum-pkl-tahun-{tahun}', [RekapPKLOlehDepartemen::class, 'printPDFBelumPKL']);
         });
     });
 });

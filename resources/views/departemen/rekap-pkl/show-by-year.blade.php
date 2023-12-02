@@ -62,7 +62,11 @@
                                                 {{ $pkl->sudahPKL($year) }}
                                             </a>
                                         </td>
-                                        <td>{{ $pkl->belumPKL($year) }}</td>
+                                        <td>
+                                            <a href="/departemen/mahasiswa-belum-pkl/{{ $year }}">
+                                                {{ $pkl->belumPKL($year) }}
+                                            </a>
+                                        </td>
                                     @endfor
                                 </tr>
                             </tbody>
