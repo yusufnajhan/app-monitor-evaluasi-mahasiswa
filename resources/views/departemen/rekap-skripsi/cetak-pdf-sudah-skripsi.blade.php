@@ -7,13 +7,13 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
         integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
-    <title>Sudah Lulus PKL Angkatan {{ $tahun }}</title>
+    <title>Sudah Lulus Skripsi Angkatan {{ $tahun }}</title>
 </head>
 
 <body class="align-items-center justify-content-center">
     <div class="text-center">
         <h3>
-            Daftar Mahasiswa Angkatan {{ $tahun }} Sudah Lulus PKL <br>
+            Daftar Mahasiswa Angkatan {{ $tahun }} Sudah Lulus Skripsi <br>
             Departemen Informatika Fakultas Sains dan Matematika UNDIP Semarang
         </h3>
     </div>
@@ -34,7 +34,7 @@
                     <td>{{ $mhs->nim }}</td>
                     <td>{{ $mhs->nama }}</td>
                     <td>{{ $mhs->angkatan }}</td>
-                    <td>{{ $mhs->progresPraktikKerjaLapangan->nilai }}</td>
+                    <td>{{ $mhs->progresSkripsi->nilai }}</td>
                 </tr>
             @endforeach
         </tbody>

@@ -13,22 +13,22 @@
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
                             <li class="breadcrumb-item"><a href="/dashboard">Dashboard</a></li>
-                            <li class="breadcrumb-item active">Daftar Mahasiswa Sudah PKL</li>
+                            <li class="breadcrumb-item active">Daftar Mahasiswa Sudah Skripsi</li>
                         </ol>
                     </div><!-- /.col -->
                 </div><!-- /.row -->
 
-                <h1 class="m-0">Daftar Mahasiswa yang Belum PKL</h1>
+                <h1 class="m-0">Daftar Mahasiswa yang Belum Skripsi</h1>
                 <br>
 
                 <!-- general form elements -->
                 <div class="card card-primary">
                     <div class="card-header">
-                        <h3 class="card-title">PKL</h3>
+                        <h3 class="card-title">Skripsi</h3>
                     </div>
                     <div class="card-body">
                         <h3 class="text-center">
-                            Daftar Mahasiswa Angkatan {{ $tahun }} Belum Lulus PKL <br>
+                            Daftar Mahasiswa Angkatan {{ $tahun }} Belum Lulus Skripsi <br>
                             Departemen Informatika Fakultas Sains dan Matematika UNDIP Semarang
                         </h3>
                         <table class="table table-bordered">
@@ -48,14 +48,14 @@
                                         <td>{{ $mhs->nim }}</td>
                                         <td>{{ $mhs->nama }}</td>
                                         <td>{{ $mhs->angkatan }}</td>
-                                        <td>{{ $mhs->progresPraktikKerjaLapangan->nilai }}</td>
+                                        <td>{{ $mhs->progresSkripsi->nilai }}</td>
                                     </tr>
                                 @endforeach
                             </tbody>
                         </table>
                     </div>
                     <div class="card-footer">
-                        <a href="/departemen/cetak-belum-pkl-tahun-{{ $tahun }}" class="btn btn-primary">
+                        <a href="/departemen/cetak-belum-skripsi-tahun-{{ $tahun }}" class="btn btn-primary">
                             Cetak PDF
                         </a>
                     </div>
