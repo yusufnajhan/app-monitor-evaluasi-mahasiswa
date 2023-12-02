@@ -58,4 +58,20 @@ class RekapPKLOlehDepartemen extends Controller
 
         return view('departemen.rekap-pkl.mahasiswa-sudah-pkl', compact('mahasiswa', 'tahun'));
     }
+
+    public function printPDFSudahPKL($tahun)
+    {
+        $mahasiswa = Mahasiswa::whereHas('progresPraktikKerjaLapangan', function ($query) {
+            $query->where('sudah_disetujui', 1);
+        })
+            ->where('angkatan', $tahun)
+            ->get();
+
+        $pdf = Pdf::loadView('departemen.rekap-pkl.cetak-pdf-sudah-pkl', [
+            'mahasiswa' => $mahasiswa,
+            'tahun' => $tahun
+        ]);
+        return $pdf->download('sudah-pkl-tahun-' . $tahun . '.pdf');
+        // return view('departemen.rekap-pkl.cetak-pdf-sudah-pkl', compact('mahasiswa', 'tahun'));
+    }
 }

@@ -27,19 +27,11 @@
                         <h3 class="card-title">PKL</h3>
                     </div>
                     <div class="card-body">
+                        <h3 class="text-center">
+                            Daftar Mahasiswa Angkatan {{ $tahun }} Sudah Lulus PKL <br>
+                            Departemen Informatika Fakultas Sains dan Matematika UNDIP Semarang
+                        </h3>
                         <table class="table table-bordered">
-                            <thead class="thead-light">
-                                <tr>
-                                    <th scope="col" colspan="5" style="text-align: center">
-                                        Daftar Mahasiswa Angkatan {{ $tahun }} Sudah Lulus PKL
-                                    </th>
-                                </tr>
-                                <tr>
-                                    <th scope="col" colspan="5" style="text-align: center">
-                                        Departemen Informatika Fakultas Sains dan Matematika UNDIP Semarang
-                                    </th>
-                                </tr>
-                            </thead>
                             <thead class="thead-light">
                                 <tr>
                                     <th>No</th>
@@ -61,6 +53,11 @@
                                 @endforeach
                             </tbody>
                         </table>
+                    </div>
+                    <div class="card-footer">
+                        <a href="/departemen/cetak-sudah-pkl-tahun-{{ $tahun }}" class="btn btn-primary">
+                            Cetak PDF
+                        </a>
                     </div>
                     <!-- /.card-header -->
                     <!-- form start -->
