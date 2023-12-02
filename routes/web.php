@@ -16,6 +16,7 @@ use App\Http\Controllers\DataSkripsiOlehMahasiswaController;
 use App\Http\Controllers\LengkapiDataMahasiswaOlehMahasiswa;
 use App\Http\Controllers\DataMahasiswaOlehOperatorController;
 use App\Http\Controllers\DataMahasiswaOlehDosenWaliController;
+use App\Http\Controllers\RekapMahasiswaOlehDepartemenController;
 use App\Http\Controllers\SetujuiSkripsiOlehDosenWaliController;
 
 /*
@@ -144,6 +145,11 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/cetak-sudah-skripsi-tahun-{tahun}', [RekapSkripsiOlehDepartemen::class, 'printPDFSudahSkripsi']);
             Route::get('/mahasiswa-belum-skripsi/{tahun}', [RekapSkripsiOlehDepartemen::class, 'daftarMahasiswaBelumSkripsi']);
             Route::get('/cetak-belum-skripsi-tahun-{tahun}', [RekapSkripsiOlehDepartemen::class, 'printPDFBelumSkripsi']);
+
+            Route::get('/rekap-mahasiswa', [RekapMahasiswaOlehDepartemenController::class, 'showByYear']);
+            Route::get('/cetak-pdf-mahasiswa', [RekapMahasiswaOlehDepartemenController::class, 'printPDFByYear']);
+            Route::get('/rekap-mahasiswa/{tahun}/{status}', [RekapMahasiswaOlehDepartemenController::class, 'daftarMahasiswaSudahSkripsi']);
+            Route::get('/cetak-mahasiswa-tahun-{tahun}-status-{status}', [RekapMahasiswaOlehDepartemenController::class, 'printPDFSudahSkripsi']);
         });
     });
 });
