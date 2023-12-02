@@ -5,6 +5,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\KabupatenController;
 use App\Http\Controllers\RekapPKLOlehDepartemen;
+use App\Http\Controllers\RekapSkripsiOlehDepartemen;
 use App\Http\Controllers\DataIRSOlehMahasiswaController;
 use App\Http\Controllers\DataKHSOlehMahasiswaController;
 use App\Http\Controllers\DataPKLOlehMahasiswaController;
@@ -132,12 +133,17 @@ Route::middleware(['auth'])->group(function () {
         Route::prefix('departemen')->group(function () {
             Route::get('/rekap-pkl', [RekapPKLOlehDepartemen::class, 'showByYear']);
             Route::get('/cetak-pdf-pkl', [RekapPKLOlehDepartemen::class, 'printPDFByYear']);
-
             Route::get('/mahasiswa-sudah-pkl/{tahun}', [RekapPKLOlehDepartemen::class, 'daftarMahasiswaSudahPKL']);
             Route::get('/cetak-sudah-pkl-tahun-{tahun}', [RekapPKLOlehDepartemen::class, 'printPDFSudahPKL']);
-
             Route::get('/mahasiswa-belum-pkl/{tahun}', [RekapPKLOlehDepartemen::class, 'daftarMahasiswaBelumPKL']);
             Route::get('/cetak-belum-pkl-tahun-{tahun}', [RekapPKLOlehDepartemen::class, 'printPDFBelumPKL']);
+
+            Route::get('/rekap-skripsi', [RekapSkripsiOlehDepartemen::class, 'showByYear']);
+            Route::get('/cetak-pdf-skripsi', [RekapSkripsiOlehDepartemen::class, 'printPDFByYear']);
+            Route::get('/mahasiswa-sudah-skripsi/{tahun}', [RekapSkripsiOlehDepartemen::class, 'daftarMahasiswaSudahSkripsi']);
+            Route::get('/cetak-sudah-skripsi-tahun-{tahun}', [RekapSkripsiOlehDepartemen::class, 'printPDFSudahSkripsi']);
+            Route::get('/mahasiswa-belum-skripsi/{tahun}', [RekapSkripsiOlehDepartemen::class, 'daftarMahasiswaBelumSkripsi']);
+            Route::get('/cetak-belum-skripsi-tahun-{tahun}', [RekapSkripsiOlehDepartemen::class, 'printPDFBelumSkripsi']);
         });
     });
 });
