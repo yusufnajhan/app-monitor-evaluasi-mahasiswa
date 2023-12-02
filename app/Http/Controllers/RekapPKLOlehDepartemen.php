@@ -45,7 +45,7 @@ class RekapPKLOlehDepartemen extends Controller
     public function printPDFByYear()
     {
         $pdf = Pdf::loadView('departemen.rekap-pkl.cetak-pdf-tahun')->setPaper('a4', 'landscape');
-        return $pdf->download('pkl-per-tahun.pdf');
+        return $pdf->stream('pkl-per-tahun.pdf');
     }
 
     public function daftarMahasiswaSudahPKL($tahun)
@@ -71,7 +71,7 @@ class RekapPKLOlehDepartemen extends Controller
             'mahasiswa' => $mahasiswa,
             'tahun' => $tahun
         ]);
-        return $pdf->download('sudah-pkl-tahun-' . $tahun . '.pdf');
+        return $pdf->stream('sudah-pkl-tahun-' . $tahun . '.pdf');
         // return view('departemen.rekap-pkl.cetak-pdf-sudah-pkl', compact('mahasiswa', 'tahun'));
     }
 }
