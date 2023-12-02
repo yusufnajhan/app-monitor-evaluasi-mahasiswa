@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Mahasiswa;
 use App\Models\ProgresPraktikKerjaLapangan;
 use Database\Factories\ProgresSkripsiFactory;
+use Laravel\Ui\Presets\React;
 
 class RekapPKLOlehDepartemen extends Controller
 {
@@ -37,10 +38,24 @@ class RekapPKLOlehDepartemen extends Controller
 
     public function showByYear()
     {
-        $pkl = ProgresPraktikKerjaLapangan::where('sudah_disetujui', 1)->count();
-
-        // dd($pkl);
-
         return view('departemen.rekap-pkl.show-by-year');
+    }
+
+    public function daftarMahasiswaSudahPKL($tahun)
+    {
+        // $mahasiswa = Mahasiswa::whereHas('progresPraktikKerjaLapangan', function ($query) {
+        //     $query->where('sudah_disetujui', 1);
+        // })
+        //     ->where('angkatan', $request)
+        //     ->get();
+
+        $mahasiswa = Mahasiswa::whereHas('progresPraktikKerjaLapangan', function ($query) {
+            $query->where('sudah_disetujui', 1);
+        })
+            ->where('angkatan', $tahun)
+            ->get();
+
+        return view('departemen.rekap-pkl.mahasiswa-sudah-pkl', compact('mahasiswa', 'tahun'));
+        // dd($tahun);
     }
 }

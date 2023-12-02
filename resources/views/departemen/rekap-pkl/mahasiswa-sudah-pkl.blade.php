@@ -13,12 +13,12 @@
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
                             <li class="breadcrumb-item"><a href="/dashboard">Dashboard</a></li>
-                            <li class="breadcrumb-item active">Rekap PKL</li>
+                            <li class="breadcrumb-item active">Daftar Mahasiswa Sudah PKL</li>
                         </ol>
                     </div><!-- /.col -->
                 </div><!-- /.row -->
 
-                <h1 class="m-0">Rekap PKL per Tahun</h1>
+                <h1 class="m-0">Daftar Mahasiswa yang Sudah PKL</h1>
                 <br>
 
                 <!-- general form elements -->
@@ -30,40 +30,37 @@
                         <table class="table table-bordered">
                             <thead class="thead-light">
                                 <tr>
-                                    <th scope="col" colspan="14" style="text-align: center">Angkatan</th>
+                                    <th scope="col" colspan="5" style="text-align: center">
+                                        Daftar Mahasiswa Angkatan {{ $tahun }} Sudah Lulus PKL
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <th scope="col" colspan="5" style="text-align: center">
+                                        Departemen Informatika Fakultas Sains dan Matematika UNDIP Semarang
+                                    </th>
                                 </tr>
                             </thead>
                             <thead class="thead-light">
                                 <tr>
-                                    @for ($year = now()->year - 6; $year <= now()->year; $year++)
-                                        <th scope="col" colspan="2" style="text-align: center">{{ $year }}
-                                        </th>
-                                    @endfor
+                                    <th>No</th>
+                                    <th>NIM</th>
+                                    <th>Nama</th>
+                                    <th>Angkatan</th>
+                                    <th>Nilai</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @inject('pkl', 'App\Http\Controllers\RekapPKLOlehDepartemen')
-                                <tr>
-                                    @for ($year = now()->year - 6; $year <= now()->year; $year++)
-                                        <td scope="col">Sudah</td>
-                                        <td scope="col">Belum</td>
-                                    @endfor
-                                </tr>
-                                <tr>
-                                    @for ($year = now()->year - 6; $year <= now()->year; $year++)
-                                        <td>
-                                            <a href="/departemen/mahasiswa-sudah-pkl/{{ $year }}">
-                                                {{ $pkl->sudahPKL($year) }}
-                                            </a>
-                                        </td>
-                                        <td>{{ $pkl->belumPKL($year) }}</td>
-                                    @endfor
-                                </tr>
+                                @foreach ($mahasiswa as $mhs)
+                                    <tr>
+                                        <td>{{ $loop->index + 1 }}</td>
+                                        <td>{{ $mhs->nim }}</td>
+                                        <td>{{ $mhs->nama }}</td>
+                                        <td>{{ $mhs->angkatan }}</td>
+                                        <td>{{ $mhs->progresPraktikKerjaLapangan->nilai }}</td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
-                    </div>
-                    <div class="card-footer">
-
                     </div>
                     <!-- /.card-header -->
                     <!-- form start -->
