@@ -73,7 +73,9 @@ Route::middleware(['auth'])->group(function () {
             Route::put('/irs/{nim}/{semester}', [DataIRSOlehMahasiswaController::class, 'update']);
 
             // KHS Mahasiswa
-            Route::get('/khs/{nim}', [DataKHSOlehMahasiswaController::class, 'index']);
+            Route::get('/isi-khs', [DataKHSOlehMahasiswaController::class, 'create']);
+            Route::post('/simpan-khs', [DataKHSOlehMahasiswaController::class, 'store']);
+            Route::get('/khs/{nim}', [DataKHSOlehMahasiswaController::class, 'index'])->name('mahasiswa.khs.index');
             Route::get('/khs/{nim}/{semester}', [DataKHSOlehMahasiswaController::class, 'show']);
             Route::get('/khs/{nim}/{semester}/edit', [DataKHSOlehMahasiswaController::class, 'edit']);
             Route::put('/khs/{nim}/{semester}', [DataKHSOlehMahasiswaController::class, 'update']);

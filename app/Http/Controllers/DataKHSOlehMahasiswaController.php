@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreKHSOlehMahasiswaRequest;
 use App\Http\Requests\UpdateKHSOlehMahasiswaRequest;
 use App\Models\KartuHasilStudi;
 use App\Models\Mahasiswa;
@@ -28,15 +29,54 @@ class DataKHSOlehMahasiswaController extends Controller
      */
     public function create()
     {
-        //
+        $mahasiswa = Mahasiswa::where('nim', auth()->user()->mahasiswa->nim)
+            ->first();
+        if (!$mahasiswa) {
+            abort(404);
+        }
+
+        return view('mahasiswa.khs.create', compact('mahasiswa'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store($request)
+    public function store(StoreKHSOlehMahasiswaRequest $request)
     {
-        //
+        $data = $request->validated();
+
+        $mahasiswa = Mahasiswa::where('nim', auth()->user()->mahasiswa->nim)
+            ->first();
+        if (!$mahasiswa) {
+            abort(404);
+        }
+
+        $khs = KartuHasilStudi::firstOrNew(
+            ['mahasiswa_id' => $mahasiswa->id, 'semester' => $data['semester']],
+            ['sks_semester' => $data['sks_semester'], 'sks_kumulatif' => $data['sks_kumulatif']],
+            ['ip_semester' => $data['ip_semester'], 'ip_kumulatif' => $data['ip_kumulatif']],
+            ['sudah_disetujui' => 0]
+        );
+
+        if ($khs->sudah_disetujui == 1) {
+            return redirect('/mahasiswa/khs/' . $mahasiswa->nim)->with('error', 'IRS sudah disetujui, tidak dapat disimpan');
+        }
+
+        if ($request->hasFile('nama_file')) {
+            $namaFileBaru = 'khs_' . $data['semester'] . '_' . str_replace(' ', '_', strtolower($mahasiswa->nama)) . '.pdf';
+            $khs->nama_file = $request->file('nama_file')->storeAs('khs', $namaFileBaru);
+        }
+
+        // Set values for existing or new KHS
+        $khs->sks_semester = $data['sks_semester'];
+        $khs->sks_kumulatif = $data['sks_kumulatif'];
+        $khs->ip_semester = $data['ip_semester'];
+        $khs->ip_kumulatif = $data['ip_kumulatif'];
+        $khs->sudah_disetujui = 0;
+
+        $khs->save();
+
+        return redirect('/mahasiswa/khs/' . $mahasiswa->nim);
     }
 
     /**

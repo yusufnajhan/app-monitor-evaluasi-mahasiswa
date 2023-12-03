@@ -26,15 +26,15 @@
                 <h1 class="m-0">KHS Mahasiswa</h1>
                 <br>
 
-                @if ($errors->any())
-                    <div class="red-alert">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
+                @if (session('error'))
+                    <div class="alert alert-danger">
+                        {{ session('error') }}
                     </div>
                 @endif
+
+                <a href="/mahasiswa/isi-khs" class="btn btn-primary mb-2" style="width: 100px;">
+                    Isi KHS
+                </a>
 
                 <!-- general form elements -->
                 <div class="card card-primary">
@@ -60,9 +60,16 @@
                                             {{ $itemKhs->statusPersetujuan() }}
                                         </td>
                                         <td>
-                                            <a href="/mahasiswa/khs/{{ $nim }}/{{ $itemKhs->semester }}">Detail</a>
-                                            <a
-                                                href="/mahasiswa/khs/{{ $nim }}/{{ $itemKhs->semester }}/edit">Edit</a>
+                                            <a href="/mahasiswa/khs/{{ $nim }}/{{ $itemKhs->semester }}"
+                                                class="btn btn-primary mr-3">
+                                                Detail
+                                            </a>
+                                            @if ($itemKhs->sudah_disetujui == 0)
+                                                <a href="/mahasiswa/khs/{{ $nim }}/{{ $itemKhs->semester }}/edit"
+                                                    class="btn btn-warning">
+                                                    Edit
+                                                </a>
+                                            @endif
                                         </td>
                                     </tr>
                                 @endforeach
@@ -70,12 +77,11 @@
                         </table>
                     </div>
                 </div>
-                <!-- /.card -->
-                <br>
-                <a href="/dashboard"
-                    class="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-primary rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900">
+                <a href="/dashboard" class="btn btn-secondary">
                     Back
                 </a>
+                <!-- /.card -->
+                <br>
             </div><!-- /.container -->
         </div>
     </div>
