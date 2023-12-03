@@ -21,6 +21,8 @@ class DataKHSOlehMahasiswaController extends Controller
 
         $khs = KartuHasilStudi::where('mahasiswa_id', $mahasiswa->id)->get();
 
+        $this->authorize('viewAny', KartuHasilStudi::class);
+
         return view('mahasiswa.khs.index', compact('khs', 'nim'));
     }
 
@@ -29,6 +31,8 @@ class DataKHSOlehMahasiswaController extends Controller
      */
     public function create()
     {
+        $this->authorize('create', KartuHasilStudi::class);
+
         $mahasiswa = Mahasiswa::where('nim', auth()->user()->mahasiswa->nim)
             ->first();
         if (!$mahasiswa) {
@@ -43,6 +47,8 @@ class DataKHSOlehMahasiswaController extends Controller
      */
     public function store(StoreKHSOlehMahasiswaRequest $request)
     {
+        $this->authorize('create', KartuHasilStudi::class);
+
         $data = $request->validated();
 
         $mahasiswa = Mahasiswa::where('nim', auth()->user()->mahasiswa->nim)
@@ -96,6 +102,8 @@ class DataKHSOlehMahasiswaController extends Controller
             abort(404);
         }
 
+        $this->authorize('view', $khs);
+
         return view('mahasiswa.khs.show', compact('khs', 'nim'));
     }
 
@@ -114,6 +122,12 @@ class DataKHSOlehMahasiswaController extends Controller
             ->first();
         if (!$khs) {
             abort(404);
+        }
+
+        $this->authorize('update', $khs);
+
+        if ($khs->sudah_disetujui == 1) {
+            return redirect('/mahasiswa/khs/' . $mahasiswa->nim)->with('error', 'KHS sudah disetujui, tidak bisa diubah');
         }
 
         return view('mahasiswa.khs.edit', compact('khs', 'nim'));
@@ -136,6 +150,12 @@ class DataKHSOlehMahasiswaController extends Controller
             ->first();
         if (!$khs) {
             abort(404);
+        }
+
+        $this->authorize('update', $khs);
+
+        if ($khs->sudah_disetujui == 1) {
+            return redirect('/mahasiswa/khs/' . $mahasiswa->nim)->with('error', 'KHS sudah disetujui, tidak bisa diubah');
         }
 
         $namaFileBaru = 'khs_' . $semester . '_' . str_replace(' ', '_', strtolower($mahasiswa->nama)) . '.pdf';

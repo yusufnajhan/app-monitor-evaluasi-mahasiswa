@@ -80,7 +80,7 @@
                             </div>
                             <!-- /.card-body -->
                             <div class="card-footer">
-                                <a href="/mahasiswa/khs/{{ $nim }}">Back</a>
+                                <a href="/mahasiswa/khs/{{ $nim }}" class="btn btn-secondary">Back</a>
                             </div>
                         </form>
                     @endif

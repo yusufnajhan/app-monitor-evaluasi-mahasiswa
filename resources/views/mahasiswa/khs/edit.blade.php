@@ -17,20 +17,11 @@
                         </ol>
                     </div><!-- /.col -->
                 </div><!-- /.row -->
+            </div>
+        </div>
 
-                <h1 class="m-0">Edit KHS</h1>
-                <br>
-
-                @if ($errors->any())
-                    <div class="red-alert">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
-
+        <div class="content">
+            <div class="container">
                 <!-- general form elements -->
                 <div class="card card-primary">
                     <div class="card-header">
@@ -47,49 +38,59 @@
                                 <label for="semester">Semester</label>
                                 <input type="text" name="semester" class="form-control" id="semester"
                                     value="{{ $khs->semester }}" disabled>
+                                @error('semester')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <label for="sks_semester">SKS Semester Ini</label>
                                 <input type="text" name="sks_semester" class="form-control" id="sks_semester"
                                     value="{{ old('sks_semester', $khs->sks_semester) }}">
+                                @error('sks_semester')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <label for="sks_kumulatif">SKS Kumulatif</label>
                                 <input type="text" name="sks_kumulatif" class="form-control" id="sks_kumulatif"
                                     value="{{ old('sks_kumulatif', $khs->sks_kumulatif) }}">
+                                @error('sks_kumulatif')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <label for="ip_semester">IP Semester Ini</label>
                                 <input type="text" name="ip_semester" class="form-control" id="ip_semester"
                                     value="{{ old('ip_semester', $khs->ip_semester) }}">
+                                @error('ip_semester')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <label for="ip_kumulatif">IP Kumulatif</label>
                                 <input type="text" name="ip_kumulatif" class="form-control" id="ip_kumulatif"
                                     value="{{ old('ip_kumulatif', $khs->ip_kumulatif) }}">
+                                @error('ip_kumulatif')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <label for="nama_file">Scan KHS </label>
-                                <input type="file" name="nama_file" class="form-control" id="nama_file">
+                                <input type="file" name="nama_file" class="form-control-file" id="nama_file">
+                                @error('nama_file')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                         </div>
                         <!-- /.card-body -->
                         <div class="card-footer">
-                            <button type="submit" class="btn btn-primary">Submit</button>
-                            <a href="/mahasiswa/khs/{{ $nim }}">Back</a>
+                            <button type="submit" class="btn btn-primary mr-2">Submit</button>
+                            <a href="/mahasiswa/khs/{{ $nim }}" class="btn btn-secondary">Back</a>
                         </div>
                     </form>
                 </div>
                 <!-- /.card -->
-            </div><!-- /.row -->
-
-
-        </div><!-- /.container-fluid -->
-        <br>
-        <a href="/dashboard"
-            class="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900">
-            Back
-        </a>
-    </div>
-    </div>
+            </div>
+        </div>
+    </div><!-- /.row -->
 @endsection

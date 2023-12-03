@@ -13,7 +13,13 @@ class KartuHasilStudiPolicy
      */
     public function viewAny(User $user): bool
     {
-        //
+        if ($user->role === 'mahasiswa') {
+            if (route('mahasiswa.khs.index', $user->mahasiswa->nim) === url()->current()) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /**
@@ -21,7 +27,11 @@ class KartuHasilStudiPolicy
      */
     public function view(User $user, KartuHasilStudi $kartuHasilStudi): bool
     {
-        //
+        if ($user->role === 'mahasiswa' && $user->mahasiswa->id === $kartuHasilStudi->mahasiswa_id) {
+            return true;
+        }
+
+        return false;
     }
 
     /**
@@ -29,7 +39,7 @@ class KartuHasilStudiPolicy
      */
     public function create(User $user): bool
     {
-        //
+        return $user->role === 'mahasiswa' ? true : false;
     }
 
     /**
@@ -37,7 +47,11 @@ class KartuHasilStudiPolicy
      */
     public function update(User $user, KartuHasilStudi $kartuHasilStudi): bool
     {
-        //
+        if ($user->role === 'mahasiswa' && $user->mahasiswa->id === $kartuHasilStudi->mahasiswa_id) {
+            return true;
+        }
+
+        return false;
     }
 
     /**

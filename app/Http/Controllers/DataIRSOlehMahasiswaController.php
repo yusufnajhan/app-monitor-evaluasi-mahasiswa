@@ -17,10 +17,6 @@ class DataIRSOlehMahasiswaController extends Controller
      */
     public function index($nim)
     {
-        $this->authorize('viewAny', IsianRencanaSemester::class)
-            ? Response::allow()
-            : Response::denyWithStatus(404);
-
         $mahasiswa = Mahasiswa::where('nim', $nim)->first();
         if (!$mahasiswa) {
             abort(404);
