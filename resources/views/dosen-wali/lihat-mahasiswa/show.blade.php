@@ -50,9 +50,23 @@
                 <div class="d-flex flex-wrap justify-content-center">
                     @for ($i = 1; $i <= 14; $i++)
                         <!-- Button trigger modal -->
-                        <button type="button" class="btn btn-primary btn-lg mr-3" data-toggle="modal"
-                            data-target="#smt-{{ $i }}" style="width: 207px; height: 75px;"
-                            @if ($i <= $mahasiswa->hitungSemester()) enabled @else disabled @endif>
+                        <button type="button"
+                            class="btn 
+                                @if ($i <= $mahasiswa->hitungSemester())
+                                    @if (!empty($pkl[$i - 1]) && $pkl[$i - 1]->sudah_disetujui == 1)
+                                        btn-warning
+                                    @elseif (!empty($skripsi[$i - 1]) && $skripsi[$i - 1]->sudah_disetujui == 1)
+                                        btn-success
+                                    @else
+                                        btn-primary
+                                    @endif
+                                @else
+                                    btn-danger 
+                                @endif
+                                btn-lg mr-3"
+                            data-toggle="modal"
+                            data-target="#smt-{{ $i }}"
+                            style="width: 207px; height: 75px;">
                             Semester {{ $i }}
                         </button>
 
@@ -70,18 +84,35 @@
                                     </div>
                                     <div class="modal-body">
                                         @if ($i <= $mahasiswa->hitungSemester())
-                                            <b>IRS</b><br>
-                                            SKS {{ $irs[$i - 1]->sks }} <br>
-                                            <embed src="/storage/{{ $irs[$i - 1]->nama_file }}" width="100%"
-                                                height="200" type="application/pdf">
+                                            <!-- mengecek apakah irs sudah disetujui -->
+                                            @if ($irs[$i - 1]->sudah_disetujui == 1) 
+                                                <b>IRS</b><br>
+                                                SKS {{ $irs[$i - 1]->sks }} <br>
+                                                <embed src="/storage/{{ $irs[$i - 1]->nama_file }}" width="100%" height="200"
+                                                    type="application/pdf">
+                                            @else
+                                                <b>IRS Belum Disetujui</b><br>
+                                                <a href="/dosen-wali/setujui-irs">
+                                                <button type="button" class="btn btn-block btn-danger">
+                                                    Setujui IRS disini
+                                                </button></a>
+                                            @endif
                                             <br>
-                                            <b>KHS</b><br>
-                                            SKS {{ $khs[$i - 1]->sks_semester }} <br>
-                                            SKS Kumulatif {{ $khs[$i - 1]->sks_kumulatif }} <br>
-                                            IP Semester {{ $khs[$i - 1]->ip_semester }} <br>
-                                            IP Kumulatif {{ $khs[$i - 1]->ip_kumulatif }} <br>
-                                            <embed src="/storage/{{ $khs[$i - 1]->nama_file }}" width="100%"
-                                                height="200" type="application/pdf">
+                                            @if ($khs[$i - 1]->sudah_disetujui == 1) 
+                                                <b>KHS</b><br>
+                                                SKS {{ $khs[$i - 1]->sks_semester }} <br>
+                                                SKS Kumulatif {{ $khs[$i - 1]->sks_kumulatif }} <br>
+                                                IP Semester {{ $khs[$i - 1]->ip_semester }} <br>
+                                                IP Kumulatif {{ $khs[$i - 1]->ip_kumulatif }} <br>
+                                                <embed src="/storage/{{ $khs[$i - 1]->nama_file }}" width="100%"
+                                                    height="200" type="application/pdf">
+                                                    @else
+                                                <b>KHS Belum Disetujui</b><br>
+                                                <a href="/dosen-wali/setujui-khs">
+                                                <button type="button" class="btn btn-block btn-danger">
+                                                    Setujui KHS disini
+                                                </button></a>
+                                            @endif
                                         @else
                                             <p>Semester belum ditempuh</p>
                                         @endif

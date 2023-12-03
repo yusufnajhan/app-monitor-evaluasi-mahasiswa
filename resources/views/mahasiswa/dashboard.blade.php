@@ -33,6 +33,7 @@
                     </div>
                 </div><!-- /.container -->
             </div>
+        </div>
 
             <!-- Main content -->
             <div class="content">
@@ -63,10 +64,7 @@
                             <div class="col-lg-6">
                                 <div class="card card-primary card-outline">
                                     <div class="card-body">
-                                        <h5 class="text-center"><a
-                                                href="/mahasiswa/progres-pkl/{{ $mahasiswa->nim }}">Progres
-                                                PKL
-                                                Mahasiswa</a></h5>
+                                        <h5 class="text-center"><a href="/mahasiswa/pkl/{{ $mahasiswa->nim }}">Progres PKL Mahasiswa</a></h5>
                                     </div>
                                 </div><!-- /.card -->
                             </div>
