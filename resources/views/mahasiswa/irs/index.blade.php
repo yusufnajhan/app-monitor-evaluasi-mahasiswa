@@ -6,9 +6,7 @@
         <div class="content-header">
             <div class="container">
                 <div class="row mb-2">
-                    <div class="col-sm-6">
-                        <h1 class="m-0"> </h1>
-                    </div><!-- /.col -->
+                    <div class="col-sm-6"></div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
@@ -63,11 +61,11 @@
                                         </td>
                                         <td>
                                             <a href="/mahasiswa/irs/{{ $nim }}/{{ $itemIrs->semester }}"
-                                                class="btn btn-warning mr-3">
+                                                class="btn btn-primary mr-3">
                                                 Detail
                                             </a>
                                             <a href="/mahasiswa/irs/{{ $nim }}/{{ $itemIrs->semester }}/edit"
-                                                class="btn btn-danger">
+                                                class="btn btn-warning mr-3">
                                                 Edit
                                             </a>
                                         </td>

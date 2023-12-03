@@ -23,17 +23,6 @@
         <!-- Main content -->
         <div class="content">
             <div class="container">
-
-                @if ($errors->any())
-                    <div class="red-alert">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
-
                 <!-- general form elements -->
                 <div class="card card-primary">
                     <div class="card-header">
@@ -48,18 +37,30 @@
                                 <label for="semester">Semester</label>
                                 <select name="semester" id="semester" class="form-control">
                                     @for ($smt = 1; $smt <= $mahasiswa->hitungSemester(); $smt++)
-                                        <option value="{{ $smt }}">{{ $smt }}</option>
+                                        <option value="{{ $smt }}"
+                                            @if (old('semester') == $smt) selected @endif>
+                                            {{ $smt }}
+                                        </option>
                                     @endfor
                                 </select>
+                                @error('semester')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <label for="sks">Jumlah SKS yang diambil</label>
                                 <input type="text" name="sks" class="form-control" id="sks"
                                     value="{{ old('sks') }}" min="2" max="24">
+                                @error('sks')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <label for="nama_file">Scan IRS </label>
                                 <input type="file" name="nama_file" class="form-control-file" id="nama_file">
+                                @error('nama_file')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                         </div><!-- /.card-body -->
                         <div class="card-footer">

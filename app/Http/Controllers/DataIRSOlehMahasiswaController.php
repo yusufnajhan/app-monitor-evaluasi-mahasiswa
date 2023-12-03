@@ -39,8 +39,6 @@ class DataIRSOlehMahasiswaController extends Controller
             abort(404);
         }
 
-        // $semester = $mahasiswa->hitungSemester();
-
         return view('mahasiswa.irs.create', compact('mahasiswa'));
     }
 
@@ -57,26 +55,21 @@ class DataIRSOlehMahasiswaController extends Controller
             abort(404);
         }
 
-        $irs = IsianRencanaSemester::firstOrCreate(
+        $irs = IsianRencanaSemester::firstOrNew(
             ['mahasiswa_id' => $mahasiswa->id, 'semester' => $data['semester']],
             ['sks' => $data['sks'], 'sudah_disetujui' => 0]
         );
 
-        if ($irs) {
+        if ($request->hasFile('nama_file')) {
             $namaFileBaru = 'irs_' . $mahasiswa->hitungSemester() . '_' . str_replace(' ', '_', strtolower($mahasiswa->nama)) . '.pdf';
             $irs->nama_file = $request->file('nama_file')->storeAs('irs', $namaFileBaru);
-
-            $irs->sks = $data['sks'];
-            $irs->sudah_disetujui = 0;
-            $irs->save();
-        } else {
-            $namaFileBaru = 'irs_' . $mahasiswa->hitungSemester() . '_' . str_replace(' ', '_', strtolower($mahasiswa->nama)) . '.pdf';
-            IsianRencanaSemester::create([
-                'semester' => $data['semester'],
-                'sks' => $data['sks'],
-                'nama_file' => $namaFileBaru
-            ]);
         }
+
+        // Set values for existing or new IRS
+        $irs->sks = $data['sks'];
+        $irs->sudah_disetujui = 0;
+
+        $irs->save();
 
         return redirect('/mahasiswa/irs/' . $mahasiswa->nim);
     }

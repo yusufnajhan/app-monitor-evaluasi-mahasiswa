@@ -23,17 +23,6 @@
         <!-- Main content -->
         <div class="content">
             <div class="container">
-
-                @if ($errors->any())
-                    <div class="red-alert">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
-
                 <!-- general form elements -->
                 <div class="card card-primary">
                     <div class="card-header">
@@ -55,22 +44,25 @@
                                 <label for="sks">Jumlah SKS yang diambil</label>
                                 <input type="text" name="sks" class="form-control" id="sks"
                                     value="{{ old('sks', $irs->sks) }}">
+                                @error('sks')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <label for="nama_file">Scan IRS </label>
-                                <input type="file" name="nama_file" class="form-control" id="nama_file">
+                                <input type="file" name="nama_file" class="form-control-file" id="nama_file">
+                                @error('nama_file')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                         </div><!-- /.card-body -->
                         <div class="card-footer">
-                            <button type="submit" class="btn btn-primary">Submit</button> |
-                            <a href="/mahasiswa/irs/{{ $nim }}">Back</a>
+                            <button type="submit" class="btn btn-primary mr-2">Submit</button>
+                            <a href="/mahasiswa/irs/{{ $nim }}" class="btn btn-secondary">Back</a>
                         </div>
                     </form>
                 </div><!-- /.card -->
                 <br>
-                <a href="/dashboard" class="">
-                    Back
-                </a>
             </div><!-- /.container -->
         </div>
     </div>

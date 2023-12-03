@@ -74,7 +74,7 @@ class DataMahasiswaOlehOperatorController extends Controller
             'role' => 'mahasiswa'
         ]);
 
-        $mahasiswa = Mahasiswa::create([
+        Mahasiswa::create([
             'nama' => $data['nama'],
             'nim' => $data['nim'],
             'angkatan' => $data['angkatan'],
@@ -82,27 +82,6 @@ class DataMahasiswaOlehOperatorController extends Controller
             'user_id' => $user->id,
             'dosen_wali_id' => $data['dosen_wali']
         ]);
-
-        $semester = $mahasiswa->hitungSemester();
-
-        ProgresPraktikKerjaLapangan::create([
-            'mahasiswa_id' => $mahasiswa->id
-        ]);
-
-        ProgresSkripsi::create([
-            'mahasiswa_id' => $mahasiswa->id
-        ]);
-
-        for ($i = 1; $i <= $semester; $i++) {
-            IsianRencanaSemester::create([
-                'semester' => $i,
-                'mahasiswa_id' => $mahasiswa->id
-            ]);
-            KartuHasilStudi::create([
-                'semester' => $i,
-                'mahasiswa_id' => $mahasiswa->id
-            ]);
-        }
 
         return redirect()->route('dashboard');
     }

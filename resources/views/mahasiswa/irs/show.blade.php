@@ -65,7 +65,7 @@
                             </div>
                             <!-- /.card-body -->
                             <div class="card-footer">
-                                <a href="/mahasiswa/irs/{{ $nim }}">Back</a>
+                                <a href="/mahasiswa/irs/{{ $nim }}" class="btn btn-secondary">Back</a>
                             </div>
                         </form>
                     @endif
