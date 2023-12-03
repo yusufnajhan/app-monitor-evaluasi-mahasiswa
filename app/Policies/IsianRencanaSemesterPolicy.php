@@ -47,7 +47,7 @@ class IsianRencanaSemesterPolicy
      */
     public function create(User $user): bool
     {
-        //
+        return $user->role === 'mahasiswa' ? true : false;
     }
 
     /**
@@ -55,7 +55,11 @@ class IsianRencanaSemesterPolicy
      */
     public function update(User $user, IsianRencanaSemester $isianRencanaSemester): bool
     {
-        //
+        if ($user->role === 'mahasiswa' && $user->mahasiswa->id === $isianRencanaSemester->mahasiswa_id) {
+            return true;
+        }
+
+        return false;
     }
 
     /**

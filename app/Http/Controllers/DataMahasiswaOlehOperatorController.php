@@ -5,16 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\DosenWali;
 use App\Models\Mahasiswa;
-use App\Models\ProgresSkripsi;
-use App\Models\KartuHasilStudi;
-use App\Models\IsianRencanaSemester;
 use Illuminate\Auth\Access\Response;
 use Illuminate\Support\Facades\Hash;
-use App\Models\ProgresPraktikKerjaLapangan;
-use App\Http\Requests\UpdateMahasiswaRequest;
 use App\Http\Requests\StoreDataMahasiswaOlehOperatorRequest;
 use Illuminate\Http\Request;
-use Laravel\Ui\Presets\React;
 
 class DataMahasiswaOlehOperatorController extends Controller
 {

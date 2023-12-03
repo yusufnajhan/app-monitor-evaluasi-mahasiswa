@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Mahasiswa;
 use App\Models\IsianRencanaSemester;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Auth\Access\Response;
 use App\Http\Requests\StoreIRSOlehMahasiswaRequest;
 use App\Http\Requests\UpdateIRSOlehMahasiswaRequest;
 
@@ -16,6 +17,10 @@ class DataIRSOlehMahasiswaController extends Controller
      */
     public function index($nim)
     {
+        $this->authorize('viewAny', IsianRencanaSemester::class)
+            ? Response::allow()
+            : Response::denyWithStatus(404);
+
         $mahasiswa = Mahasiswa::where('nim', $nim)->first();
         if (!$mahasiswa) {
             abort(404);
@@ -33,6 +38,10 @@ class DataIRSOlehMahasiswaController extends Controller
      */
     public function create()
     {
+        $this->authorize('create', IsianRencanaSemester::class)
+            ? Response::allow()
+            : Response::denyWithStatus(404);
+
         $mahasiswa = Mahasiswa::where('nim', auth()->user()->mahasiswa->nim)
             ->first();
         if (!$mahasiswa) {
@@ -47,6 +56,10 @@ class DataIRSOlehMahasiswaController extends Controller
      */
     public function store(StoreIRSOlehMahasiswaRequest $request)
     {
+        $this->authorize('create', IsianRencanaSemester::class)
+            ? Response::allow()
+            : Response::denyWithStatus(404);
+
         $data = $request->validated();
 
         $mahasiswa = Mahasiswa::where('nim', auth()->user()->mahasiswa->nim)
@@ -60,8 +73,12 @@ class DataIRSOlehMahasiswaController extends Controller
             ['sks' => $data['sks'], 'sudah_disetujui' => 0]
         );
 
+        if ($irs->sudah_disetujui == 1) {
+            return redirect('/mahasiswa/irs/' . $mahasiswa->nim)->with('error', 'IRS sudah disetujui, tidak dapat disimpan');
+        }
+
         if ($request->hasFile('nama_file')) {
-            $namaFileBaru = 'irs_' . $mahasiswa->hitungSemester() . '_' . str_replace(' ', '_', strtolower($mahasiswa->nama)) . '.pdf';
+            $namaFileBaru = 'irs_' . $data['semester'] . '_' . str_replace(' ', '_', strtolower($mahasiswa->nama)) . '.pdf';
             $irs->nama_file = $request->file('nama_file')->storeAs('irs', $namaFileBaru);
         }
 
@@ -101,6 +118,7 @@ class DataIRSOlehMahasiswaController extends Controller
      */
     public function edit($nim, $semester)
     {
+
         $mahasiswa = Mahasiswa::where('nim', $nim)->first();
         if (!$mahasiswa) {
             abort(404);
@@ -111,6 +129,12 @@ class DataIRSOlehMahasiswaController extends Controller
             ->first();
         if (!$irs) {
             abort(404);
+        }
+
+        $this->authorize('update', $irs);
+
+        if ($irs->sudah_disetujui == 1) {
+            return redirect('/mahasiswa/irs/' . $mahasiswa->nim)->with('error', 'IRS sudah disetujui, tidak bisa diubah');
         }
 
         return view('mahasiswa.irs.edit', compact('irs', 'nim'));
@@ -136,6 +160,12 @@ class DataIRSOlehMahasiswaController extends Controller
             ->first();
         if (!$irs) {
             abort(404);
+        }
+
+        $this->authorize('update', $irs);
+
+        if ($irs->sudah_disetujui == 1) {
+            return redirect('/mahasiswa/irs/' . $mahasiswa->nim)->with('error', 'IRS sudah disetujui, tidak dapat disimpan');
         }
 
         $namaFileBaru = 'irs_' . $semester . '_' . str_replace(' ', '_', strtolower($mahasiswa->nama)) . '.pdf';

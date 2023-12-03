@@ -24,13 +24,9 @@
                 <h1 class="m-0">IRS Mahasiswa</h1>
                 <br>
 
-                @if ($errors->any())
-                    <div class="red-alert">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
+                @if (session('error'))
+                    <div class="alert alert-danger">
+                        {{ session('error') }}
                     </div>
                 @endif
 
@@ -64,10 +60,12 @@
                                                 class="btn btn-primary mr-3">
                                                 Detail
                                             </a>
-                                            <a href="/mahasiswa/irs/{{ $nim }}/{{ $itemIrs->semester }}/edit"
-                                                class="btn btn-warning mr-3">
-                                                Edit
-                                            </a>
+                                            @if ($itemIrs->sudah_disetujui == 0)
+                                                <a href="/mahasiswa/irs/{{ $nim }}/{{ $itemIrs->semester }}/edit"
+                                                    class="btn btn-warning mr-3">
+                                                    Edit
+                                                </a>
+                                            @endif
                                         </td>
                                     </tr>
                                 @endforeach
@@ -75,12 +73,11 @@
                         </table>
                     </div>
                 </div>
-                <!-- /.card -->
-                <br>
-                <a href="/dashboard"
-                    class="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-primary rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900">
+                <a href="/dashboard" class="btn btn-secondary">
                     Back
                 </a>
+                <!-- /.card -->
+                <br>
             </div><!-- /.container -->
         </div>
     </div>
