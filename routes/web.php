@@ -65,6 +65,8 @@ Route::middleware(['auth'])->group(function () {
         // IRS Mahasiswa
         Route::prefix('mahasiswa')->group(function () {
             // IRS
+            Route::get('/isi-irs', [DataIRSOlehMahasiswaController::class, 'create']);
+            Route::post('/simpan-irs', [DataIRSOlehMahasiswaController::class, 'store']);
             Route::get('/irs/{nim}', [DataIRSOlehMahasiswaController::class, 'index'])->name('mahasiswa.irs.index');
             Route::get('/irs/{nim}/{semester}', [DataIRSOlehMahasiswaController::class, 'show']);
             Route::get('/irs/{nim}/{semester}/edit', [DataIRSOlehMahasiswaController::class, 'edit']);

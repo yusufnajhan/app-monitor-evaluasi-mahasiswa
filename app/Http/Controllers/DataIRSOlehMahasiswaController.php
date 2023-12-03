@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Mahasiswa;
 use App\Models\IsianRencanaSemester;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\StoreIRSOlehMahasiswaRequest;
 use App\Http\Requests\UpdateIRSOlehMahasiswaRequest;
 
 
@@ -32,16 +33,53 @@ class DataIRSOlehMahasiswaController extends Controller
      */
     public function create()
     {
-        //
+        $mahasiswa = Mahasiswa::where('nim', auth()->user()->mahasiswa->nim)
+            ->first();
+        if (!$mahasiswa) {
+            abort(404);
+        }
+
+        // $semester = $mahasiswa->hitungSemester();
+
+        return view('mahasiswa.irs.create', compact('mahasiswa'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    // public function store(StoreIsianRencanaSemesterRequest $request)
-    // {
-    //     //
-    // }
+    public function store(StoreIRSOlehMahasiswaRequest $request)
+    {
+        $data = $request->validated();
+
+        $mahasiswa = Mahasiswa::where('nim', auth()->user()->mahasiswa->nim)
+            ->first();
+        if (!$mahasiswa) {
+            abort(404);
+        }
+
+        $irs = IsianRencanaSemester::firstOrCreate(
+            ['mahasiswa_id' => $mahasiswa->id, 'semester' => $data['semester']],
+            ['sks' => $data['sks'], 'sudah_disetujui' => 0]
+        );
+
+        if ($irs) {
+            $namaFileBaru = 'irs_' . $mahasiswa->hitungSemester() . '_' . str_replace(' ', '_', strtolower($mahasiswa->nama)) . '.pdf';
+            $irs->nama_file = $request->file('nama_file')->storeAs('irs', $namaFileBaru);
+
+            $irs->sks = $data['sks'];
+            $irs->sudah_disetujui = 0;
+            $irs->save();
+        } else {
+            $namaFileBaru = 'irs_' . $mahasiswa->hitungSemester() . '_' . str_replace(' ', '_', strtolower($mahasiswa->nama)) . '.pdf';
+            IsianRencanaSemester::create([
+                'semester' => $data['semester'],
+                'sks' => $data['sks'],
+                'nama_file' => $namaFileBaru
+            ]);
+        }
+
+        return redirect('/mahasiswa/irs/' . $mahasiswa->nim);
+    }
 
     /**
      * Display the specified resource.

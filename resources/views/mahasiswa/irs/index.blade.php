@@ -36,6 +36,10 @@
                     </div>
                 @endif
 
+                <a href="/mahasiswa/isi-irs" class="btn btn-primary mb-2" style="width: 100px;">
+                    Isi IRS
+                </a>
+
                 <!-- general form elements -->
                 <div class="card card-primary">
                     <div class="card-body p-0">
@@ -58,10 +62,14 @@
                                             {{ $itemIrs->statusPersetujuan() }}
                                         </td>
                                         <td>
-                                            <a href="/mahasiswa/irs/{{ $nim }}/{{ $itemIrs->semester }}">Detail</a>
-                                            |
-                                            <a
-                                                href="/mahasiswa/irs/{{ $nim }}/{{ $itemIrs->semester }}/edit">Edit</a>
+                                            <a href="/mahasiswa/irs/{{ $nim }}/{{ $itemIrs->semester }}"
+                                                class="btn btn-warning mr-3">
+                                                Detail
+                                            </a>
+                                            <a href="/mahasiswa/irs/{{ $nim }}/{{ $itemIrs->semester }}/edit"
+                                                class="btn btn-danger">
+                                                Edit
+                                            </a>
                                         </td>
                                     </tr>
                                 @endforeach
