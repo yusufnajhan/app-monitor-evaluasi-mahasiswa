@@ -24,7 +24,7 @@ class IsianRencanaSemesterSeeder extends Seeder
                     'semester' => $i,
                     'sks' => rand(2, 24),
                     'nama_file' => $namaFile,
-                    'sudah_disetujui' => rand(0, 1),
+                    'sudah_disetujui' => 1,
                     'mahasiswa_id' => $mahasiswa->id
                 ]);
             }
